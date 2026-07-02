@@ -1691,3 +1691,214 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
   line-height: 1.6;
   color: var(--eid-muted);
 }
+
+/* =========================================================================
+   CRYSTAL HERO ("The Stone") — dramatic home hero, EID design system.
+   Dark canvas = --eid-midnight/charcoal; accents = --eid-blue (no rainbow
+   dispersion); type = Rubik/Roboto (no font swap). Component: _components/stone.tsx
+   ========================================================================= */
+.crystal-hero {
+  position: relative;
+  overflow: hidden;
+  color: #eef1f7;
+  background:
+    radial-gradient(1100px 520px at 72% 42%, rgba(31, 78, 179, 0.30), transparent 62%),
+    linear-gradient(180deg, var(--eid-charcoal) 0%, var(--eid-midnight) 100%);
+  border-bottom: 3px solid var(--eid-blue);
+}
+/* faint precision grid */
+.crystal-hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(900px 600px at 68% 45%, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(900px 600px at 68% 45%, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+.crystal-hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: 48px;
+  min-height: min(86vh, 840px);
+  padding-block: 96px 76px;
+}
+
+/* copy */
+.crystal-hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Rubik", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #9db4e8;
+  margin-bottom: 24px;
+}
+.crystal-hero__kicker-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--eid-blue);
+  box-shadow: 0 0 0 0 rgba(31, 78, 179, 0.6);
+  animation: eid-pulse 2.4s ease-out infinite;
+}
+.crystal-hero__rotator { min-height: 296px; }
+@media (max-width: 991px) { .crystal-hero__rotator { min-height: 270px; } }
+.crystal-hero__eyebrow {
+  display: block;
+  font-family: "Rubik", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7f93b8;
+  margin-bottom: 18px;
+}
+.crystal-hero__title {
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: clamp(38px, 4.7vw, 66px);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  color: #f4f6fb;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+.crystal-hero__desc {
+  max-width: 52ch;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(233, 238, 248, 0.7);
+  margin: 0;
+}
+.crystal-hero__cta-row {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+.crystal-hero__link {
+  font-family: "Rubik", sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #cfd9ef;
+  border-bottom: 1px solid rgba(207, 217, 239, 0.35);
+  padding-bottom: 3px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.crystal-hero__link:hover { color: #fff; border-color: var(--eid-blue); }
+.crystal-hero__dots { display: flex; gap: 9px; margin-top: 30px; }
+.crystal-hero__dot {
+  width: 26px; height: 4px;
+  border: none;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, width 0.3s ease;
+}
+.crystal-hero__dot.is-active { width: 42px; background: var(--eid-blue); }
+.crystal-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 44px;
+  margin-top: 52px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.crystal-hero__meta-item { display: grid; gap: 4px; }
+.crystal-hero__meta-value {
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1;
+  color: #f4f6fb;
+  font-variant-numeric: tabular-nums;
+}
+.crystal-hero__meta-label {
+  font-family: "Rubik", sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7d8798;
+}
+
+/* visual / the stone */
+.crystal-hero__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 440px;
+}
+.crystal-hero__glow {
+  position: absolute;
+  width: 70%; height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(31, 78, 179, 0.42), transparent 66%);
+  filter: blur(46px);
+  z-index: 0;
+}
+.stone-float { position: relative; z-index: 1; }
+.stone-canvas {
+  max-width: 100%;
+  filter: drop-shadow(0 22px 44px rgba(0, 20, 70, 0.6))
+          drop-shadow(0 0 44px rgba(125, 165, 252, 0.22));
+}
+.stone-shimmer {
+  animation: eid-stone-shimmer 5.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+@keyframes eid-stone-shimmer {
+  0%   { transform: translateX(0) skewX(-18deg); }
+  55%  { transform: translateX(520px) skewX(-18deg); }
+  100% { transform: translateX(520px) skewX(-18deg); }
+}
+.stone-hud { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.stone-hud__tag {
+  position: absolute;
+  font-family: "Rubik", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #a9bce0;
+  padding: 5px 9px;
+  border: 1px solid rgba(142, 162, 201, 0.3);
+  background: rgba(10, 12, 16, 0.55);
+  backdrop-filter: blur(4px);
+  border-radius: 2px;
+}
+.stone-hud__tag--tl { top: 8%;  left: 3%; }
+.stone-hud__tag--tr { top: 13%; right: 2%; }
+.stone-hud__tag--bl { bottom: 15%; left: 1%; }
+.stone-hud__tag--br { bottom: 9%;  right: 4%; }
+.stone-hud__ring {
+  position: absolute;
+  inset: 8%;
+  border: 1px dashed rgba(142, 162, 201, 0.18);
+  border-radius: 50%;
+}
+
+@media (max-width: 991px) {
+  .crystal-hero__inner {
+    grid-template-columns: 1fr;
+    padding-block: 72px 44px;
+    min-height: 0;
+  }
+  .crystal-hero__visual { min-height: 340px; }
+  .stone-canvas { width: 320px; height: auto; }
+  .crystal-hero__meta { gap: 28px; margin-top: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crystal-hero *,
+  .stone-shimmer { animation: none !important; }
+}

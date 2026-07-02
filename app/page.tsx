@@ -9,12 +9,12 @@ import {
 } from "./_components/sections";
 import {
   ChapterMarker,
-  HeroMasthead,
   StatsBar,
   Marquee,
   BentoGallery,
   ProcessSteps,
 } from "./_components/award";
+import { CrystalHero } from "./_components/stone";
 import type { IconName } from "./_components/Icon";
 import { products } from "@/lib/products";
 
@@ -46,10 +46,9 @@ const services: { icon: IconName; title: string; desc: string; href: string }[] 
 export default function Home() {
   return (
     <>
-      {/* HERO — cinematic split masthead (rotating headlines + parallax visual) */}
-      <HeroMasthead
+      {/* HERO — The Stone: faceted diamond crystal + metrology HUD */}
+      <CrystalHero
         slides={heroSlides}
-        imgLabel="FACTORY / PRODUCTION FLOOR — London"
         metaStats={[
           { value: "30+", label: "Countries served" },
           { value: "12", label: "Product lines" },
