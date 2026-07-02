@@ -385,8 +385,8 @@ export function Testimonials({
               {items.map((t, i) => (
                 <div key={i} className="testimonial-item">
                   <div className="testimonial__meta">
-                    <div className="testimonial__thumb">
-                      <ImagePlaceholder label="LOGO" minHeight={70} />
+                    <div className="testimonial-mark" aria-hidden="true">
+                      <i className="fa fa-diamond" />
                     </div>
                     <h5 className="testimonial__meta-title">{t.name}</h5>
                     <p className="testimonial__meta-desc">{t.role}</p>
@@ -409,32 +409,25 @@ export function Testimonials({
   );
 }
 
-/* ---- clients-1 : logo carousel (wireframe boxes) ---- */
-export function Clients({ count = 6 }: { count?: number }) {
+/* ---- clients : typographic trade strip (no logo placeholders) ---- */
+export function Clients({ count }: { count?: number }) {
+  void count;
+  const trade = [
+    "Diamond tool makers · Germany",
+    "Dental instruments · Israel",
+    "Saw blade producers · Italy",
+    "Grinding wheel makers · Japan",
+    "Wire die producers · USA",
+    "Precision optics · Switzerland",
+  ];
   return (
-    <section className="clients clients-1 border-top pt-60 pb-60">
+    <section className="clients-strip border-top">
       <div className="container">
-        <div className="row">
-          <div className="col-sm-12 col-md-12 col-lg-12">
-            <div
-              className="carousel owl-carousel"
-              data-slide={6}
-              data-slide-md={4}
-              data-slide-sm={2}
-              data-autoplay="true"
-              data-nav="false"
-              data-dots="false"
-              data-space={20}
-              data-loop="true"
-              data-speed={700}
-            >
-              {Array.from({ length: count }).map((_, i) => (
-                <div key={i} className="client">
-                  <ImagePlaceholder label="CLIENT LOGO" minHeight={70} />
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="clients-strip__label">Supplying tool makers in 30+ countries</div>
+        <div className="clients-strip__row">
+          {trade.map((t) => (
+            <span key={t} className="clients-strip__item">{t}</span>
+          ))}
         </div>
       </div>
     </section>

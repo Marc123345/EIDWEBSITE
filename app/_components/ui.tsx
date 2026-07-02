@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Icon, { IconName } from "./Icon";
+import { DiamondStone } from "./stone";
 
 /* ---------- Labeled image / media placeholder (wireframe) ---------- */
 export function ImagePlaceholder({
@@ -50,14 +51,15 @@ export function PageTitle({
   crumbs: { label: string; href?: string }[];
 }) {
   return (
-    <section className="page-title bg-overlay bg-ph">
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-xl-9">
-            <span className="pagetitle__subheading">{subheading}</span>
-            <h1 className="pagetitle__heading">{heading}</h1>
+    <>
+      <section className="page-hero">
+        <div className="page-hero__grid" aria-hidden="true" />
+        <div className="container page-hero__inner">
+          <div className="page-hero__copy">
+            <span className="page-hero__subheading">{subheading}</span>
+            <h1 className="page-hero__heading">{heading}</h1>
             <nav aria-label="breadcrumb">
-              <ol className="breadcrumb">
+              <ol className="breadcrumb page-hero__crumbs">
                 {crumbs.map((c, i) =>
                   c.href ? (
                     <li key={i} className="breadcrumb-item">
@@ -72,9 +74,13 @@ export function PageTitle({
               </ol>
             </nav>
           </div>
+          <div className="page-hero__stone" aria-hidden="true">
+            <DiamondStone size={230} />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <div className="hero-rule" aria-hidden="true" />
+    </>
   );
 }
 

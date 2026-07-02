@@ -7,6 +7,7 @@ import { CrossLinks, ImagePlaceholder } from "@/app/_components/ui";
 import { FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
 import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
+import { ProductVisual } from "@/app/_components/product-visuals";
 import Icon from "@/app/_components/Icon";
 
 export function generateStaticParams() {
@@ -62,7 +63,7 @@ export default async function ProductPage({
           { label: "Products", href: "/products" },
           { label: p.name },
         ]}
-        imgLabel={`PRODUCT — ${p.name}`}
+        visual={<ProductVisual slug={p.slug} />}
         primaryCta={{ label: p.cta, href: "/contact" }}
         secondaryCta={{ label: "All Products", href: "/products" }}
       />

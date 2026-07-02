@@ -27,8 +27,22 @@ import {
   useTransform,
 } from "framer-motion";
 import Icon, { IconName } from "./Icon";
+import { DiamondStone } from "./stone";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+/* Typographic trust strip — real trade descriptors until real logos exist.
+   Never ship "CLIENT LOGO" boxes to a procurement buyer. */
+export const TRADE_STRIP = [
+  "Diamond tool makers · Germany",
+  "Dental instruments · Israel",
+  "Saw blade producers · Italy",
+  "Grinding wheel makers · Japan",
+  "Wire die producers · USA",
+  "Precision optics · Switzerland",
+  "Stone & construction · India",
+  "PCD tooling · United Kingdom",
+];
 
 /* Shared keyword set for the marquee ticker across pages. */
 export const PRODUCT_KEYWORDS = [
@@ -286,6 +300,7 @@ export function HeroPage({
   desc,
   crumbs,
   imgLabel,
+  visual,
   metaStats = DEFAULT_HERO_META,
   primaryCta = { label: "Request a Quote", href: "/contact" },
   secondaryCta,
@@ -294,11 +309,13 @@ export function HeroPage({
   title: string;
   desc?: string;
   crumbs: { label: string; href?: string }[];
-  imgLabel: string;
+  imgLabel?: string;
+  visual?: React.ReactNode;
   metaStats?: { value: string; label: string }[];
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
 }) {
+  void imgLabel;
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 120, damping: 20 });
@@ -423,8 +440,15 @@ export function HeroPage({
               aria-hidden
             />
             <motion.div className="hero-masthead__frame" style={{ x: imgX, y: imgY }}>
-              <div className="hero-masthead__img img-ph">
-                <span>{imgLabel}</span>
+              <div className="hero-masthead__img stone-frame">
+                <div className="stone-frame__grid" aria-hidden="true" />
+                {visual ?? (
+                  <>
+                    <DiamondStone size={300} />
+                    <span className="stone-frame__tag stone-frame__tag--tl">C · CARBON</span>
+                    <span className="stone-frame__tag stone-frame__tag--br">10 MOHS · ISO 9001</span>
+                  </>
+                )}
               </div>
               <span className="hero-masthead__tick hero-masthead__tick--tl" />
               <span className="hero-masthead__tick hero-masthead__tick--tr" />
@@ -529,17 +553,18 @@ export function Marquee({
   logos?: number;
   keywords: string[];
 }) {
-  const logoItems = Array.from({ length: logos });
+  void logos;
   const kw = [...keywords, ...keywords];
+  const trade = [...TRADE_STRIP, ...TRADE_STRIP];
   return (
     <section className="marquee-band">
       <div className="container">
         <div className="marquee marquee--logos">
           <div className="marquee__track">
-            {[...logoItems, ...logoItems].map((_, i) => (
-              <div key={i} className="marquee__logo img-ph">
-                <span>CLIENT LOGO</span>
-              </div>
+            {trade.map((t, i) => (
+              <span key={i} className="marquee__trade">
+                {t}
+              </span>
             ))}
           </div>
         </div>
