@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { ImagePlaceholder } from "../_components/ui";
 import { RequestQuotePanel, FeaturesRow } from "../_components/sections";
-import { HeroPage, Chapter, ChapterMarker, ProcessSteps } from "../_components/award";
+import { Chapter, ChapterMarker, ProcessSteps } from "../_components/award";
+import { CrystalHeroPage } from "../_components/stone";
 import Icon from "../_components/Icon";
 import { products } from "@/lib/products";
 import { site } from "@/lib/site";
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <HeroPage
+      <CrystalHeroPage
         eyebrow="A real person responds within 24 hours"
         title="Contact Us / Request a Quote"
         desc="Contact EID for industrial diamond and CBN quotes, samples, and technical specs. London-based manufacturer serving tool makers worldwide."

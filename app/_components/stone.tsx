@@ -103,6 +103,156 @@ function DiamondCrystal() {
   );
 }
 
+const DEFAULT_META = [
+  { value: "30+", label: "Countries served" },
+  { value: "12", label: "Product lines" },
+  { value: "ISO 9001", label: "Certified" },
+];
+
+/* Shared visual column (crystal + glow + metrology HUD). */
+function StoneVisual() {
+  return (
+    <motion.div
+      className="crystal-hero__visual"
+      initial={{ opacity: 0, scale: 0.94 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: EASE, delay: 0.15 }}
+    >
+      <div className="crystal-hero__glow" aria-hidden />
+      <motion.div
+        className="stone-float"
+        animate={{ y: [0, -12, 0] }}
+        transition={{ duration: 7, ease: "easeInOut", repeat: Infinity }}
+      >
+        <DiamondCrystal />
+      </motion.div>
+      <div className="stone-hud" aria-hidden>
+        <span className="stone-hud__ring" />
+        <span className="stone-hud__tag stone-hud__tag--tl">C — CARBON</span>
+        <span className="stone-hud__tag stone-hud__tag--tr">MOHS 10</span>
+        <span className="stone-hud__tag stone-hud__tag--bl">ρ 3.52 g/cm³</span>
+        <span className="stone-hud__tag stone-hud__tag--br">ISO 9001</span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* -------------------------------------------------------------------------
+   CrystalHeroPage — single-headline Stone hero for inner pages. Same prop
+   shape as the light HeroPage it replaces, so pages swap 1:1.
+   ------------------------------------------------------------------------- */
+export function CrystalHeroPage({
+  eyebrow,
+  title,
+  desc,
+  crumbs,
+  metaStats = DEFAULT_META,
+  primaryCta = { label: "Request a Quote", href: "/contact" },
+  secondaryCta,
+}: {
+  eyebrow: string;
+  title: string;
+  desc?: string;
+  crumbs: { label: string; href?: string }[];
+  imgLabel?: string; // accepted for HeroPage parity; the Stone uses the crystal
+  metaStats?: { value: string; label: string }[];
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}) {
+  const words = title.split(" ");
+  return (
+    <section className="crystal-hero crystal-hero--page">
+      <div className="crystal-hero__grid" aria-hidden />
+      <div className="container">
+        <div className="crystal-hero__inner">
+          <div className="crystal-hero__copy">
+            <motion.span
+              className="crystal-hero__kicker"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: EASE }}
+            >
+              <span className="crystal-hero__kicker-dot" />
+              Industrial Diamond &amp; CBN · London, UK
+            </motion.span>
+
+            <motion.span
+              className="crystal-hero__eyebrow"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: EASE, delay: 0.05 }}
+            >
+              {eyebrow}
+            </motion.span>
+
+            <h1 className="crystal-hero__title">
+              {words.map((w, wi) => (
+                <motion.span
+                  key={wi}
+                  className="crystal-hero__word"
+                  initial={{ opacity: 0, y: "0.5em" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: EASE, delay: 0.1 + wi * 0.04 }}
+                >
+                  {w}&nbsp;
+                </motion.span>
+              ))}
+            </h1>
+
+            {desc && (
+              <motion.p
+                className="crystal-hero__desc"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
+              >
+                {desc}
+              </motion.p>
+            )}
+
+            <div className="crystal-hero__cta-row">
+              <Link href={primaryCta.href} className="btn btn__primary btn__hover2">
+                {primaryCta.label} <Icon name="arrow" />
+              </Link>
+              {secondaryCta && (
+                <Link href={secondaryCta.href} className="crystal-hero__link">
+                  {secondaryCta.label}
+                </Link>
+              )}
+            </div>
+
+            <nav aria-label="breadcrumb" className="crystal-hero__crumbs">
+              {crumbs.map((c, i) => (
+                <span key={i} className="crystal-hero__crumb">
+                  {c.href ? (
+                    <Link href={c.href}>{c.label}</Link>
+                  ) : (
+                    <span className="current">{c.label}</span>
+                  )}
+                  {i < crumbs.length - 1 && <span className="sep">/</span>}
+                </span>
+              ))}
+            </nav>
+
+            {metaStats.length > 0 && (
+              <div className="crystal-hero__meta">
+                {metaStats.map((m) => (
+                  <div key={m.label} className="crystal-hero__meta-item">
+                    <span className="crystal-hero__meta-value">{m.value}</span>
+                    <span className="crystal-hero__meta-label">{m.label}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <StoneVisual />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function CrystalHero({
   slides,
   metaStats,

@@ -5,7 +5,8 @@ import { products, getProduct } from "@/lib/products";
 import { getIndustry } from "@/lib/industries";
 import { CrossLinks, ImagePlaceholder } from "@/app/_components/ui";
 import { FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
-import { HeroPage, Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
+import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
+import { CrystalHeroPage } from "@/app/_components/stone";
 import Icon from "@/app/_components/Icon";
 
 export function generateStaticParams() {
@@ -52,7 +53,7 @@ export default async function ProductPage({
 
   return (
     <>
-      <HeroPage
+      <CrystalHeroPage
         eyebrow={p.eyebrow}
         title={p.h1}
         desc={p.metaDesc}

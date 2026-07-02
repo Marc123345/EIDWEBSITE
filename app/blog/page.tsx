@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ImagePlaceholder } from "../_components/ui";
 import { BannerCTA } from "../_components/sections";
-import { HeroPage, Chapter, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
+import { Chapter, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
+import { CrystalHeroPage } from "../_components/stone";
 
 export const metadata: Metadata = {
   title: { absolute: "Blog | Industrial Diamond & Superabrasive Insights | EID Ltd" },
@@ -22,7 +23,7 @@ const posts = [
 export default function BlogPage() {
   return (
     <>
-      <HeroPage
+      <CrystalHeroPage
         eyebrow="News, application notes & technical insight"
         title="The EID Blog"
         desc="News, application notes, and technical insight on industrial diamond and CBN from EID Ltd — London-based superabrasive manufacturer."

@@ -1902,3 +1902,31 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
   .crystal-hero *,
   .stone-shimmer { animation: none !important; }
 }
+
+/* ---- Crystal hero: inner-page variant (single headline + breadcrumb) --- */
+.crystal-hero--page .crystal-hero__inner {
+  min-height: min(62vh, 600px);
+  padding-block: 84px 64px;
+}
+.crystal-hero--page .crystal-hero__title { font-size: clamp(30px, 4.2vw, 52px); }
+.crystal-hero--page .stone-canvas { width: 360px; }
+.crystal-hero__word { display: inline-block; }
+.crystal-hero__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin-top: 26px;
+  font-family: "Rubik", sans-serif;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+}
+.crystal-hero__crumb { display: inline-flex; align-items: center; gap: 9px; }
+.crystal-hero__crumbs a { color: rgba(233, 238, 248, 0.6); transition: color 0.16s ease; }
+.crystal-hero__crumbs a:hover { color: #fff; }
+.crystal-hero__crumbs .current { color: #9db4e8; font-weight: 600; }
+.crystal-hero__crumbs .sep { color: rgba(255, 255, 255, 0.25); }
+@media (max-width: 991px) {
+  .crystal-hero--page .crystal-hero__inner { min-height: 0; }
+  .crystal-hero--page .stone-canvas { width: 300px; }
+}

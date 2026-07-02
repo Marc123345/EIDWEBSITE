@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BannerCTA } from "../../_components/sections";
-import { HeroPage, Chapter } from "../../_components/award";
+import { Chapter } from "../../_components/award";
+import { CrystalHeroPage } from "../../_components/stone";
 import Icon from "../../_components/Icon";
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ const datasheets = [
 export default function DatasheetsPage() {
   return (
     <>
-      <HeroPage
+      <CrystalHeroPage
         eyebrow="Specifications, grades & sizing"
         title="Product Datasheets"
         desc="Download technical datasheets for EID's full range of industrial diamond and CBN products — specifications, grades, and sizing."

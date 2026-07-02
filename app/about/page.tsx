@@ -6,7 +6,8 @@ import {
   Testimonials,
   BannerCTA,
 } from "../_components/sections";
-import { HeroPage, Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
+import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
+import { CrystalHeroPage } from "../_components/stone";
 
 export const metadata: Metadata = {
   title: { absolute: "About EID | Industrial Diamond Manufacturer, London | EID Ltd" },
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <HeroPage
+      <CrystalHeroPage
         eyebrow="One manufacturer · the full range · no compromises"
         title="About EID — Industrial Diamond Manufacturer"
         desc="EID Ltd manufactures and quality-controls the full range of industrial diamond and CBN from London, supplying tool makers worldwide."

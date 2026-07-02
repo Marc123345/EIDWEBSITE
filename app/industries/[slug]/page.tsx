@@ -5,7 +5,8 @@ import { industries, getIndustry } from "@/lib/industries";
 import { getProduct } from "@/lib/products";
 import { CrossLinks, ImagePlaceholder } from "@/app/_components/ui";
 import { ServicesLayout3, FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
-import { HeroPage, Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
+import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
+import { CrystalHeroPage } from "@/app/_components/stone";
 import type { IconName } from "@/app/_components/Icon";
 
 export function generateStaticParams() {
@@ -60,7 +61,7 @@ export default async function IndustryPage({
 
   return (
     <>
-      <HeroPage
+      <CrystalHeroPage
         eyebrow={ind.eyebrow}
         title={ind.h1}
         desc={ind.metaDesc}

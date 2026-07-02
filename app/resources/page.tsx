@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ImagePlaceholder } from "../_components/ui";
 import { BannerCTA } from "../_components/sections";
-import { HeroPage, Chapter, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
+import { Chapter, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
+import { CrystalHeroPage } from "../_components/stone";
 import Icon from "../_components/Icon";
 
 export const metadata: Metadata = {
@@ -22,7 +23,7 @@ const guides = [
 export default function ResourcesPage() {
   return (
     <>
-      <HeroPage
+      <CrystalHeroPage
         eyebrow="Written by EID's technical team"
         title="Resources & Guides"
         desc="Technical guides, application notes, and industry knowledge from EID — diamond vs CBN, grit size charts, bond comparison, and more."
