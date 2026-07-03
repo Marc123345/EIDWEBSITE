@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BannerCTA } from "../../_components/sections";
 import { Chapter } from "../../_components/award";
-import { PageHeroBand } from "../../_components/stone";
+import { CrystalHeroPage } from "../../_components/stone";
 import Icon from "../../_components/Icon";
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ const msds = [
 export default function MsdsPage() {
   return (
     <>
-      <PageHeroBand
+      <CrystalHeroPage
         eyebrow="Handling, storage & regulatory information"
         title="Material Safety Data Sheets (MSDS)"
         desc="Download material safety data sheets (MSDS) for EID's industrial diamond and CBN products — handling, storage, and safety information."

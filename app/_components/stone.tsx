@@ -224,7 +224,7 @@ export function CrystalHeroPage({
 }) {
   const words = title.split(" ");
   return (
-    <section className="crystal-hero crystal-hero--page">
+    <section className="crystal-hero">
       <div className="crystal-hero__grid" aria-hidden />
       <div className="container">
         <div className="crystal-hero__inner">
@@ -309,7 +309,7 @@ export function CrystalHeroPage({
             )}
           </div>
 
-          <StoneVisual visual={visual} size={380} />
+          <StoneVisual visual={visual} size={520} />
         </div>
       </div>
       <div className="hero-rule" aria-hidden />

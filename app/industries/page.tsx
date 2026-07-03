@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ServicesLayout3, FeaturesListParallax, BannerCTA } from "../_components/sections";
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
-import { PageHeroBand } from "../_components/stone";
+import { CrystalHeroPage } from "../_components/stone";
 import type { IconName } from "../_components/Icon";
 import { industries } from "@/lib/industries";
 
@@ -29,7 +29,7 @@ export default function IndustriesOverview() {
 
   return (
     <>
-      <PageHeroBand
+      <CrystalHeroPage
         eyebrow="We supply the material · you build the tools"
         title="Industries We Serve"
         desc="EID supplies industrial diamond and CBN to tool makers in dental, optics & precision, stone & glass, automotive & aerospace, and electronics & semiconductors."
