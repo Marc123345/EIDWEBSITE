@@ -6,7 +6,7 @@ import { getIndustry } from "@/lib/industries";
 import { CrossLinks, ImagePlaceholder } from "@/app/_components/ui";
 import { FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
 import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
-import { CrystalHeroPage } from "@/app/_components/stone";
+import { PageHeroBand } from "@/app/_components/stone";
 import { ProductVisual } from "@/app/_components/product-visuals";
 import Icon from "@/app/_components/Icon";
 
@@ -54,7 +54,7 @@ export default async function ProductPage({
 
   return (
     <>
-      <CrystalHeroPage
+      <PageHeroBand
         eyebrow={p.eyebrow}
         title={p.h1}
         desc={p.metaDesc}

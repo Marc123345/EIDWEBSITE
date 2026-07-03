@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ServicesLayout3, BannerCTA } from "../_components/sections";
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
-import { CrystalHeroPage } from "../_components/stone";
+import { PageHeroBand } from "../_components/stone";
 import Icon, { IconName } from "../_components/Icon";
 import { PRODUCT_FAMILIES, productsByFamily, products } from "@/lib/products";
 
@@ -34,7 +34,7 @@ export default function ProductsOverview() {
 
   return (
     <>
-      <CrystalHeroPage
+      <PageHeroBand
         eyebrow="The complete range · one manufacturer"
         title="Industrial Diamond & CBN Products"
         desc="Browse EID's complete range of industrial diamond and CBN — natural grit, metal & resin bond, CBN, CVD single crystal, MCD, PCD/PCBN, and surface enhancements."

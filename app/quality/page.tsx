@@ -6,7 +6,7 @@ import {
   BannerCTA,
 } from "../_components/sections";
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
-import { CrystalHeroPage } from "../_components/stone";
+import { PageHeroBand } from "../_components/stone";
 import type { IconName } from "../_components/Icon";
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ const tests: { icon: IconName; title: string; desc: string; href: string }[] = [
 export default function QualityPage() {
   return (
     <>
-      <CrystalHeroPage
+      <PageHeroBand
         eyebrow="In-house QC · ISO 9001 · full traceability"
         title="Quality Control & ISO 9001"
         desc="Our in-house QC laboratory tests every batch of diamond and CBN for size distribution, crystal strength, morphology, and coating integrity. ISO 9001 certified."

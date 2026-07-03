@@ -317,6 +317,64 @@ export function CrystalHeroPage({
   );
 }
 
+/* -------------------------------------------------------------------------
+   PageHeroBand — compact inner-page header: subheading + heading + crumbs
+   with a small stone (or a bespoke product visual) on the right. Accepts the
+   full CrystalHeroPage prop shape so pages swap 1:1; extra props are ignored.
+   ------------------------------------------------------------------------- */
+export function PageHeroBand({
+  eyebrow,
+  title,
+  crumbs,
+  visual,
+}: {
+  eyebrow: string;
+  title: string;
+  desc?: string;
+  crumbs: { label: string; href?: string }[];
+  imgLabel?: string;
+  visual?: ReactNode;
+  metaStats?: { value: string; label: string }[];
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}) {
+  return (
+    <>
+      <section className="page-hero">
+        <div className="page-hero__grid" aria-hidden="true" />
+        <div className="container page-hero__inner">
+          <div className="page-hero__copy">
+            <span className="page-hero__subheading">{eyebrow}</span>
+            <h1 className="page-hero__heading">{title}</h1>
+            <nav aria-label="breadcrumb">
+              <ol className="breadcrumb page-hero__crumbs">
+                {crumbs.map((c, i) =>
+                  c.href ? (
+                    <li key={i} className="breadcrumb-item">
+                      <Link href={c.href}>{c.label}</Link>
+                    </li>
+                  ) : (
+                    <li key={i} className="breadcrumb-item active" aria-current="page">
+                      {c.label}
+                    </li>
+                  )
+                )}
+              </ol>
+            </nav>
+          </div>
+          <div
+            className={`page-hero__stone${visual ? " page-hero__stone--visual" : ""}`}
+            aria-hidden="true"
+          >
+            {visual ?? <DiamondStone size={230} />}
+          </div>
+        </div>
+      </section>
+      <div className="hero-rule" aria-hidden="true" />
+    </>
+  );
+}
+
 type HeroSlide = { eyebrow: string; title: string; desc: string };
 
 export function CrystalHero({
