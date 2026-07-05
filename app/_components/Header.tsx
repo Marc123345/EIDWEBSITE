@@ -23,7 +23,10 @@ export default function Header() {
       <nav className="navbar navbar-expand-lg">
         <div className="container">
           <Link className="navbar-brand" href="/" onClick={close} aria-label="EID — Industrial Diamonds, home">
-            <span className="eid-brand-logo" role="img" aria-label="EID — Industrial Diamonds" />
+            <span className="eid-brand">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/eid/logo-white.png" alt="EID — Industrial Diamonds" className="eid-brand__img" />
+            </span>
           </Link>
 
           <div className="header__topbar d-none d-lg-block">
