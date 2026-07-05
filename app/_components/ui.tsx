@@ -167,7 +167,7 @@ export function CrossLinks({
                     <li key={l.href}>
                       <Link href={l.href} className="btn btn__secondary btn__link">
                         <Icon name="arrow" />
-                        <span style={{ marginLeft: 6 }}>{l.label}</span>
+                        <span>{l.label}</span>
                       </Link>
                     </li>
                   ))}

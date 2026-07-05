@@ -2312,3 +2312,20 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
   border: 1px solid var(--eid-line);
   border-radius: 2px;
 }
+
+/* =========================================================================
+   ARROW ICON SPACING — consistent gap & vertical alignment for the
+   fa-long-arrow-right icon inside buttons and inline text links.
+   ========================================================================= */
+.btn .fa,
+.btn__link .fa {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  vertical-align: middle;
+  flex: 0 0 auto;
+}
+/* Inline text links (Read more →, View product →) read tighter than solid buttons */
+.btn__link { gap: 7px !important; }
+/* Solid buttons keep a balanced, slightly roomier gap */
+.btn:not(.btn__link) { gap: 10px; }
