@@ -113,11 +113,11 @@ export function DiamondStone({ size = 520 }: { size?: number }) {
         ctx.fillStyle = g;
         ctx.fill();
 
-        // Edge light: EID blue family (#b3c5ff -> #1f4eb3), strongest on lit front edges.
+        // Edge light: EID blue family (#b3c5ff -> #2c3c6c), strongest on lit front edges.
         const eg = ctx.createLinearGradient(p0.x, p0.y, p2.x, p2.y);
         eg.addColorStop(0, "rgba(179, 197, 255, 0.95)");
         eg.addColorStop(0.5, "rgba(94, 129, 214, 0.9)");
-        eg.addColorStop(1, "rgba(31, 78, 179, 0.9)");
+        eg.addColorStop(1, "rgba(44, 60, 108, 0.9)");
         ctx.strokeStyle = eg;
         ctx.lineWidth = facing ? 1.4 : 0.5;
         ctx.globalAlpha = facing ? 0.35 + lum * 0.65 : 0.18;

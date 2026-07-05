@@ -6,8 +6,9 @@ export const site = {
   tagline: "Industrial Diamond & CBN Manufacturer",
   location: "London, UK",
   email: "info@eid-ltd.com",
-  phone: "+44 [number]",
-  address: "[Full London address]",
+  phone: "+44 (0) 207 405 6594",
+  phoneHref: "tel:+442074056594",
+  address: "EID House, 12 St Cross Street, London EC1N 8UB, United Kingdom",
 };
 
 export const trustPoints = [

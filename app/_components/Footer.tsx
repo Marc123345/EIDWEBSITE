@@ -9,12 +9,9 @@ export default function Footer() {
           <div className="row">
             <div className="col-sm-12 col-md-12 col-lg-4 footer__widget footer__widget-about mb-30">
               <div className="footer__widget-content">
-                <Link href="/" className="eid-logo eid-logo--footer">
-                  <i className="fa fa-diamond" />
-                  <span className="eid-logo__text">
-                    <strong>EID Ltd</strong>
-                    <em>Industrial Diamond &amp; CBN</em>
-                  </span>
+                <Link href="/" className="eid-footer-brand" aria-label="EID — Industrial Diamonds, home">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/eid/logo-white.png" alt="EID — Industrial Diamonds" className="eid-footer-logo" />
                 </Link>
                 <p className="mt-20">
                   Manufacturer and finisher of the full range of industrial diamond and superabrasive
@@ -25,7 +22,7 @@ export default function Footer() {
                   Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
                 </p>
                 <p>
-                  <a href="tel:+44" className="font-weight-bold">{site.phone}</a>
+                  <a href={site.phoneHref} className="font-weight-bold">{site.phone}</a>
                 </p>
               </div>
             </div>

@@ -22,14 +22,8 @@ export default function Header() {
     <header id="header" className="header header-white header-full header-full-layout2">
       <nav className="navbar navbar-expand-lg">
         <div className="container">
-          <Link className="navbar-brand" href="/" onClick={close}>
-            <span className="eid-logo">
-              <i className="fa fa-diamond" />
-              <span className="eid-logo__text">
-                <strong>EID</strong>
-                <em>Industrial Diamond &amp; CBN</em>
-              </span>
-            </span>
+          <Link className="navbar-brand" href="/" onClick={close} aria-label="EID — Industrial Diamonds, home">
+            <span className="eid-brand-logo" role="img" aria-label="EID — Industrial Diamonds" />
           </Link>
 
           <div className="header__topbar d-none d-lg-block">

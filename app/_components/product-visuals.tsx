@@ -3,7 +3,7 @@
    One SVG per product, depicting the actual material — crystal habit,
    bond context, wafer structure, coatings — on the EID midnight system.
    Server components (pure SVG). Dispatcher: <ProductVisual slug="..." />
-   Palette: facets #c4d6fc/#7894d6, edges #b3c5ff→#1f4eb3, CBN amber,
+   Palette: facets #c4d6fc/#7894d6, edges #b3c5ff→#2c3c6c, CBN amber,
    labels Rubik caps #8ea2c9. Designed for the stone-frame viewport.
    ========================================================================= */
 
@@ -22,7 +22,7 @@ function Edge({ id }: { id: string }) {
   return (
     <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stopColor="#b3c5ff" />
-      <stop offset="1" stopColor="#1f4eb3" />
+      <stop offset="1" stopColor="#2c3c6c" />
     </linearGradient>
   );
 }
@@ -100,7 +100,7 @@ export function NaturalMicronVisual() {
     <svg viewBox={VB} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Micron diamond powder with size distribution curve">
       <defs><Edge id="g2e" /></defs>
       <path d="M50,150 C110,150 130,52 200,52 C270,52 290,150 350,150" fill="none" stroke="url(#g2e)" strokeWidth="2" />
-      <path d="M50,150 C110,150 130,52 200,52 C270,52 290,150 350,150 Z" fill="#1f4eb3" opacity="0.12" />
+      <path d="M50,150 C110,150 130,52 200,52 C270,52 290,150 350,150 Z" fill="#2c3c6c" opacity="0.12" />
       <line x1="200" y1="52" x2="200" y2="150" stroke="#b3c5ff" strokeWidth="1" strokeDasharray="4 4" />
       <text x="200" y="40" style={LBL} textAnchor="middle">D50 ±1 µm</text>
       <line x1="50" y1="150" x2="350" y2="150" stroke="#3a4560" strokeWidth="1" />
