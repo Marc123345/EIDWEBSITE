@@ -111,6 +111,23 @@
   margin-bottom: 16px;
 }
 
+/* ---------- Contrast fix: accessible paragraph text on light backgrounds ----------
+   The Industic template renders body/description text at #9b9b9b (~2.5:1 on white,
+   which fails WCAG AA). These classes only inherit that color, so darkening them to
+   --eid-muted (#434653, ~8.9:1 on white) fixes readability on every light section.
+   Dark bands keep their light text: .color-white is !important, the dark parallax
+   feature descriptions use their own #f4f4f4, and the footer/hero use other classes. */
+.heading__desc,
+.service__desc,
+.feature__desc,
+.post__desc {
+  color: var(--eid-muted);
+}
+/* Non-lead About paragraphs (the first-of-type lead keeps its dark #222). */
+body .about__text p {
+  color: var(--eid-muted);
+}
+
 /* ---------- Grid utilities ---------- */
 .grid-2,
 .grid-3,
