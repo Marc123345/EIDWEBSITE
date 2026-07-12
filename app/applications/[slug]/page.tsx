@@ -133,7 +133,7 @@ export default async function ApplicationPage({
       {/* WHY EID — dark parallax */}
       <Chapter index="03" label="Why EID" />
       <FeaturesListParallax
-        subtitle="Why EID"
+        subtitle="The EID advantage"
         title={app.why.title}
         desc={app.why.body}
         features={[

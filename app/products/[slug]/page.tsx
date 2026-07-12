@@ -208,7 +208,7 @@ export default async function ProductPage({
       {/* QC — dark parallax features list */}
       {chapter("Quality Control")}
       <FeaturesListParallax
-        subtitle="Quality control"
+        subtitle="Proven on every lot"
         title="Tested in our own laboratory."
         desc={
           p.quality ??
