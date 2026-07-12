@@ -26,7 +26,7 @@ export default function MsdsPage() {
       <CrystalHeroPage
         eyebrow="Handling, storage & regulatory information"
         title="Material Safety Data Sheets (MSDS)"
-        desc="Download material safety data sheets (MSDS) for EID's industrial diamond and CBN products — handling, storage, and safety information."
+        desc="Download material safety data sheets (MSDS) for EID's industrial diamond and CBN products: handling, storage, and safety information."
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Resources", href: "/resources" },
@@ -48,7 +48,7 @@ export default function MsdsPage() {
             </p>
             <p className="note-mono mt-20">
               Documents must be current, accurate, and correctly labelled before publishing. The EU uses SDS under
-              REACH/CLP rather than the older &quot;MSDS&quot; label — confirm with Uri whether the DE, IT, and other
+              REACH/CLP rather than the older &quot;MSDS&quot; label. Confirm with Uri whether the DE, IT, and other
               EU-facing versions should be titled SDS. Do not publish placeholder or out-of-date safety sheets.
             </p>
           </div>

@@ -84,7 +84,7 @@ export default function DatasheetsPage() {
               Grades, sizes, crystal types, coating options, and packaging. No form, no login. Download what you
               need, and if the exact spec you are after is not here, ask us and we will send it.
             </p>
-            <p className="note-mono mt-20">Placeholder downloads — confirm available datasheets with Uri and upload the actual PDFs.</p>
+            <p className="note-mono mt-20">Placeholder downloads. Confirm available datasheets with Uri and upload the actual PDFs.</p>
           </div>
           <div style={{ display: "grid", gap: 40 }}>
             {groups.map(({ group, sheets }) => (

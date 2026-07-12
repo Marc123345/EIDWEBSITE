@@ -9,7 +9,7 @@ import Icon from "../_components/Icon";
 export const metadata: Metadata = {
   title: { absolute: "Diamond & CBN Guides | Technical Resources | EID Ltd" },
   description:
-    "Technical guides, application notes, and industry knowledge from EID — diamond vs CBN, grit size charts, bond comparison, and more.",
+    "Technical guides, application notes, and industry knowledge from EID on diamond vs CBN, grit size charts, bond comparison, and more.",
 };
 
 const guides: { title: string; desc: string; links: { label: string; href: string }[] }[] = [
@@ -67,7 +67,7 @@ export default function ResourcesPage() {
       <CrystalHeroPage
         eyebrow="Written by EID's technical team"
         title="Resources & Guides"
-        desc="Technical guides, application notes, and industry knowledge from EID — diamond vs CBN, grit size charts, bond comparison, and more."
+        desc="Technical guides, application notes, and industry knowledge from EID on diamond vs CBN, grit size charts, bond comparison, and more."
         crumbs={[{ label: "Home", href: "/" }, { label: "Resources" }]}
         imgLabel="TECHNICAL LIBRARY — Guides & Charts"
         secondaryCta={{ label: "Datasheets", href: "/resources/datasheets" }}
@@ -126,7 +126,7 @@ export default function ResourcesPage() {
             <Link href="/resources/datasheets" className="tech-card" style={{ display: "block" }}>
               <div className="tech-card__meta">Reference</div>
               <h3>Datasheets</h3>
-              <p>Technical specification downloads for every product — grades, sizes, crystal types, coatings.</p>
+              <p>Technical specification downloads for every product: grades, sizes, crystal types, coatings.</p>
               <span className="btn btn__secondary btn__link mt-20"><span>Browse datasheets</span> <i className="fa fa-long-arrow-right" /></span>
             </Link>
             <Link href="/resources/msds" className="tech-card" style={{ display: "block" }}>

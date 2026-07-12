@@ -8,13 +8,13 @@ import { CrystalHeroPage } from "../_components/stone";
 export const metadata: Metadata = {
   title: { absolute: "Blog | Industrial Diamond & Superabrasive Insights | EID Ltd" },
   description:
-    "News, application notes, and technical insight on industrial diamond and CBN from EID Ltd — London-based superabrasive manufacturer.",
+    "News, application notes, and technical insight on industrial diamond and CBN from EID Ltd, London-based superabrasive manufacturer.",
 };
 
 const posts = [
   { category: "Application Note", title: "Why batch-to-batch consistency is the real cost driver in diamond tooling" },
   { category: "Technical", title: "Reading a particle size distribution: D10, D50, D90 and span" },
-  { category: "Materials", title: "When CBN beats diamond — a field guide for ferrous grinding" },
+  { category: "Materials", title: "When CBN beats diamond: a field guide for ferrous grinding" },
   { category: "Industry", title: "What dental bur makers actually need from a diamond supplier" },
   { category: "Process", title: "Inside our QC laboratory: how a batch gets approved to ship" },
   { category: "Materials", title: "CVD vs HPHT (MCD): choosing a single-crystal route" },
@@ -26,7 +26,7 @@ export default function BlogPage() {
       <CrystalHeroPage
         eyebrow="News, application notes & technical insight"
         title="The EID Blog"
-        desc="News, application notes, and technical insight on industrial diamond and CBN from EID Ltd — London-based superabrasive manufacturer."
+        desc="News, application notes, and technical insight on industrial diamond and CBN from EID Ltd, London-based superabrasive manufacturer."
         crumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
         imgLabel="TECHNICAL INSIGHT — Diamond & CBN"
         secondaryCta={{ label: "Resources & Guides", href: "/resources" }}
@@ -44,7 +44,7 @@ export default function BlogPage() {
               </h2>
               <p style={{ marginTop: 14, color: "var(--eid-muted)", lineHeight: 1.6 }}>
                 Procurement optimises for price per carat. The bigger number is what an inconsistent batch
-                costs downstream — rejected product, recalibrated lines, lost trust.
+                costs downstream: rejected product, recalibrated lines, lost trust.
               </p>
               <Link href="/contact" className="btn btn__secondary btn__link mt-20">
                 <span>Read article</span> <i className="fa fa-long-arrow-right" />
@@ -75,7 +75,7 @@ export default function BlogPage() {
               </article>
             ))}
           </div>
-          <p className="note-mono text-center mt-40">Coming soon — content hub launches with the site.</p>
+          <p className="note-mono text-center mt-40">Coming soon. Content hub launches with the site.</p>
         </div>
       </section>
 
@@ -83,7 +83,7 @@ export default function BlogPage() {
 
       <BannerCTA
         subtitle="Have a technical question?"
-        title="Ask our team — we may write about it."
+        title="Ask our team, we may write about it."
         desc="Send us your application question and we'll point you to the right grade, or cover it in a future guide."
         ctaLabel="Ask Our Team"
         ctaHref="/contact"

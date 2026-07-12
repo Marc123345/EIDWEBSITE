@@ -16,10 +16,11 @@ export const metadata: Metadata = {
 };
 
 const tests: { icon: IconName; title: string; desc: string; href: string }[] = [
-  { icon: "gauge", title: "Particle Size Distribution", desc: "Graded and verified to ensure tight D50, D10/D90, and span values. No outliers.", href: "/contact" },
-  { icon: "shield", title: "Crystal Strength", desc: "Friability index tested to confirm performance in your bond system.", href: "/contact" },
-  { icon: "diamond", title: "Morphology & Shape", desc: "Inspected to verify blocky, semi-blocky, or irregular form matches the grade.", href: "/contact" },
-  { icon: "layers", title: "Coating Weight & Coverage", desc: "Every coated batch checked for target weight and uniform surface coverage.", href: "/contact" },
+  { icon: "gauge", title: "Particle Size Distribution", desc: "Graded and verified for tight D50, D10 and D90, and span, with outliers controlled. This keeps a grade cutting and finishing the same way order to order.", href: "/contact" },
+  { icon: "shield", title: "Crystal Strength (Friability)", desc: "Tested so the diamond or CBN performs as expected in your bond system rather than breaking down too fast or not enough.", href: "/contact" },
+  { icon: "diamond", title: "Morphology & Shape", desc: "Inspected to confirm the blocky, semi-blocky, or irregular form matches the grade specification.", href: "/contact" },
+  { icon: "layers", title: "Coating Weight & Coverage", desc: "Every coated batch checked for target weight percentage and uniform surface coverage.", href: "/contact" },
+  { icon: "grid", title: "Traceability", desc: "Every lot documented from raw material through production, QC, and shipping, with full traceability available on request.", href: "/contact" },
 ];
 
 export default function QualityPage() {
@@ -39,7 +40,7 @@ export default function QualityPage() {
         subtitle="Quality is the product"
         title="We don't sample and hope. We test and confirm."
         text={[
-          "Quality control is built into every stage of production — from raw material selection through grading, coating, and final inspection. Our in-house QC laboratory is the backbone of everything we sell.",
+          "Quality control is built into every stage of production, from raw material selection through grading, coating, and final inspection. Our in-house QC laboratory is the backbone of everything we sell.",
           "When a customer re-orders, they expect the same material. Our job is to make sure they get it.",
         ]}
         imgLabel="QC LABORATORY — particle sizing & microscopy"
@@ -62,7 +63,7 @@ export default function QualityPage() {
       <Chapter index="02" label="What We Test" />
       <ServicesLayout3
         subtitle="What we test on every batch"
-        title="Four checks, every production run."
+        title="What we test, every production run."
         desc="Tool performance depends on predictable crystal strength and size distribution. Every lot is documented and traceable from raw material through QC to delivery."
         ctaHref="/contact"
         ctaLabel="Request a Quote with QC Spec"
@@ -76,11 +77,11 @@ export default function QualityPage() {
         title="How a batch moves through our laboratory."
         desc="A structured process from incoming inspection to shipped product, with documentation at every step. This is the demonstrate-don't-badge detail no direct competitor offers."
         features={[
-          { title: "01 — Incoming inspection", desc: "Raw materials tested on arrival against their incoming specification before anything enters production." },
-          { title: "02 — In-process control", desc: "Production parameters monitored and recorded throughout grading, coating, and finishing." },
-          { title: "03 — Final QC", desc: "Every finished batch sampled and tested, then compared against your specification and our internal standards." },
-          { title: "04 — Certificate of analysis", desc: "Issued with any shipment on request, documenting the test results for that specific lot." },
-          { title: "05 — Retention samples", desc: "A sample from every batch is kept, so any later question can be checked against the exact material that shipped." },
+          { title: "01 · Incoming inspection", desc: "Raw materials tested on arrival against their incoming specification before anything enters production." },
+          { title: "02 · In-process control", desc: "Production parameters monitored and recorded throughout grading, coating, and finishing." },
+          { title: "03 · Final QC", desc: "Every finished batch sampled and tested, then compared against your specification and our internal standards." },
+          { title: "04 · Certificate of analysis", desc: "Issued with any shipment on request, documenting the test results for that specific lot." },
+          { title: "05 · Retention samples", desc: "A sample from every batch is kept, so any later question can be checked against the exact material that shipped." },
         ]}
       />
 
@@ -117,7 +118,7 @@ export default function QualityPage() {
       <BannerCTA
         subtitle="Specify your tolerances"
         title="Request a quote with your QC specification."
-        desc="Send us your D50, span, friability, and coating requirements — we'll match them and confirm on every lot."
+        desc="Send us your D50, span, friability, and coating requirements, and we'll match them and confirm on every lot."
         ctaLabel="Request a Quote"
         ctaHref="/contact"
       />

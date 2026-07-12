@@ -14,7 +14,7 @@ const orgSchema = {
   url: "https://www.eid-ltd.com",
   logo: "https://eid-nextjs.vercel.app/eid/logo-white.png",
   description:
-    "London-based manufacturer and finisher of the full range of industrial diamond and CBN — grit, powder, CVD single crystal, MCD, PCD/PCBN — with in-house QC and ISO 9001 consistency.",
+    "London-based manufacturer of the full industrial diamond and CBN range: grit, powder, CVD single crystal, MCD, PCD and PCBN, graded and QC-tested in-house. ISO 9001.",
   email: site.email,
   telephone: site.phone,
   address: {
@@ -35,11 +35,11 @@ const orgSchema = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Industrial Diamond & CBN Powder Manufacturer | EID Ltd",
+    default: "Industrial Diamond & CBN Manufacturer | EID Ltd",
     template: "%s | EID Ltd",
   },
   description:
-    "EID manufactures the full range of industrial diamond and CBN — grit, powder, CVD single crystal, MCD, PCD/PCBN — with in-house QC and ISO 9001 consistency.",
+    "EID manufactures the full industrial diamond and CBN range: grit, powder, CVD single crystal, MCD, PCD and PCBN, graded and QC-tested in-house. ISO 9001.",
 };
 
 export default function RootLayout({
