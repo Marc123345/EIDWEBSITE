@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Icon, { IconName } from "./Icon";
-import { DiamondStone } from "./stone";
 
 /* ---------- Labeled image / media placeholder (wireframe) ---------- */
 export function ImagePlaceholder({
@@ -73,9 +72,6 @@ export function PageTitle({
                 )}
               </ol>
             </nav>
-          </div>
-          <div className="page-hero__stone" aria-hidden="true">
-            <DiamondStone size={230} />
           </div>
         </div>
       </section>

@@ -27,7 +27,6 @@ import {
   useTransform,
 } from "framer-motion";
 import Icon, { IconName } from "./Icon";
-import { DiamondStone } from "./stone";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -444,7 +443,6 @@ export function HeroPage({
                 <div className="stone-frame__grid" aria-hidden="true" />
                 {visual ?? (
                   <>
-                    <DiamondStone size={300} />
                     <span className="stone-frame__tag stone-frame__tag--tl">C · CARBON</span>
                     <span className="stone-frame__tag stone-frame__tag--br">10 MOHS · ISO 9001</span>
                   </>

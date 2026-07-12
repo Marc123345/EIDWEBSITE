@@ -1763,6 +1763,26 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
   padding-block: 96px 76px;
 }
 
+/* Text-only hero (no side visual): single column, constrained measure. */
+.crystal-hero--text .crystal-hero__inner {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: auto;
+  padding-block: clamp(88px, 11vw, 150px) clamp(56px, 7vw, 96px);
+}
+.crystal-hero--text .crystal-hero__copy {
+  max-width: 880px;
+}
+/* Static product diagram in the side column (no float/HUD/3D). */
+.crystal-hero__still {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+.crystal-hero__still .product-visual { padding: 0; }
+.crystal-hero__still .product-visual svg { max-width: 100%; height: auto; }
+
 /* copy */
 .crystal-hero__kicker {
   display: inline-flex;
