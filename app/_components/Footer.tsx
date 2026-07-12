@@ -10,8 +10,10 @@ export default function Footer() {
             <div className="col-sm-12 col-md-12 col-lg-4 footer__widget footer__widget-about mb-30">
               <div className="footer__widget-content">
                 <Link href="/" className="eid-footer-brand" aria-label="EID — Industrial Diamonds, home">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/eid/logo-white.png" alt="EID — Industrial Diamonds" className="eid-footer-logo" />
+                  <span className="eid-wordmark eid-wordmark--light">
+                    <span className="eid-wordmark__mark">EID</span>
+                    <span className="eid-wordmark__sub">Industrial Diamonds</span>
+                  </span>
                 </Link>
                 <p className="mt-20">
                   Manufacturer and finisher of the full range of industrial diamond and superabrasive

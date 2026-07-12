@@ -10,20 +10,6 @@ import { CrystalHeroPage } from "@/app/_components/stone";
 import { ProductVisual } from "@/app/_components/product-visuals";
 import Icon from "@/app/_components/Icon";
 
-// Real product photography from the EID website (public/eid/*), by slug.
-const PRODUCT_PHOTO: Record<string, string> = {
-  "natural-grit": "/eid/natural-grit.jpg",
-  "tool-stones": "/eid/tool-stones.jpg",
-  "metal-bond": "/eid/metal-bond.jpg",
-  "resin-bond": "/eid/resin-bond.jpg",
-  "cbn": "/eid/cbn.jpg",
-  "cvd-single-crystal": "/eid/cvd-single-crystal.jpg",
-  "cvd-polycrystalline": "/eid/cvd-polycrystalline.jpg",
-  "pcd-blanks": "/eid/pcd-pcbn.png",
-  "pcbn": "/eid/pcd-pcbn.png",
-  "polycrystalline-micron": "/eid/polycrystalline-micron.jpg",
-};
-
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
@@ -107,16 +93,7 @@ export default async function ProductPage({
             </div>
             <div className="col-sm-12 col-md-8 col-lg-5">
               <div className="about__img">
-                {PRODUCT_PHOTO[p.slug] ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={PRODUCT_PHOTO[p.slug]}
-                    alt={`${p.name} — industrial diamond product`}
-                    className="product-photo"
-                  />
-                ) : (
-                  <ImagePlaceholder label={`PRODUCT IMAGE — ${p.name}`} minHeight={340} />
-                )}
+                <ImagePlaceholder label={`PRODUCT IMAGE — ${p.name}`} minHeight={340} />
               </div>
             </div>
             <div className="col-sm-12 col-md-12 col-lg-3">

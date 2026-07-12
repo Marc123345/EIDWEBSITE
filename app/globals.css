@@ -2357,30 +2357,34 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
   line-height: 1 !important;
   overflow: visible;
 }
-/* Real white logo on a compact navy brand tile — always renders, never
-   clipped (the CSS-mask approach could fail to paint on some engines). */
-.eid-brand {
+/* Text wordmark placeholder (wireframe build — no real logo image yet). */
+.eid-wordmark {
   display: inline-flex;
-  align-items: center;
-  background: var(--eid-blue);
-  padding: 9px 14px;
-  border-radius: 3px;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1;
 }
-.eid-brand__img { height: 26px; width: auto; display: block; }
-@media (max-width: 575px) {
-  .eid-brand { padding: 7px 11px; }
-  .eid-brand__img { height: 22px; }
+.eid-wordmark__mark {
+  font-family: "Rubik", sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: var(--eid-blue);
 }
+.eid-wordmark__sub {
+  font-family: "Rubik", sans-serif;
+  font-weight: 600;
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--eid-muted);
+  margin-top: 4px;
+}
+.eid-wordmark--light .eid-wordmark__mark { color: #fff; }
+.eid-wordmark--light .eid-wordmark__sub { color: rgba(255, 255, 255, 0.6); }
 .eid-footer-brand { display: inline-block; }
-.eid-footer-logo { height: 48px; width: auto; display: block; }
-
-/* Real product photo in the product intro (replaces the wireframe placeholder) */
-.product-photo {
-  width: 100%;
-  height: auto;
-  display: block;
-  border: 1px solid var(--eid-line);
-  border-radius: 2px;
+@media (max-width: 575px) {
+  .eid-wordmark__mark { font-size: 22px; }
 }
 
 /* =========================================================================
