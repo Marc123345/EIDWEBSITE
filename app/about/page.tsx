@@ -65,8 +65,9 @@ export default function AboutPage() {
         ]}
       />
 
-      <Chapter index="03" label="Quality" />
       <FeaturesListParallax
+        chapterIndex="03"
+        chapterLabel="Quality"
         subtitle="Consistency, measured on every run"
         title="When you re-order a grade, you get the grade you qualified."
         desc="Our QC laboratory tests every production run for particle size distribution, crystal strength, morphology, and coating coverage. ISO 9001 certified, with a certificate of analysis available for each lot."

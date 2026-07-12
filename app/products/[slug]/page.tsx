@@ -205,9 +205,10 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* QC — dark parallax features list */}
-      {chapter("Quality Control")}
+      {/* QC — dark parallax features list; chapter marker sits inside the dark band */}
       <FeaturesListParallax
+        chapterIndex={String(++step).padStart(2, "0")}
+        chapterLabel="Quality Control"
         subtitle="Proven on every lot"
         title="Tested in our own laboratory."
         desc={
@@ -215,7 +216,7 @@ export default async function ProductPage({
           "Every production run is tested in our in-house QC laboratory for size distribution, crystal morphology, and strength. ISO 9001 certified. Full traceability from raw material to shipped product."
         }
         features={[
-          { title: "Particle size distribution", desc: "Tight D50 and span — graded and verified on every batch." },
+          { title: "Particle size distribution", desc: "Tight D50 and span, graded and verified on every batch." },
           { title: "Crystal strength & morphology", desc: "Confirmed to perform as expected in your bond system." },
           { title: "Coating weight & coverage", desc: "Every coated batch checked for target weight and uniformity." },
           { title: "ISO 9001 & traceability", desc: "Certificate of analysis and retention samples on request." },

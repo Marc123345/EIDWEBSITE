@@ -69,8 +69,9 @@ export default function QualityPage() {
         items={tests}
       />
 
-      <Chapter index="03" label="QC Process" />
       <FeaturesListParallax
+        chapterIndex="03"
+        chapterLabel="QC Process"
         subtitle="Our QC process, step by step"
         title="How a batch moves through our laboratory."
         desc="A structured process from incoming inspection to shipped product, with documentation at every step. This is the demonstrate-don't-badge detail no direct competitor offers."

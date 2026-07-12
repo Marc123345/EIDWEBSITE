@@ -58,8 +58,9 @@ export default function ApplicationsOverview() {
         ]}
       />
 
-      <Chapter index="02" label="The Common Thread" />
       <FeaturesListParallax
+        chapterIndex="02"
+        chapterLabel="The Common Thread"
         subtitle="One standard behind every hub"
         title="Consistency your production line can rely on."
         desc="Whatever the application, tool performance depends on predictable crystal strength and size distribution, and that is exactly what our QC process delivers."

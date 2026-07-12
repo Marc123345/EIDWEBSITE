@@ -225,17 +225,28 @@ export function FeaturesListParallax({
   title,
   desc,
   features,
+  chapterIndex,
+  chapterLabel,
 }: {
   subtitle: string;
   title: string;
   desc: string;
   features: { title: string; desc: string }[];
+  chapterIndex?: string;
+  chapterLabel?: string;
 }) {
   const mid = Math.ceil(features.length / 2);
   const cols = [features.slice(0, mid), features.slice(mid)];
   return (
     <section className="features-list features-list-layout2 bg-overlay bg-overlay-gradient bg-ph pt-110 pb-90">
       <div className="container">
+        {chapterLabel && (
+          <div className="chapter-marker chapter-marker--on-dark parallax-chapter">
+            {chapterIndex && <span className="chapter-marker__index">{chapterIndex}</span>}
+            <span className="chapter-marker__rule" />
+            <span className="chapter-marker__label">{chapterLabel}</span>
+          </div>
+        )}
         <div className="row heading mb-30">
           <div className="col-sm-12 col-md-12 col-lg-12">
             <span className="heading__subtitle">{subtitle}</span>

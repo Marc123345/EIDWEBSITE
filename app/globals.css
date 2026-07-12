@@ -1314,6 +1314,24 @@ body {
 }
 
 /* ---- Chapter band : spacing wrapper for inner-page chapter markers ----- */
+/* Chapter marker placed inside a dark band (e.g. the navy parallax): the label,
+   index, rule, and section eyebrow all read on navy instead of being stranded
+   on a white strip above it. */
+.chapter-marker--on-dark .chapter-marker__index {
+  color: var(--eid-inverse-primary, #b3c5ff);
+}
+.chapter-marker--on-dark .chapter-marker__rule {
+  background: rgba(255, 255, 255, 0.30);
+}
+.chapter-marker--on-dark .chapter-marker__label {
+  color: rgba(255, 255, 255, 0.85);
+}
+.features-list-layout2 .parallax-chapter { margin-bottom: 30px; }
+/* Section eyebrow on the dark parallax was navy-on-navy (#2c3c6c). */
+.features-list-layout2 .heading__subtitle {
+  color: var(--eid-inverse-primary, #b3c5ff);
+}
+
 .chapter-band { padding-top: clamp(56px, 7vw, 96px); background: #fff; }
 .chapter-band + section,
 .chapter-band + .about { padding-top: 18px !important; }
