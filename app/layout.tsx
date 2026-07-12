@@ -12,7 +12,6 @@ const orgSchema = {
   name: "EID Ltd",
   legalName: "EID Ltd.",
   url: "https://www.eid-ltd.com",
-  logo: "https://eid-nextjs.vercel.app/eid/logo-white.png",
   description:
     "London-based manufacturer of the full industrial diamond and CBN range: grit, powder, CVD single crystal, MCD, PCD and PCBN, graded and QC-tested in-house. ISO 9001.",
   email: site.email,
