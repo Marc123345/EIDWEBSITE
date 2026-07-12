@@ -1,22 +1,35 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
 import { useState } from "react";
-import {
-  primaryNav,
-  productMenu,
-  applicationMenu,
-  resourceMenu,
-  site,
-} from "@/lib/site";
+import { primaryNav, resourceMenu as resourceMenuBase, site } from "@/lib/site";
+import { PRODUCT_FAMILIES } from "@/lib/products";
+import { getProducts, getApplications, getFamilyLabel, t } from "@/lib/i18n-content";
+import type { Locale } from "@/i18n/routing";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header() {
   const pathname = usePathname();
+  const locale = useLocale() as Locale;
   const [open, setOpen] = useState(false);
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
   const close = () => setOpen(false);
+
+  const products = getProducts(locale);
+  const nav = primaryNav.map((i) => ({ ...i, label: t(locale, i.label) }));
+  const productMenu = PRODUCT_FAMILIES.map((family) => ({
+    family: getFamilyLabel(locale, family),
+    items: products
+      .filter((p) => p.family === family)
+      .map((p) => ({ label: p.name, href: `/products/${p.slug}` })),
+  }));
+  const applicationMenu = getApplications(locale).map((a) => ({
+    label: a.name,
+    href: `/applications/${a.slug}`,
+  }));
+  const resourceMenu = resourceMenuBase.map((r) => ({ label: t(locale, r.label), href: r.href }));
 
   return (
     <header id="header" className="header header-white header-full header-full-layout2">
@@ -35,29 +48,30 @@ export default function Header() {
                 <li>
                   <i className="fa fa-phone" />
                   <div>
-                    <span>Call Us:</span>
+                    <span>{t(locale, "Call Us:")}</span>
                     <strong>{site.phone}</strong>
                   </div>
                 </li>
                 <li>
                   <i className="fa fa-envelope" />
                   <div>
-                    <span>Email Us:</span>
+                    <span>{t(locale, "Email Us:")}</span>
                     <strong>{site.email}</strong>
                   </div>
                 </li>
                 <li>
                   <i className="fa fa-map-marker" />
                   <div>
-                    <span>Based In:</span>
+                    <span>{t(locale, "Based In:")}</span>
                     <strong>{site.location}</strong>
                   </div>
                 </li>
               </ul>
               <Link href="/contact" className="btn btn__secondary module__btn-request" onClick={close}>
-                <span>Request A Quote</span>
+                <span>{t(locale, "Request A Quote")}</span>
                 <i className="fa fa-long-arrow-right" />
               </Link>
+              <LanguageSwitcher />
             </div>
           </div>
 
@@ -77,7 +91,7 @@ export default function Header() {
           <div className="container">
             <div className={`collapse navbar-collapse${open ? " menu-opened" : ""}`} id="mainNavigation">
               <ul className="navbar-nav">
-                {primaryNav.map((item) => {
+                {nav.map((item) => {
                   if (!item.menu) {
                     return (
                       <li key={item.href} className="nav__item">
@@ -121,7 +135,7 @@ export default function Header() {
                             ))}
                           </div>
                           <Link className="eid-mega__all" href="/products" onClick={close}>
-                            View all products <i className="fa fa-long-arrow-right" />
+                            {t(locale, "View all products")} <i className="fa fa-long-arrow-right" />
                           </Link>
                         </div>
                       )}
@@ -156,7 +170,7 @@ export default function Header() {
                 {/* mobile-only CTA */}
                 <li className="nav__item d-lg-none">
                   <Link href="/contact" className="btn btn__primary btn-block" onClick={close}>
-                    Contact
+                    {t(locale, "Contact")}
                   </Link>
                 </li>
               </ul>

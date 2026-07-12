@@ -1,16 +1,27 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ServicesLayout3, BannerCTA } from "@/app/_components/sections";
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
 import Icon, { IconName } from "@/app/_components/Icon";
-import { PRODUCT_FAMILIES, productsByFamily, products } from "@/lib/products";
+import { PRODUCT_FAMILIES } from "@/lib/products";
+import { getProducts, getFamilyLabel } from "@/lib/i18n-content";
+import { localeAlternates } from "@/lib/hreflang";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: { absolute: "Industrial Diamond & CBN Products | Full Range | EID Ltd" },
-  description:
-    "Browse EID's full range of industrial diamond and CBN: natural grit and powder, metal and resin bond, CBN and PCBN, CVD, MCD, PCD, and polishing powder.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: { absolute: "Industrial Diamond & CBN Products | Full Range | EID Ltd" },
+    description:
+      "Browse EID's full range of industrial diamond and CBN: natural grit and powder, metal and resin bond, CBN and PCBN, CVD, MCD, PCD, and polishing powder.",
+    alternates: localeAlternates(locale, "/products"),
+  };
+}
 
 const familyIcon: Record<string, IconName> = {
   "Natural Diamond Grit & Powder": "diamond",
@@ -23,12 +34,20 @@ const familyIcon: Record<string, IconName> = {
   "Polycrystalline Diamond Powder": "bolt",
 };
 
-export default function ProductsOverview() {
+export default async function ProductsOverview({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  const products = getProducts(locale);
+  const byFamily = (family: string) => products.filter((p) => p.family === family);
+
   const familyCards = PRODUCT_FAMILIES.map((family) => {
-    const items = productsByFamily(family);
+    const items = byFamily(family);
     return {
       icon: familyIcon[family] || "diamond",
-      title: family,
+      title: getFamilyLabel(locale, family),
       desc: items.map((p) => p.name).join(" · "),
       href: `/products/${items[0].slug}`,
     };
@@ -73,10 +92,10 @@ export default function ProductsOverview() {
             <div key={family}>
               <div className="heading mb-30" style={{ display: "flex", alignItems: "center", gap: 14, borderBottom: "1px solid var(--eid-line)", paddingBottom: 12 }}>
                 <Icon name={familyIcon[family] || "diamond"} style={{ color: "var(--eid-blue)" }} />
-                <span className="heading__subtitle" style={{ margin: 0 }}>{family}</span>
+                <span className="heading__subtitle" style={{ margin: 0 }}>{getFamilyLabel(locale, family)}</span>
               </div>
               <div className="grid-3">
-                {productsByFamily(family).map((p) => (
+                {byFamily(family).map((p) => (
                   <Link key={p.slug} href={`/products/${p.slug}`} className="tech-card" style={{ display: "block" }}>
                     <h3>{p.name}</h3>
                     <p>{p.cardDesc}</p>

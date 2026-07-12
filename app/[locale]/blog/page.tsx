@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ImagePlaceholder } from "@/app/_components/ui";
 import { BannerCTA } from "@/app/_components/sections";
 import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";

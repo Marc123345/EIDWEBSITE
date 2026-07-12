@@ -1,7 +1,37 @@
-import Link from "next/link";
-import { footerColumns, site, languages } from "@/lib/site";
+import { getLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { site } from "@/lib/site";
+import { getProducts, getApplications, t } from "@/lib/i18n-content";
+import type { Locale } from "@/i18n/routing";
+import LanguageSwitcher from "./LanguageSwitcher";
 
-export default function Footer() {
+export default async function Footer() {
+  const locale = (await getLocale()) as Locale;
+
+  const columns = [
+    {
+      title: t(locale, "Products"),
+      links: getProducts(locale).map((p) => ({ label: p.name, href: `/products/${p.slug}` })),
+    },
+    {
+      title: t(locale, "Applications"),
+      links: getApplications(locale).map((a) => ({ label: a.name, href: `/applications/${a.slug}` })),
+    },
+    {
+      title: t(locale, "Company & Resources"),
+      links: [
+        { label: t(locale, "Products Overview"), href: "/products" },
+        { label: t(locale, "Quality, QC & ISO 9001"), href: "/quality" },
+        { label: t(locale, "Resources & Guides"), href: "/resources" },
+        { label: t(locale, "Datasheets"), href: "/resources/datasheets" },
+        { label: t(locale, "MSDS"), href: "/resources/msds" },
+        { label: t(locale, "Blog"), href: "/blog" },
+        { label: t(locale, "About"), href: "/about" },
+        { label: t(locale, "Contact"), href: "/contact" },
+      ],
+    },
+  ];
+
   return (
     <footer id="footer" className="footer footer-1">
       <div className="footer-top">
@@ -15,10 +45,7 @@ export default function Footer() {
                     <span className="eid-wordmark__sub">Industrial Diamonds</span>
                   </span>
                 </Link>
-                <p className="mt-20">
-                  Manufacturer and finisher of the full range of industrial diamond and superabrasive
-                  materials, supplying tool makers worldwide.
-                </p>
+                <p className="mt-20">{t(locale, "footerAbout")}</p>
                 <p>{site.address}</p>
                 <p>
                   Mail: <a href={`mailto:${site.email}`}>{site.email}</a>
@@ -29,7 +56,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {footerColumns.map((col) => (
+            {columns.map((col) => (
               <div
                 key={col.title}
                 className="col-6 col-sm-6 col-md-4 col-lg footer__widget footer__widget-nav"
@@ -70,11 +97,7 @@ export default function Footer() {
               </div>
             </div>
             <div className="col-sm-12 col-md-4 col-lg-4 d-flex align-items-center justify-content-md-end">
-              <div className="eid-lang">
-                {languages.map((l, i) => (
-                  <span key={l} className={i === 0 ? "active" : ""}>{l}</span>
-                ))}
-              </div>
+              <LanguageSwitcher footer />
             </div>
           </div>
         </div>

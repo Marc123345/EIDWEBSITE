@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Link from "next/link";
-import { applications, getApplication } from "@/lib/applications";
-import { getProduct } from "@/lib/products";
+import { Link } from "@/i18n/navigation";
+import { applications } from "@/lib/applications";
+import { getApplication, getApplications, getProduct } from "@/lib/i18n-content";
+import { localeAlternates } from "@/lib/hreflang";
+import type { Locale } from "@/i18n/routing";
 import { CrossLinks, ImagePlaceholder } from "@/app/_components/ui";
 import { ServicesLayout3, FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
 import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
@@ -16,12 +18,16 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: Locale; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const a = getApplication(slug);
+  const { locale, slug } = await params;
+  const a = getApplication(locale, slug);
   if (!a) return {};
-  return { title: { absolute: a.metaTitle }, description: a.metaDesc };
+  return {
+    title: { absolute: a.metaTitle },
+    description: a.metaDesc,
+    alternates: localeAlternates(locale, `/applications/${slug}`),
+  };
 }
 
 const familyIcon: Record<string, IconName> = {
@@ -38,17 +44,17 @@ const familyIcon: Record<string, IconName> = {
 export default async function ApplicationPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: Locale; slug: string }>;
 }) {
-  const { slug } = await params;
-  const app = getApplication(slug);
+  const { locale, slug } = await params;
+  const app = getApplication(locale, slug);
   if (!app) notFound();
 
   const [headline, ...bodyParas] = app.intro;
 
   const serviceItems = app.products
     .map((ap) => {
-      const prod = getProduct(ap.product);
+      const prod = getProduct(locale, ap.product);
       if (!prod) return null;
       return {
         icon: familyIcon[prod.family] || "diamond",
@@ -170,7 +176,7 @@ export default async function ApplicationPage({
           },
           {
             title: "Other applications",
-            links: applications
+            links: getApplications(locale)
               .filter((o) => o.slug !== app.slug)
               .map((o) => ({ label: o.name, href: `/applications/${o.slug}` })),
           },

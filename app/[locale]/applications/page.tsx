@@ -3,13 +3,23 @@ import { ServicesLayout3, FeaturesListParallax, BannerCTA } from "@/app/_compone
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
 import type { IconName } from "@/app/_components/Icon";
-import { applications } from "@/lib/applications";
+import { getApplications } from "@/lib/i18n-content";
+import { localeAlternates } from "@/lib/hreflang";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: { absolute: "Applications | Diamond & CBN by the Work Your Tools Do | EID Ltd" },
-  description:
-    "EID supplies industrial diamond and CBN to tool makers across dental, semiconductor and advanced electronics, automotive and aerospace, tool and die, grinding and cutting, and polishing and lapping.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: { absolute: "Applications | Diamond & CBN by the Work Your Tools Do | EID Ltd" },
+    description:
+      "EID supplies industrial diamond and CBN to tool makers across dental, semiconductor and advanced electronics, automotive and aerospace, tool and die, grinding and cutting, and polishing and lapping.",
+    alternates: localeAlternates(locale, "/applications"),
+  };
+}
 
 const icons: Record<string, IconName> = {
   dental: "tooth",
@@ -20,8 +30,13 @@ const icons: Record<string, IconName> = {
   "polishing-lapping": "lens",
 };
 
-export default function ApplicationsOverview() {
-  const items = applications.map((a) => ({
+export default async function ApplicationsOverview({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  const items = getApplications(locale).map((a) => ({
     icon: icons[a.slug] || "diamond",
     title: a.name,
     desc: a.cardDesc,

@@ -518,12 +518,21 @@ body .about__text p {
 /* ---------- Language switcher ---------- */
 .eid-lang {
   display: inline-flex;
-  gap: 8px;
+  gap: 10px;
+  align-items: center;
   font-family: "Rubik", sans-serif;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
-.eid-lang span.active { color: var(--eid-blue); font-weight: 600; }
+.eid-lang a { color: var(--eid-muted); text-decoration: none; transition: color 0.15s ease; }
+.eid-lang a:hover { color: var(--eid-blue); }
+.eid-lang a.active { color: var(--eid-blue); }
+.header__topbar .eid-lang { margin-left: 16px; }
+/* Footer variant sits on the dark footer background. */
+.eid-lang--footer a { color: rgba(255, 255, 255, 0.55); }
+.eid-lang--footer a:hover,
+.eid-lang--footer a.active { color: #fff; }
 
 /* ---------- Dropdowns: open on hover (desktop) ---------- */
 @media (min-width: 992px) {

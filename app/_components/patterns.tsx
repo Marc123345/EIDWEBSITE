@@ -25,7 +25,7 @@
    16 MidnightPanel    generic dark technical band wrapper (grid + glow)
    ========================================================================= */
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 

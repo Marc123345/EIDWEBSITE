@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Icon, { IconName } from "./Icon";
 import { ImagePlaceholder } from "./ui";
 

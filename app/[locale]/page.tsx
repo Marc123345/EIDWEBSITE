@@ -13,10 +13,22 @@ import {
   BentoGallery,
   ProcessSteps,
 } from "@/app/_components/award";
+import type { Metadata } from "next";
 import { CrystalHero } from "@/app/_components/stone";
 import type { IconName } from "@/app/_components/Icon";
-import { products, PRODUCT_FAMILIES, productsByFamily } from "@/lib/products";
-import { applications } from "@/lib/applications";
+import { PRODUCT_FAMILIES } from "@/lib/products";
+import { getProducts, getApplications, getFamilyLabel } from "@/lib/i18n-content";
+import { localeAlternates } from "@/lib/hreflang";
+import type { Locale } from "@/i18n/routing";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return { alternates: localeAlternates(locale, "/") };
+}
 
 const heroSlides = [
   {
@@ -48,16 +60,6 @@ const familyIcon: Record<string, IconName> = {
   "Polycrystalline Diamond Powder": "bolt",
 };
 
-const groupCards = PRODUCT_FAMILIES.map((family) => {
-  const items = productsByFamily(family);
-  return {
-    icon: familyIcon[family] || "diamond",
-    title: family,
-    desc: items.map((p) => p.name).join(" · "),
-    href: `/products/${items[0].slug}`,
-  };
-});
-
 // The six application hubs as home cards.
 const hubIcon: Record<string, IconName> = {
   dental: "tooth",
@@ -68,14 +70,31 @@ const hubIcon: Record<string, IconName> = {
   "polishing-lapping": "lens",
 };
 
-const hubCards = applications.map((a) => ({
-  icon: hubIcon[a.slug] || "diamond",
-  title: a.name,
-  desc: a.cardDesc,
-  href: `/applications/${a.slug}`,
-}));
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  const products = getProducts(locale);
 
-export default function Home() {
+  const groupCards = PRODUCT_FAMILIES.map((family) => {
+    const items = products.filter((p) => p.family === family);
+    return {
+      icon: familyIcon[family] || "diamond",
+      title: getFamilyLabel(locale, family),
+      desc: items.map((p) => p.name).join(" · "),
+      href: `/products/${items[0].slug}`,
+    };
+  });
+
+  const hubCards = getApplications(locale).map((a) => ({
+    icon: hubIcon[a.slug] || "diamond",
+    title: a.name,
+    desc: a.cardDesc,
+    href: `/applications/${a.slug}`,
+  }));
+
   return (
     <>
       {/* HERO — The Stone: faceted diamond crystal + metrology HUD */}

@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Link from "next/link";
-import { products, getProduct } from "@/lib/products";
-import { getApplication } from "@/lib/applications";
+import { Link } from "@/i18n/navigation";
+import { products } from "@/lib/products";
+import { getProduct, getApplication } from "@/lib/i18n-content";
+import { localeAlternates } from "@/lib/hreflang";
+import type { Locale } from "@/i18n/routing";
 import { CrossLinks, ImagePlaceholder } from "@/app/_components/ui";
 import { FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
 import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
@@ -17,21 +19,25 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: Locale; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const p = getProduct(slug);
+  const { locale, slug } = await params;
+  const p = getProduct(locale, slug);
   if (!p) return {};
-  return { title: { absolute: p.metaTitle }, description: p.metaDesc };
+  return {
+    title: { absolute: p.metaTitle },
+    description: p.metaDesc,
+    alternates: localeAlternates(locale, `/products/${slug}`),
+  };
 }
 
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: Locale; slug: string }>;
 }) {
-  const { slug } = await params;
-  const p = getProduct(slug);
+  const { locale, slug } = await params;
+  const p = getProduct(locale, slug);
   if (!p) notFound();
 
   const [headline, ...bodyParas] = p.intro;
@@ -43,11 +49,11 @@ export default async function ProductPage({
   );
 
   const crossProductLinks = p.crossProducts
-    .map((s) => getProduct(s))
+    .map((s) => getProduct(locale, s))
     .filter(Boolean)
     .map((cp) => ({ label: cp!.name, href: `/products/${cp!.slug}` }));
   const crossApplicationLinks = p.crossApplications
-    .map((s) => getApplication(s))
+    .map((s) => getApplication(locale, s))
     .filter(Boolean)
     .map((ca) => ({ label: ca!.name, href: `/applications/${ca!.slug}` }));
   const guideLinks = (p.guides ?? []).map((g) => ({ label: g, href: "/resources" }));

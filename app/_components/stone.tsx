@@ -6,7 +6,7 @@
    every inner page and can host a static product diagram in its side column.
    ========================================================================= */
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
