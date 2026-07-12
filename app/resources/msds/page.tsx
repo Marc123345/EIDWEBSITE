@@ -7,7 +7,7 @@ import Icon from "../../_components/Icon";
 export const metadata: Metadata = {
   title: { absolute: "Diamond & CBN Safety Data Sheets (MSDS) | EID Ltd" },
   description:
-    "Download material safety data sheets (MSDS) for EID's industrial diamond and CBN products. Handling, storage, and safety information.",
+    "Download safety data sheets for EID's industrial diamond and CBN products. Handling, storage, disposal, and regulatory information. Free, no login.",
 };
 
 const msds = [
@@ -40,9 +40,17 @@ export default function MsdsPage() {
       <section className="section">
         <div className="container">
           <div className="heading mb-40">
-            <span className="heading__subtitle">Downloads</span>
+            <span className="heading__subtitle">Free to download</span>
             <h2 className="heading__title">Safety data for all EID products.</h2>
-            <p className="note-mono mt-20">Placeholder downloads — confirm available MSDS documents with Uri.</p>
+            <p className="prose mt-20">
+              Handling, storage, disposal, and regulatory information. No form, no login. If you need a document
+              that is not listed, or a specific regional format, ask us and we will send it.
+            </p>
+            <p className="note-mono mt-20">
+              Documents must be current, accurate, and correctly labelled before publishing. The EU uses SDS under
+              REACH/CLP rather than the older &quot;MSDS&quot; label — confirm with Uri whether the DE, IT, and other
+              EU-facing versions should be titled SDS. Do not publish placeholder or out-of-date safety sheets.
+            </p>
           </div>
           <div style={{ display: "grid", gap: 14 }}>
             {msds.map((name) => (
@@ -60,8 +68,8 @@ export default function MsdsPage() {
 
       <BannerCTA
         subtitle="Need a safety document not listed?"
-        title="We'll send the right MSDS for your material."
-        desc="Tell us the product and we'll provide the current safety data sheet."
+        title="We'll send the current SDS for your material."
+        desc="Tell us the product and the regional format you need, and we will send the current document. Replies within one business day."
         ctaLabel="Contact Us"
         ctaHref="/contact"
       />

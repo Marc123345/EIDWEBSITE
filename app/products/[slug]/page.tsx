@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { products, getProduct } from "@/lib/products";
-import { getIndustry } from "@/lib/industries";
+import { getApplication } from "@/lib/applications";
 import { CrossLinks, ImagePlaceholder } from "@/app/_components/ui";
 import { FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
 import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
@@ -19,9 +19,9 @@ const PRODUCT_PHOTO: Record<string, string> = {
   "cbn": "/eid/cbn.jpg",
   "cvd-single-crystal": "/eid/cvd-single-crystal.jpg",
   "cvd-polycrystalline": "/eid/cvd-polycrystalline.jpg",
-  "pcd-pcbn": "/eid/pcd-pcbn.png",
+  "pcd-blanks": "/eid/pcd-pcbn.png",
+  "pcbn": "/eid/pcd-pcbn.png",
   "polycrystalline-micron": "/eid/polycrystalline-micron.jpg",
-  "surface-enhancements": "/eid/surface-enhancements.jpg",
 };
 
 export function generateStaticParams() {
@@ -60,10 +60,10 @@ export default async function ProductPage({
     .map((s) => getProduct(s))
     .filter(Boolean)
     .map((cp) => ({ label: cp!.name, href: `/products/${cp!.slug}` }));
-  const crossIndustryLinks = p.crossIndustries
-    .map((s) => getIndustry(s))
+  const crossApplicationLinks = p.crossApplications
+    .map((s) => getApplication(s))
     .filter(Boolean)
-    .map((ci) => ({ label: ci!.name, href: `/industries/${ci!.slug}` }));
+    .map((ca) => ({ label: ca!.name, href: `/applications/${ca!.slug}` }));
   const guideLinks = (p.guides ?? []).map((g) => ({ label: g, href: "/resources" }));
 
   return (
@@ -237,7 +237,7 @@ export default async function ProductPage({
       <CrossLinks
         groups={[
           { title: "Related products", links: crossProductLinks },
-          { title: "Industries", links: crossIndustryLinks },
+          { title: "Applications", links: crossApplicationLinks },
           {
             title: "Quality & resources",
             links: [

@@ -1,27 +1,28 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   AboutGeometric,
   FeaturesRow,
   FeaturesListParallax,
-  Testimonials,
   BannerCTA,
 } from "../_components/sections";
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
 import { CrystalHeroPage } from "../_components/stone";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: { absolute: "About EID | Industrial Diamond Manufacturer, London | EID Ltd" },
   description:
-    "EID Ltd manufactures and quality-controls the full range of industrial diamond and CBN from London, supplying tool makers worldwide. In-house production, ISO 9001.",
+    "EID has manufactured and quality-controlled the full industrial diamond and CBN range from London for over 50 years, supplying tool makers worldwide.",
 };
 
 export default function AboutPage() {
   return (
     <>
       <CrystalHeroPage
-        eyebrow="One manufacturer · the full range · no compromises"
+        eyebrow="Over 50 years · the full range · made and graded in-house"
         title="About EID — Industrial Diamond Manufacturer"
-        desc="EID Ltd manufactures and quality-controls the full range of industrial diamond and CBN from London, supplying tool makers worldwide."
+        desc="EID has manufactured and quality-controlled the full industrial diamond and CBN range from London for over 50 years, supplying tool makers worldwide."
         crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
         imgLabel="FACTORY / PRODUCTION FLOOR — London"
         secondaryCta={{ label: "View Products", href: "/products" }}
@@ -30,65 +31,96 @@ export default function AboutPage() {
       <Chapter index="01" label="The Company" />
       <AboutGeometric
         subtitle="London-based superabrasive manufacturer"
-        title="We make the material that goes into your tools."
+        title="Over 50 years making the material that goes into the world's diamond tools."
         text={[
-          "EID Ltd is a London-based manufacturer and finisher of industrial diamond and superabrasive materials, supplying the full range of diamond and CBN to tool makers worldwide.",
-          "We control the production. We control the quality. And because we offer the entire range from one facility, our customers manage one relationship instead of five.",
+          "EID Ltd is a London-based manufacturer and finisher of industrial diamond and superabrasive materials. For more than fifty years we have supplied the full diamond and CBN range, meaning grit, powder, and crystal, to tool manufacturers and precision-parts producers worldwide.",
+          "We do not make finished tools. We make the material inside them. Half a century of doing this for the same kinds of customers is why they keep coming back, and why the material is consistent enough to build a production line around.",
+          "That track record is also what separates us from a distributor. We control the production and the quality decision, and we cover the whole range from one facility, so our customers manage one relationship instead of five.",
         ]}
         imgLabel="FACTORY / PRODUCTION FLOOR — London"
         features={[
-          { title: "Manufacturer, not distributor", desc: "We make and finish the material — we don't resell someone else's." },
+          { title: "Manufacturer, not distributor", desc: "We control the production and the quality decision. The specification and the QC pass are ours." },
           { title: "Full range, one facility", desc: "Grit, powder, and crystal, all quality-controlled in-house." },
-          { title: "Worldwide supply", desc: "Customers across Europe, the Middle East, Asia, and beyond." },
+          { title: "Over 50 years", desc: "Half a century supplying the same kinds of tool makers, order after order." },
         ]}
       />
 
       <StatsBar
         items={[
-          { value: 30, suffix: "+", label: "Countries served" },
+          { value: 50, suffix: "+", label: "Years' experience" },
+          { value: 8, label: "Product groups" },
           { value: 12, label: "Product lines" },
           { value: 100, suffix: "%", label: "Batches QC-tested" },
-          { value: 24, suffix: "hr", label: "Quote response" },
         ]}
       />
 
-      <Chapter index="02" label="The Range" />
+      {/* HOW WE MAKE IT — the honest, graduated production model */}
+      <Chapter index="02" label="How We Make It" />
       <FeaturesRow
         items={[
-          { title: "Natural Grit & Powder", desc: "Manufactured entirely in-house — from raw material to finished, graded product.", href: "/products/natural-grit" },
-          { title: "CVD Single Crystal", desc: "Grown with a dedicated partner to EID's exact specification and orientation.", href: "/products/cvd-single-crystal" },
-          { title: "Bonded & CBN", desc: "Produced to order and QC-upgraded through our facility to your spec.", href: "/products/metal-bond" },
-          { title: "Surface Enhancements", desc: "Nickel, copper, and titanium coatings plus polish and etch treatments.", href: "/products/surface-enhancements" },
+          { title: "Natural grit & powder", desc: "Manufactured entirely in-house, from raw material through crushing, grading, and final QC.", href: "/products/natural-grit" },
+          { title: "CVD single crystal", desc: "Grown to EID's exact specification and orientation through a dedicated growth partner, finished and inspected by us.", href: "/products/cvd-single-crystal" },
+          { title: "Bonded & CBN", desc: "Produced to order, then re-processed and QC-upgraded through our facility to your spec.", href: "/products/metal-bond" },
+          { title: "Coating in-house", desc: "Nickel, copper, and titanium coatings applied in-house rather than sourced from a second vendor.", href: "/products/metal-bond" },
         ]}
       />
 
       <Chapter index="03" label="Quality" />
       <FeaturesListParallax
-        subtitle="Quality is the product"
-        title="When you re-order, you get the same material."
-        desc="Our in-house QC laboratory tests every production run for particle size distribution, crystal morphology, strength, and coating integrity. ISO 9001 certified."
+        subtitle="Consistency, measured on every run"
+        title="When you re-order a grade, you get the grade you qualified."
+        desc="Our QC laboratory tests every production run for particle size distribution, crystal strength, morphology, and coating coverage. ISO 9001 certified, with a certificate of analysis available for each lot."
         features={[
-          { title: "In-house QC laboratory", desc: "The backbone of everything we ship — not an afterthought." },
+          { title: "In-house QC laboratory", desc: "The backbone of everything we ship, not an afterthought." },
           { title: "Tested every batch", desc: "Size distribution, crystal strength, morphology, coating coverage." },
           { title: "Full traceability", desc: "Documented from raw material through QC to delivery." },
           { title: "ISO 9001 certified", desc: "Covering production, QC, and the full supply chain." },
         ]}
       />
 
-      <Chapter index="04" label="Clients" />
-      <Testimonials
-        items={[
-          { name: "Procurement Manager", role: "Diamond & CBN Tool Manufacturer · Germany", quote: "EID is our single source for natural diamond grit and metal bond. The consistency is excellent — we haven't had a rejected batch in over three years." },
-          { name: "Technical Director", role: "Dental Instrument Manufacturer · Israel", quote: "We switched to EID for our CVD requirements because they grow to our exact specification. The quality and communication are outstanding." },
-        ]}
-      />
+      {/* WHO WE SERVE — real buyer types and regions, no unverified figures */}
+      <Chapter index="04" label="Who We Serve" gray />
+      <section className="section bg-gray">
+        <div className="container">
+          <div className="heading mb-30">
+            <span className="heading__subtitle">Trusted by tool makers across industries and continents</span>
+            <h2 className="heading__title">We supply the manufacturers who convert diamond and CBN into finished tools.</h2>
+          </div>
+          <p className="prose" style={{ maxWidth: 860 }}>
+            Our customers include diamond and CBN grinding and dressing tool makers, dental bur and rotary
+            instrument producers, ultra-precision tool makers for optics and watch components, and
+            flexible-abrasive manufacturers for glass and stone. We supply them across Europe, the Middle East,
+            and Asia, with the material behind dental, optics and precision, automotive and aerospace, tool and
+            die, stone and glass, and electronics applications.
+          </p>
+          <Link href="/contact" className="btn btn__primary mt-20">
+            Contact Us <i className="fa fa-long-arrow-right" />
+          </Link>
+        </div>
+      </section>
+
+      {/* COMPANY DETAILS — reinforce that EID is a physical manufacturer */}
+      <section className="section">
+        <div className="container">
+          <div className="heading mb-20">
+            <span className="heading__subtitle">Company details</span>
+            <h2 className="heading__title">{site.name}</h2>
+          </div>
+          <p className="prose">
+            {site.address}
+            <br />
+            Tel: {site.phone} · Fax: {site.fax} ·{" "}
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        </div>
+      </section>
 
       <Marquee logos={8} keywords={PRODUCT_KEYWORDS} />
 
       <BannerCTA
         subtitle="Trusted by tool makers across continents"
         title="Let's talk about what you manufacture."
-        desc="Request a quote, order a sample, or ask a technical question. A real person responds within 24 hours."
+        desc="Request a quote, order a sample, or ask a technical question. A real person replies within one business day."
         ctaLabel="Contact Us"
         ctaHref="/contact"
       />

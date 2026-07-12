@@ -368,9 +368,9 @@ const VISUALS: Record<string, () => ReactNode> = {
   "cvd-single-crystal": CvdSingleVisual,
   "cvd-polycrystalline": CvdPolyVisual,
   "mcd": McdVisual,
-  "pcd-pcbn": PcdPcbnVisual,
+  "pcd-blanks": PcdPcbnVisual,
+  "pcbn": PcdPcbnVisual,
   "polycrystalline-micron": PolyMicronVisual,
-  "surface-enhancements": SurfaceEnhancementsVisual,
 };
 
 export function ProductVisual({ slug }: { slug: string }) {

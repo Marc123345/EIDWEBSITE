@@ -423,7 +423,7 @@ export function Clients({ count }: { count?: number }) {
   return (
     <section className="clients-strip border-top">
       <div className="container">
-        <div className="clients-strip__label">Supplying tool makers in 30+ countries</div>
+        <div className="clients-strip__label">Supplying tool makers across Europe, the Middle East, and Asia</div>
         <div className="clients-strip__row">
           {trade.map((t) => (
             <span key={t} className="clients-strip__item">{t}</span>

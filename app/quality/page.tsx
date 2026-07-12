@@ -52,10 +52,10 @@ export default function QualityPage() {
 
       <StatsBar
         items={[
-          { value: 4, label: "Checks per run" },
+          { value: 5, label: "QC process steps" },
           { value: 100, suffix: "%", label: "Batches tested" },
           { value: 12, label: "Product lines" },
-          { value: 30, suffix: "+", label: "Countries served" },
+          { value: 50, suffix: "+", label: "Years' experience" },
         ]}
       />
 
@@ -71,16 +71,45 @@ export default function QualityPage() {
 
       <Chapter index="03" label="QC Process" />
       <FeaturesListParallax
-        subtitle="Our QC process"
+        subtitle="Our QC process, step by step"
         title="How a batch moves through our laboratory."
-        desc="A structured process from incoming inspection to shipped product, with documentation at every step."
+        desc="A structured process from incoming inspection to shipped product, with documentation at every step. This is the demonstrate-don't-badge detail no direct competitor offers."
         features={[
-          { title: "01 — Incoming inspection", desc: "Raw materials tested on arrival against incoming specification." },
-          { title: "02 — In-process control", desc: "Production parameters monitored and recorded throughout manufacturing." },
-          { title: "03 — Final QC", desc: "Every finished batch sampled and tested against customer and internal specs." },
-          { title: "04 — Certificate & retention", desc: "Certificate of analysis issued and retention samples kept per lot." },
+          { title: "01 — Incoming inspection", desc: "Raw materials tested on arrival against their incoming specification before anything enters production." },
+          { title: "02 — In-process control", desc: "Production parameters monitored and recorded throughout grading, coating, and finishing." },
+          { title: "03 — Final QC", desc: "Every finished batch sampled and tested, then compared against your specification and our internal standards." },
+          { title: "04 — Certificate of analysis", desc: "Issued with any shipment on request, documenting the test results for that specific lot." },
+          { title: "05 — Retention samples", desc: "A sample from every batch is kept, so any later question can be checked against the exact material that shipped." },
         ]}
       />
+
+      {/* MESH & MICRON QC + ISO 9001 */}
+      <Chapter index="04" label="Mesh, Micron & ISO 9001" gray />
+      <section className="section bg-gray">
+        <div className="container">
+          <div className="grid-2">
+            <div className="tech-card">
+              <div className="tech-card__meta">Mesh & micron QC</div>
+              <h3>Grading differs by form, so testing does too.</h3>
+              <p style={{ fontSize: 16 }}>
+                Mesh QC covers how we grade and verify grit sizing and crystal shape. Micron QC covers
+                particle-size-distribution measurement and the D-value control that fine polishing depends on.
+                Each product page states the checks that matter for that grade.
+              </p>
+            </div>
+            <div className="tech-card">
+              <div className="tech-card__meta">ISO 9001 certified</div>
+              <h3>A documented, audited, repeatable process.</h3>
+              <p style={{ fontSize: 16 }}>
+                Our quality management system is ISO 9001 certified, covering the full process from incoming raw
+                material inspection through manufacturing, testing, packaging, and delivery. That is what stands
+                behind every certificate of analysis we issue.
+              </p>
+              <p className="note-mono mt-20">Certificate number and validity date to be confirmed with Uri; display the scanned certificate here.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Marquee logos={8} keywords={PRODUCT_KEYWORDS} />
 

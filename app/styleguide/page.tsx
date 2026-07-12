@@ -63,10 +63,10 @@ export default function Styleguide() {
       <Block id="stat-tiles" name="02 · StatTiles">
         <StatTiles
           items={[
-            { value: "30+", label: "Countries served" },
+            { value: "50+", label: "Years' experience" },
             { value: "12", label: "Product lines" },
             { value: "100%", label: "Batches QC-tested", note: "Every production run" },
-            { value: "24hr", label: "Quote response" },
+            { value: "1 day", label: "Quote response" },
           ]}
         />
       </Block>
@@ -165,7 +165,7 @@ export default function Styleguide() {
             { icon: "fa-certificate", label: "ISO 9001 certified" },
             { icon: "fa-flask", label: "In-house QC laboratory" },
             { icon: "fa-barcode", label: "Full lot traceability" },
-            { icon: "fa-globe", label: "Customers in 30+ countries" },
+            { icon: "fa-globe", label: "50+ years' experience" },
           ]}
         />
       </Block>

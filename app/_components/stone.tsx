@@ -160,7 +160,7 @@ export function DiamondStone({ size = 520 }: { size?: number }) {
 }
 
 const DEFAULT_META = [
-  { value: "30+", label: "Countries served" },
+  { value: "50+", label: "Years' experience" },
   { value: "12", label: "Product lines" },
   { value: "ISO 9001", label: "Certified" },
 ];

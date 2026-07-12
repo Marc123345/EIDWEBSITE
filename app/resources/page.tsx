@@ -12,12 +12,53 @@ export const metadata: Metadata = {
     "Technical guides, application notes, and industry knowledge from EID — diamond vs CBN, grit size charts, bond comparison, and more.",
 };
 
-const guides = [
-  { title: "Diamond vs CBN: which superabrasive for your application?", desc: "When to use each, with application examples and material compatibility charts." },
-  { title: "Diamond grit & micron size chart (mesh-to-micron)", desc: "A reference chart mapping FEPA, US mesh, and micron sizes." },
-  { title: "Metal bond vs resin bond vs vitrified", desc: "How the bond you choose determines how a tool cuts, lasts, and what it works on." },
-  { title: "How size distribution affects tool performance", desc: "D50, D10/D90, and span — what the numbers mean and why they matter." },
-  { title: "CVD, MCD, and natural diamond compared", desc: "Three ways to get a single crystal — when each is the right choice." },
+const guides: { title: string; desc: string; links: { label: string; href: string }[] }[] = [
+  {
+    title: "Diamond vs CBN: which superabrasive for your application?",
+    desc: "Diamond is the hardest material, but it cannot grind hardened steel and CBN can. When to use each, with a material-compatibility chart and application examples.",
+    links: [
+      { label: "CBN", href: "/products/cbn" },
+      { label: "Metal Bond", href: "/products/metal-bond" },
+    ],
+  },
+  {
+    title: "Diamond grit & micron size chart (mesh-to-micron)",
+    desc: "A reference chart mapping FEPA, US mesh, and micron sizes, so you can convert between the sizing systems your specs and your suppliers use.",
+    links: [
+      { label: "Natural Grit", href: "/products/natural-grit" },
+      { label: "Natural Micron", href: "/products/natural-micron" },
+    ],
+  },
+  {
+    title: "Metal bond, resin bond, and vitrified: choosing a bond system",
+    desc: "The bond holds the diamond, and the bond you choose sets how the tool cuts, how long it lasts, and what it can work. A comparison of the three major systems.",
+    links: [
+      { label: "Metal Bond", href: "/products/metal-bond" },
+      { label: "Resin Bond", href: "/products/resin-bond" },
+    ],
+  },
+  {
+    title: "How diamond size distribution affects tool performance",
+    desc: "What D50, D10, D90, and span actually mean, and why a tight distribution changes the way your tool cuts and finishes.",
+    links: [
+      { label: "Quality & QC", href: "/quality" },
+      { label: "Natural Micron", href: "/products/natural-micron" },
+    ],
+  },
+  {
+    title: "CVD, HPHT (MCD), and natural diamond compared",
+    desc: "Three ways to get a single crystal, and when each is the right choice for single-point and precision tooling.",
+    links: [
+      { label: "CVD Single Crystal", href: "/products/cvd-single-crystal" },
+      { label: "MCD", href: "/products/mcd" },
+      { label: "Natural Tool Stones", href: "/products/tool-stones" },
+    ],
+  },
+  {
+    title: "Diamond and CBN by application",
+    desc: "Which grades serve dental, semiconductor, automotive and aerospace, and tool and die, and why, with links through to the application hubs.",
+    links: [{ label: "Applications", href: "/applications" }],
+  },
 ];
 
 export default function ResourcesPage() {
@@ -50,6 +91,15 @@ export default function ResourcesPage() {
                   <span className="chip">Guide</span>
                   <h3 className="post__title">{g.title}</h3>
                   <p className="post__desc">{g.desc}</p>
+                  <p className="note-mono" style={{ marginTop: 4 }}>
+                    Links to:{" "}
+                    {g.links.map((l, i) => (
+                      <span key={l.href}>
+                        {i > 0 ? " · " : ""}
+                        <Link href={l.href}>{l.label}</Link>
+                      </span>
+                    ))}
+                  </p>
                   <Link href="/contact" className="btn btn__secondary btn__link">
                     <span>Read</span> <i className="fa fa-long-arrow-right" />
                   </Link>

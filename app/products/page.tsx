@@ -9,16 +9,18 @@ import { PRODUCT_FAMILIES, productsByFamily, products } from "@/lib/products";
 export const metadata: Metadata = {
   title: { absolute: "Industrial Diamond & CBN Products | Full Range | EID Ltd" },
   description:
-    "Browse EID's complete range of industrial diamond and CBN products — natural grit, metal bond, resin bond, CBN, CVD single crystal, MCD, PCD/PCBN, and surface enhancements.",
+    "Browse EID's full range of industrial diamond and CBN: natural grit and powder, metal and resin bond, CBN and PCBN, CVD, MCD, PCD, and polishing powder.",
 };
 
 const familyIcon: Record<string, IconName> = {
-  "Natural Diamond": "diamond",
-  "Bonded Diamond Powders": "saw",
+  "Natural Diamond Grit & Powder": "diamond",
+  "Metal Bond Diamond": "saw",
+  "Resin Bond Diamond": "layers",
   CBN: "gauge",
-  "Synthetic / Grown Diamond": "cube",
-  "Finished Forms": "grid",
-  Specialist: "flask",
+  "Single Crystal Diamond (CVD & MCD)": "cube",
+  "Polycrystalline Diamond (PCD & CVD)": "grid",
+  "Natural Tool Stones": "flask",
+  "Polycrystalline Diamond Powder": "bolt",
 };
 
 export default function ProductsOverview() {
@@ -37,18 +39,18 @@ export default function ProductsOverview() {
       <CrystalHeroPage
         eyebrow="The complete range · one manufacturer"
         title="Industrial Diamond & CBN Products"
-        desc="Browse EID's complete range of industrial diamond and CBN — natural grit, metal & resin bond, CBN, CVD single crystal, MCD, PCD/PCBN, and surface enhancements."
+        desc="Browse EID's full range of industrial diamond and CBN: natural grit and powder, metal and resin bond, CBN and PCBN, CVD single crystal, MCD, PCD, and polishing powder."
         crumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
         imgLabel="PRODUCT RANGE — Diamond & CBN"
-        secondaryCta={{ label: "Industries We Serve", href: "/industries" }}
+        secondaryCta={{ label: "Applications We Serve", href: "/applications" }}
       />
 
-      {/* FAMILIES — services layout 3 */}
+      {/* INTRO — honest production framing, visible where technical buyers scan */}
       <Chapter index="01" label="The Range" />
       <ServicesLayout3
         subtitle="The full range · one source"
-        title="Six families. Twelve product lines."
-        desc="EID manufactures and quality-controls every superabrasive product you need — from raw natural diamond grit to precision-grown CVD single crystal, finished forms, and coatings."
+        title="Eight groups. Twelve product lines."
+        desc="Natural grit and powder are produced and graded in our own factory. Bonded and CBN grades are made to order, then re-processed and QC-tested through our facility to your spec. CVD single crystal is grown to your orientation through a dedicated growth partner. One supplier covers the range, and one QC standard covers the range."
         ctaHref="/contact"
         ctaLabel="Request a Quote"
         items={familyCards}
@@ -56,14 +58,14 @@ export default function ProductsOverview() {
 
       <StatsBar
         items={[
-          { value: 6, label: "Product families" },
+          { value: 8, label: "Product groups" },
           { value: 12, label: "Product lines" },
+          { value: 6, label: "Application hubs" },
           { value: 100, suffix: "%", label: "Batches QC-tested" },
-          { value: 30, suffix: "+", label: "Countries served" },
         ]}
       />
 
-      {/* FULL GRID grouped by family */}
+      {/* FULL GRID grouped by the eight locked groups */}
       <Chapter index="02" label="All Products" />
       <section className="section">
         <div className="container" style={{ display: "grid", gap: 48 }}>
@@ -89,13 +91,38 @@ export default function ProductsOverview() {
         </div>
       </section>
 
+      {/* NOT SURE WHICH GRADE — route the application-first buyer to a person */}
+      <section className="section bg-gray">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-12 col-lg-7">
+              <div className="heading mb-20">
+                <span className="heading__subtitle">Help me specify</span>
+                <h2 className="heading__title">Not sure which grade fits your process?</h2>
+              </div>
+              <p className="prose">
+                Tell us the material you are working, the bond system, and the finish you need, and we will
+                point you to the right product and grade. This is what our technical team does before every quote.
+                You can also start from your <Link href="/applications">application</Link> or read the{" "}
+                <Link href="/resources">technical guides</Link> if you are still comparing options.
+              </p>
+            </div>
+            <div className="col-sm-12 col-md-12 col-lg-5 d-flex align-items-center justify-content-lg-end">
+              <Link href="/contact" className="btn btn__primary mt-20">
+                Talk to our technical team <i className="fa fa-long-arrow-right" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Marquee logos={8} keywords={PRODUCT_KEYWORDS} />
 
       <BannerCTA
         subtitle="Whatever your application"
         title="Request a quote for any product."
-        desc={`One supplier for all ${products.length} product lines. Tell us the grade, size, and country and your enquiry arrives ready to action.`}
-        ctaLabel="Request a Quote"
+        desc={`One form covers all ${products.length} product lines. Give us the grade, size, and quantity, and a real person replies within one business day.`}
+        ctaLabel="Request a Quote or Sample"
         ctaHref="/contact"
       />
     </>

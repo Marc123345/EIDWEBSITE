@@ -6,7 +6,7 @@ import { useState } from "react";
 import {
   primaryNav,
   productMenu,
-  industryMenu,
+  applicationMenu,
   resourceMenu,
   site,
 } from "@/lib/site";
@@ -126,9 +126,9 @@ export default function Header() {
                         </div>
                       )}
 
-                      {item.menu === "industries" && (
+                      {item.menu === "applications" && (
                         <ul className="dropdown-menu">
-                          {industryMenu.map((l) => (
+                          {applicationMenu.map((l) => (
                             <li key={l.href} className="nav__item">
                               <Link className="nav__item-link" href={l.href} onClick={close}>
                                 {l.label}

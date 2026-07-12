@@ -10,16 +10,16 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: { absolute: "Contact EID | Request a Quote or Sample | EID Ltd" },
   description:
-    "Contact EID for industrial diamond and CBN quotes, samples, and technical specs. London-based manufacturer serving tool makers worldwide.",
+    "Contact EID for industrial diamond and CBN quotes, samples, and technical specs. London manufacturer, real technical replies within one business day.",
 };
 
 export default function ContactPage() {
   return (
     <>
       <CrystalHeroPage
-        eyebrow="A real person responds within 24 hours"
+        eyebrow="A real person replies within one business day"
         title="Contact Us / Request a Quote"
-        desc="Contact EID for industrial diamond and CBN quotes, samples, and technical specs. London-based manufacturer serving tool makers worldwide."
+        desc="Tell us the grade you need. Request a quote, order a sample, or ask a technical question. One form, and a real person who works with the material replies within one business day."
         crumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
         imgLabel="EID — London, UK"
         secondaryCta={{ label: "View Products", href: "/products" }}
@@ -42,8 +42,8 @@ export default function ContactPage() {
             <div className="col-sm-12 col-md-12 col-lg-7">
               <ProcessSteps
                 steps={[
-                  { title: "Tell us the spec", desc: "Product, grade, size, quantity, and destination country — as much or as little as you have." },
-                  { title: "We qualify & quote", desc: "A technical specialist reviews your enquiry and responds within 24 hours, not with 'please send info.'" },
+                  { title: "Tell us the spec", desc: "Product, grade, size, quantity, and destination country. Not sure of the exact grade? Give us the material you are working and the finish you need, and we will specify it for you." },
+                  { title: "We qualify & quote", desc: "A technical specialist reviews your enquiry and replies within one business day with a real answer, not a request for more info." },
                   { title: "Sample & supply", desc: "Order a sample to validate, then scheduled or stock supply to your lead time." },
                 ]}
               />
@@ -52,11 +52,11 @@ export default function ContactPage() {
         </div>
       </section>
       <RequestQuotePanel
-        panelTitle="Tell us what you need."
-        panelDesc="Request a quote, order a sample, or ask a technical question. The product dropdown pre-qualifies your enquiry so it arrives ready to action — not as 'please send info.'"
+        panelTitle="Tell us the grade you need."
+        panelDesc="Pick the closest product. Not sure? Choose 'Help me specify' and describe your application. The dropdown pre-qualifies your enquiry so it arrives ready to action, and a real person replies within one business day."
         formTitle="Request a Quote"
-        formDesc="Name, company, country, product, grade, size, quantity — give us as much as you can and we'll respond fast."
-        productOptions={products.map((p) => p.name)}
+        formDesc="Name, company, country, product, grade, size, quantity. Give us as much as you can and someone who works with the material replies within one business day."
+        productOptions={["Help me specify", ...products.map((p) => p.name)]}
       />
 
       {/* COMPANY DETAILS + MAP */}
@@ -76,7 +76,7 @@ export default function ContactPage() {
                 </li>
                 <li style={{ display: "flex", gap: 12 }}>
                   <Icon name="phone" style={{ color: "var(--eid-blue)" }} />
-                  <span style={{ color: "var(--eid-muted)" }}>{site.phone}</span>
+                  <span style={{ color: "var(--eid-muted)" }}>Tel: {site.phone} · Fax: {site.fax}</span>
                 </li>
                 <li style={{ display: "flex", gap: 12 }}>
                   <Icon name="mail" style={{ color: "var(--eid-blue)" }} />
@@ -95,8 +95,8 @@ export default function ContactPage() {
       <FeaturesRow
         items={[
           { title: "ISO 9001 Certified", desc: "Quality management certified across production and supply chain.", href: "/quality" },
-          { title: "In-House QC Lab", desc: "Every batch tested before it ships — no surprises.", href: "/quality" },
-          { title: "Customers in 30+ Countries", desc: "Serving tool makers across Europe, the Middle East, and Asia.", href: "/about" },
+          { title: "In-House QC Lab", desc: "Every batch tested before it ships, no surprises.", href: "/quality" },
+          { title: "50+ Years' Experience", desc: "Serving tool makers across Europe, the Middle East, and Asia.", href: "/about" },
           { title: "Full Diamond & CBN Range", desc: "One supplier, one standard, one delivery to manage.", href: "/products" },
         ]}
       />

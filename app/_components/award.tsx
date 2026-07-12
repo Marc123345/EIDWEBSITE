@@ -289,7 +289,7 @@ export function HeroMasthead({
    marks. Replaces the flat PageTitle banner on every sub-page.
    ------------------------------------------------------------------------- */
 const DEFAULT_HERO_META = [
-  { value: "30+", label: "Countries served" },
+  { value: "50+", label: "Years' experience" },
   { value: "12", label: "Product lines" },
   { value: "ISO 9001", label: "Certified" },
 ];
