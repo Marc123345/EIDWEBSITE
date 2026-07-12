@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ImagePlaceholder } from "../_components/ui";
-import { BannerCTA } from "../_components/sections";
-import { Chapter, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
-import { CrystalHeroPage } from "../_components/stone";
-import Icon from "../_components/Icon";
+import { ImagePlaceholder } from "@/app/_components/ui";
+import { BannerCTA } from "@/app/_components/sections";
+import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
+import { CrystalHeroPage } from "@/app/_components/stone";
+import Icon from "@/app/_components/Icon";
 
 export const metadata: Metadata = {
   title: { absolute: "Diamond & CBN Guides | Technical Resources | EID Ltd" },

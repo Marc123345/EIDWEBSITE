@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { ImagePlaceholder } from "../_components/ui";
-import { RequestQuotePanel, FeaturesRow } from "../_components/sections";
-import { Chapter, ChapterMarker, ProcessSteps } from "../_components/award";
-import { CrystalHeroPage } from "../_components/stone";
-import Icon from "../_components/Icon";
+import { ImagePlaceholder } from "@/app/_components/ui";
+import { RequestQuotePanel, FeaturesRow } from "@/app/_components/sections";
+import { Chapter, ChapterMarker, ProcessSteps } from "@/app/_components/award";
+import { CrystalHeroPage } from "@/app/_components/stone";
+import Icon from "@/app/_components/Icon";
 import { products } from "@/lib/products";
 import { site } from "@/lib/site";
 

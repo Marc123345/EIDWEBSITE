@@ -5,16 +5,16 @@ import {
   FeaturesListParallax,
   RequestQuotePanel,
   BannerCTA,
-} from "./_components/sections";
+} from "@/app/_components/sections";
 import {
   ChapterMarker,
   StatsBar,
   Marquee,
   BentoGallery,
   ProcessSteps,
-} from "./_components/award";
-import { CrystalHero } from "./_components/stone";
-import type { IconName } from "./_components/Icon";
+} from "@/app/_components/award";
+import { CrystalHero } from "@/app/_components/stone";
+import type { IconName } from "@/app/_components/Icon";
 import { products, PRODUCT_FAMILIES, productsByFamily } from "@/lib/products";
 import { applications } from "@/lib/applications";
 

@@ -4,10 +4,10 @@ import {
   ServicesLayout3,
   FeaturesListParallax,
   BannerCTA,
-} from "../_components/sections";
-import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
-import { CrystalHeroPage } from "../_components/stone";
-import type { IconName } from "../_components/Icon";
+} from "@/app/_components/sections";
+import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
+import { CrystalHeroPage } from "@/app/_components/stone";
+import type { IconName } from "@/app/_components/Icon";
 
 export const metadata: Metadata = {
   title: { absolute: "Quality Control & ISO 9001 | Industrial Diamond QC | EID Ltd" },

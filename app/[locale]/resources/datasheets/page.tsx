@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { BannerCTA } from "../../_components/sections";
-import { Chapter } from "../../_components/award";
-import { CrystalHeroPage } from "../../_components/stone";
-import Icon from "../../_components/Icon";
+import { BannerCTA } from "@/app/_components/sections";
+import { Chapter } from "@/app/_components/award";
+import { CrystalHeroPage } from "@/app/_components/stone";
+import Icon from "@/app/_components/Icon";
 
 export const metadata: Metadata = {
   title: { absolute: "Diamond & CBN Product Datasheets | EID Ltd" },

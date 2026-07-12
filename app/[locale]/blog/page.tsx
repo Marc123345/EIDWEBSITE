@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ImagePlaceholder } from "../_components/ui";
-import { BannerCTA } from "../_components/sections";
-import { Chapter, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
-import { CrystalHeroPage } from "../_components/stone";
+import { ImagePlaceholder } from "@/app/_components/ui";
+import { BannerCTA } from "@/app/_components/sections";
+import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
+import { CrystalHeroPage } from "@/app/_components/stone";
 
 export const metadata: Metadata = {
   title: { absolute: "Blog | Industrial Diamond & Superabrasive Insights | EID Ltd" },

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ServicesLayout3, BannerCTA } from "../_components/sections";
-import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "../_components/award";
-import { CrystalHeroPage } from "../_components/stone";
-import Icon, { IconName } from "../_components/Icon";
+import { ServicesLayout3, BannerCTA } from "@/app/_components/sections";
+import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
+import { CrystalHeroPage } from "@/app/_components/stone";
+import Icon, { IconName } from "@/app/_components/Icon";
 import { PRODUCT_FAMILIES, productsByFamily, products } from "@/lib/products";
 
 export const metadata: Metadata = {

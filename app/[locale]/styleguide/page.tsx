@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HeroPage, Chapter } from "../_components/award";
+import { HeroPage, Chapter } from "@/app/_components/award";
 import {
   SectionIntro,
   StatTiles,
@@ -17,7 +17,7 @@ import {
   ContactBand,
   CapabilityRow,
   MidnightPanel,
-} from "../_components/patterns";
+} from "@/app/_components/patterns";
 
 export const metadata: Metadata = {
   title: "Styleguide — Pattern Library",

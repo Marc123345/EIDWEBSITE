@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import Header from "./_components/Header";
-import Footer from "./_components/Footer";
-import TemplateScripts from "./_components/TemplateScripts";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
+import "@/app/globals.css";
+import Header from "@/app/_components/Header";
+import Footer from "@/app/_components/Footer";
+import TemplateScripts from "@/app/_components/TemplateScripts";
+import { routing } from "@/i18n/routing";
 import { site } from "@/lib/site";
 
 // Organization / LocalBusiness structured data (real EID NAP details).
@@ -32,6 +36,10 @@ const orgSchema = {
   },
 };
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export const metadata: Metadata = {
   title: {
     default: "Industrial Diamond & CBN Manufacturer | EID Ltd",
@@ -41,13 +49,19 @@ export const metadata: Metadata = {
     "EID manufactures the full industrial diamond and CBN range: grit, powder, CVD single crystal, MCD, PCD and PCBN, graded and QC-tested in-house. ISO 9001.",
 };
 
-export default function RootLayout({
+export default async function LocaleLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         {/* Industic template typography */}
         <link
@@ -63,15 +77,17 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="wrapper">
-          <Header />
-          {children}
-          <Footer />
-        </div>
-        <a href="#" id="scrollTopBtn" aria-label="Scroll to top">
-          <i className="fa fa-angle-up" />
-        </a>
-        <TemplateScripts />
+        <NextIntlClientProvider>
+          <div className="wrapper">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+          <a href="#" id="scrollTopBtn" aria-label="Scroll to top">
+            <i className="fa fa-angle-up" />
+          </a>
+          <TemplateScripts />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
