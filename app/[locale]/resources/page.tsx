@@ -7,9 +7,9 @@ import { CrystalHeroPage } from "@/app/_components/stone";
 import Icon from "@/app/_components/Icon";
 
 export const metadata: Metadata = {
-  title: { absolute: "Diamond & CBN Guides | Technical Resources | EID Ltd" },
+  title: { absolute: "Diamond & CBN Technical Guides & Resources | EID" },
   description:
-    "Technical guides, application notes, and industry knowledge from EID on diamond vs CBN, grit size charts, bond comparison, and more.",
+    "Technical guides on choosing superabrasives: diamond vs CBN, grit size charts, bond systems, and size distribution. Written by EID's technical team.",
 };
 
 const guides: { title: string; desc: string; links: { label: string; href: string }[] }[] = [
@@ -67,7 +67,7 @@ export default function ResourcesPage() {
       <CrystalHeroPage
         eyebrow="Written by EID's technical team"
         title="Resources & Guides"
-        desc="Technical guides, application notes, and industry knowledge from EID on diamond vs CBN, grit size charts, bond comparison, and more."
+        desc="Technical guides on choosing superabrasives: diamond vs CBN, grit size charts, bond systems, and size distribution. Written by EID's technical team."
         crumbs={[{ label: "Home", href: "/" }, { label: "Resources" }]}
         imgLabel="TECHNICAL LIBRARY — Guides & Charts"
         secondaryCta={{ label: "Read the blog", href: "/resources/blog" }}
@@ -123,6 +123,9 @@ export default function ResourcesPage() {
                   <Link href="/contact" className="btn btn__secondary btn__link">
                     <span>Read</span> <i className="fa fa-long-arrow-right" />
                   </Link>
+                  <p className="note-mono" style={{ marginTop: 8 }}>
+                    Guide not yet written; deck defers the six guides to a later batch.
+                  </p>
                 </div>
               </article>
             ))}
@@ -172,7 +175,7 @@ export default function ResourcesPage() {
         subtitle="Can't find what you need?"
         title="Have a technical question the guides don't answer?"
         desc="Tell us the material, the process, and the finish you need, and someone who works with the material will help you specify. Replies within one business day."
-        ctaLabel="Contact Us"
+        ctaLabel="Contact our technical team"
         ctaHref="/contact"
       />
     </>

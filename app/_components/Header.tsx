@@ -29,7 +29,12 @@ export default function Header() {
       .map((p) => ({
         label: p.name,
         href: `/products/${p.slug}`,
-        note: p.menuNote,
+        // The doc asks for the inside-sections to be jump links, not just a
+        // note, so a buyer can reach a folded-in section straight from the menu.
+        sections:
+          p.sections.length > 1
+            ? p.sections.map((s) => ({ label: s.label, href: `/products/${p.slug}#${s.id}` }))
+            : [],
       })),
   );
   const applicationMenu = getApplications(locale).map((a) => ({
@@ -92,6 +97,24 @@ export default function Header() {
             </div>
           </div>
 
+          {/* Below lg the topbar is hidden, so Contact and WhatsApp get compact
+              always-visible affordances here. The doc requires both to be
+              present on every page, not tucked inside the hamburger. */}
+          <div className="header__compact d-lg-none">
+            <a
+              href={site.whatsappHref}
+              className="header__whatsapp header__whatsapp--sm"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`WhatsApp EID on ${site.whatsapp}`}
+            >
+              <i className="fa fa-whatsapp" aria-hidden="true" />
+            </a>
+            <Link href="/contact" className="btn btn__primary header__compact-cta" onClick={close}>
+              Contact
+            </Link>
+          </div>
+
           <button
             className={`navbar-toggler${open ? " actived" : ""}`}
             type="button"
@@ -109,6 +132,15 @@ export default function Header() {
             <div className={`collapse navbar-collapse${open ? " menu-opened" : ""}`} id="mainNavigation">
               <ul className="navbar-nav">
                 {nav.map((item) => {
+                  if (item.cta) {
+                    return (
+                      <li key={item.href} className="nav__item nav__item--cta d-none d-lg-block">
+                        <Link href={item.href} className="btn btn__primary nav__cta" onClick={close}>
+                          {item.label} <i className="fa fa-long-arrow-right" />
+                        </Link>
+                      </li>
+                    );
+                  }
                   if (!item.menu) {
                     return (
                       <li key={item.href} className="nav__item">
@@ -143,8 +175,19 @@ export default function Header() {
                                     <li key={l.href}>
                                       <Link href={l.href} onClick={close}>
                                         <span className="eid-mega__name">{l.label}</span>
-                                        {l.note && <span className="eid-mega__note">{l.note}</span>}
                                       </Link>
+                                      {l.sections.length > 0 && (
+                                        <span className="eid-mega__note">
+                                          {l.sections.map((sec, si) => (
+                                            <span key={sec.href}>
+                                              {si > 0 && " · "}
+                                              <Link href={sec.href} onClick={close}>
+                                                {sec.label}
+                                              </Link>
+                                            </span>
+                                          ))}
+                                        </span>
+                                      )}
                                     </li>
                                   ))}
                                 </ul>

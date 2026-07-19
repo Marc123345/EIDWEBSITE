@@ -19,7 +19,9 @@ export type Application = {
   productsTitle: string;
   products: ApplicationProduct[];
   why: { title: string; body: string };
+  whyCta?: string; // deck's "See how our (micron) QC works" link after WHY
   cta: string;
+  ctaDesc: string; // the deck gives each hub its own closing ask
   guides?: string[];
   relatedHubs?: string[]; // application slugs
 };
@@ -44,7 +46,7 @@ export const applications: Application[] = [
     ],
     outcome: {
       title: "What consistent diamond does for a dental line",
-      body: "Sintered burs require repeatable inputs. Variations in crystal strength or coating weight cause sintering drift and unpredictable retention. EID grades and QC-tests every lot for exactly those variables, so your sintering process sees the same input each run. The payoff is fewer rejects, predictable instrument life, and a diamond supply you can qualify once instead of re-checking every delivery.",
+      body: "Sintered burs require repeatable inputs. Variations in crystal strength or coating weight cause sintering drift and unpredictable retention. EID's batch-to-batch consistency reduces rejects and protects your reputation. Qualify our supply once and eliminate the need for constant re-checking. EID grades and QC-tests every lot for exactly those variables, so your sintering process sees the same input each run. The payoff is fewer rejects, predictable instrument life, and a diamond supply you can qualify once instead of re-checking every delivery.",
     },
     productsTitle: "The grades dental makers use",
     products: [
@@ -69,6 +71,8 @@ export const applications: Application[] = [
       body: "Consistency, breadth, and a real technical reply. In-house QC on every lot gives the batch-to-batch repeatability a dental line depends on. In-house coating means you do not manage a second vendor for retention. And when you need to specify a grade for a new instrument, you talk to someone who works with the material, not a catalogue. ISO 9001 certified, with a certificate of analysis available per lot.",
     },
     cta: "Request a Quote for Dental Diamond",
+    ctaDesc:
+      "Tell us the instrument, the grade, and the volume, and a real person replies within one business day.",
   },
   {
     slug: "semiconductor-electronics",
@@ -87,7 +91,7 @@ export const applications: Application[] = [
     ],
     outcome: {
       title: "Why size-distribution control decides yield",
-      body: "At wafer scale, a single oversized particle can kill hundreds of die. Yield depends on powder with a tight D50 and a narrow span. EID measures particle size distribution on every batch and grades to a controlled D50 and span, so the powder you qualify is the powder you receive. For a process where a single particle sets the failure mode, that is the specification that matters most.",
+      body: "At wafer scale, a single oversized particle can kill hundreds of die. Yield depends on powder with tight D50 and narrow span. EID verifies every batch for size distribution and outlier control. When your process qualification depends on constant inputs, our in-house QC provides the necessary security. EID measures particle size distribution on every batch and grades to a controlled D50 and span, so the powder you qualify is the powder you receive. For a process where a single particle sets the failure mode, that is the specification that matters most.",
     },
     productsTitle: "The grades electronics makers use",
     products: [
@@ -109,15 +113,23 @@ export const applications: Application[] = [
       {
         label: "CVD Single Crystal",
         href: "/products/single-crystal#cvd",
-        note: "With MCD, for scribing, cleaving, and dicing-blade applications.",
+        note: "For scribing, cleaving, and dicing-blade applications.",
+      },
+      {
+        label: "MCD",
+        href: "/products/single-crystal#mcd",
+        note: "HPHT monocrystalline diamond for scribing and wafer cutting.",
       },
     ],
     why: {
       title: "Why electronics manufacturers choose EID",
       body: "Tight distribution, low outlier risk, and documentation you can put in a qualification file. Every batch is measured for particle size distribution with controlled D50 and minimal outliers, ISO 9001 certified, with a certificate of analysis per lot. When your process qualification depends on the input staying constant, in-house grading and QC are what let you lock the material in.",
     },
+    whyCta: "See how our micron QC works",
     cta: "Request a Quote for Electronics-Grade Diamond",
-    guides: ["How diamond size distribution affects tool performance"],
+    ctaDesc:
+      "Tell us the substrate, the process step, and the grade or finish you need, and a real person replies within one business day.",
+    guides: ["How size distribution affects tool performance"],
   },
   {
     slug: "automotive-aerospace",
@@ -160,13 +172,21 @@ export const applications: Application[] = [
         href: "/products/polycrystalline-diamond#dressing-logs",
         note: "For truing and dressing the grinding wheels on automotive grinding lines.",
       },
+      {
+        label: "Metal Bond Diamond",
+        href: "/products/metal-bond",
+        note: "For the non-ferrous side of the same production line, and for sintered and brazed tooling.",
+      },
     ],
     why: {
       title: "Why automotive and aerospace tool makers choose EID",
       body: "Consistency at volume, backed by QC on every lot. A CBN lot that matches the last one is what keeps a grinding line running without a re-set, and in-house grading and testing are how EID delivers it. Covering both the ferrous grinding materials and the non-ferrous cutting materials from one supplier also means fewer vendors qualifying into a production process that does not tolerate surprises. ISO 9001 certified, with a certificate of analysis per lot.",
     },
+    whyCta: "See how our QC works",
     cta: "Request a Quote for Automotive & Aerospace",
-    guides: ["Diamond vs CBN: which superabrasive for your application"],
+    ctaDesc:
+      "Tell us the operation, the material you are cutting or grinding, and the grade, and a real person replies within one business day.",
+    guides: ["Diamond vs CBN"],
   },
   {
     slug: "tool-and-die",
@@ -220,6 +240,8 @@ export const applications: Application[] = [
       body: "Made-to-spec capability plus a full material set from one supplier. For the demanding precision jobs, CVD single crystal is grown to your exact orientation and inspected here for clarity and orientation accuracy before it ships. For production tooling, MCD and finished blanks give a repeatable grade order to order. And because EID covers single crystal, MCD, PCD, PCBN, and natural stone, one supplier can match the material to the tool rather than pushing you toward the one line they carry. ISO 9001 certified.",
     },
     cta: "Request a Quote for Tool & Die",
+    ctaDesc:
+      "Tell us the tool, the material it machines, and the tolerance, and a real person replies within one business day.",
     guides: ["CVD, HPHT (MCD), and natural diamond compared"],
   },
   {
@@ -234,7 +256,7 @@ export const applications: Application[] = [
     intro: [
       "Diamond and CBN for grinding, cutting, sawing, and drilling.",
       "Saw segments, grinding wheels, core drills, and cutting tools consume more diamond than any other application, and their performance depends on predictable crystal strength and size distribution. EID supplies the grit, powder, and coated abrasives that go into them: natural grit and metal bond for aggressive cutting, CBN for ferrous grinding, and resin bond for finer work.",
-      "One supplier covers saw grade, wheel grade, and finishing grades across diamond and CBN, which simplifies procurement for a maker whose product range spans quarry saws to precision wheels, and stone and glass to construction.",
+      "One supplier covers saw grade, wheel grade, and finishing grades across diamond and CBN, which simplifies procurement for a maker whose product range spans quarry saws to precision wheels.",
     ],
     outcome: {
       title: "Predictable tools, and one supplier across the range",
@@ -250,7 +272,7 @@ export const applications: Application[] = [
       {
         label: "Natural Diamond Grit",
         href: "/products/natural-grit-powder#grit",
-        note: "For diamond segments and dressing tools working stone, glass, and construction materials.",
+        note: "For diamond segments and dressing tools.",
       },
       {
         label: "CBN Powder",
@@ -272,11 +294,10 @@ export const applications: Application[] = [
       title: "Why grinding and cutting tool makers choose EID",
       body: "Volume, consistency, and range from one supplier. High-volume abrasive tool production depends on predictable crystal strength and size distribution, and in-house grading plus QC on every lot deliver it. In-house coating improves retention in sintered segments without a second vendor. And covering saw grade, wheel grade, and finishing grades from one relationship simplifies procurement across a broad product line. ISO 9001 certified, with a certificate of analysis per lot.",
     },
-    cta: "Request a Quote for Grinding & Cutting",
-    guides: [
-      "Metal bond, resin bond, and vitrified: choosing a diamond bond system",
-      "Diamond vs CBN: which superabrasive for your application",
-    ],
+    cta: "Request a Quote",
+    ctaDesc:
+      "Tell us the tool, the material it works, and the grade, and a real person replies within one business day.",
+    guides: ["Metal bond vs resin bond vs vitrified", "Diamond vs CBN"],
   },
   {
     slug: "polishing-lapping",
@@ -318,8 +339,11 @@ export const applications: Application[] = [
       title: "Why finishers choose EID",
       body: "Tight distribution, a grade for every stage, and QC you can document. Every batch is measured for particle size distribution with controlled D50 and span, ISO 9001 certified, with a certificate of analysis per lot. Because EID grades both the lapping powders and the final polycrystalline polish in-house, one supplier covers your whole finishing sequence, and the recommendation follows the finish you need rather than the single grade a vendor happens to stock.",
     },
+    whyCta: "See how our micron QC works",
     cta: "Request a Quote or Sample",
-    guides: ["How diamond size distribution affects tool performance"],
+    ctaDesc:
+      "Tell us the material, the stage, and the finish you are targeting, and a real person replies within one business day.",
+    guides: ["How size distribution affects tool performance"],
     relatedHubs: ["semiconductor-electronics"],
   },
 ];

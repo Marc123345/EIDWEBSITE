@@ -3,9 +3,10 @@ import { BannerCTA } from "@/app/_components/sections";
 import { Chapter } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
 import Icon from "@/app/_components/Icon";
+import { Link } from "@/i18n/navigation";
 
 export const metadata: Metadata = {
-  title: { absolute: "Diamond & CBN Product Datasheets | EID Ltd" },
+  title: { absolute: "Diamond & CBN Product Datasheets | EID" },
   description:
     "Download technical datasheets for EID's full diamond and CBN range: grades, sizes, crystal types, coatings, and packaging. Ungated, free to download.",
 };
@@ -35,14 +36,14 @@ const groups: { group: string; sheets: [string, string][] }[] = [
     ],
   },
   {
-    group: "Single Crystal Diamond (CVD & MCD)",
+    group: "Single Crystal Diamond",
     sheets: [
       ["CVD Single Crystal Diamond", "Orientations, sizes, and faces."],
       ["MCD (Monocrystalline Diamond)", "Shapes, sizes, orientations."],
     ],
   },
   {
-    group: "Polycrystalline Diamond (CVD & PCD)",
+    group: "Polycrystalline Diamond",
     sheets: [
       ["PCD Discs & Blanks", "Grain sizes and dimensions."],
       ["CVD Polycrystalline Dressing Logs", "Log sizes and shapes."],
@@ -82,7 +83,8 @@ export default function DatasheetsPage() {
             <h2 className="heading__title">Technical specifications for every product.</h2>
             <p className="prose mt-20">
               Grades, sizes, crystal types, coating options, and packaging. No form, no login. Download what you
-              need, and if the exact spec you are after is not here, ask us and we will send it.
+              need, and if the exact spec you are after is not here, <Link href="/contact">ask us</Link> and we
+              will send it.
             </p>
             <p className="note-mono mt-20">Placeholder downloads. Confirm available datasheets with Uri and upload the actual PDFs.</p>
           </div>

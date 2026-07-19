@@ -11,7 +11,7 @@ import { CrystalHeroPage } from "@/app/_components/stone";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: { absolute: "About EID | Industrial Diamond Manufacturer, London | EID Ltd" },
+  title: { absolute: "About EID | Industrial Diamond Manufacturer, London" },
   description:
     "EID has manufactured and quality-controlled the full industrial diamond and CBN range from London for over 50 years, supplying tool makers worldwide.",
 };
@@ -34,7 +34,8 @@ export default function AboutPage() {
         title="Over 50 years making the material that goes into the world's diamond tools."
         text={[
           "EID Ltd is a London-based manufacturer and finisher of industrial diamond and superabrasive materials. For more than fifty years we have supplied the full diamond and CBN range, meaning grit, powder, and crystal, to tool manufacturers and precision-parts producers worldwide.",
-          "We do not make finished tools. We make the material inside them. Half a century of doing this for the same kinds of customers is why they keep coming back, and why the material is consistent enough to build a production line around.",
+          "We manufacture the materials inside tools. Customers choose EID for metal bond powder, oriented CVD crystals, and consistent CBN that matches previous orders.",
+          "Decades of experience supporting these industries have built our technical understanding of production environments.",
           "That track record is also what separates us from a distributor. We control the production and the quality decision, and we cover the whole range from one facility, so our customers manage one relationship instead of five.",
         ]}
         imgLabel="FACTORY / PRODUCTION FLOOR — London"
@@ -64,6 +65,14 @@ export default function AboutPage() {
           { title: "Coating in-house", desc: "Nickel, copper, and titanium coatings applied in-house rather than sourced from a second vendor.", href: "/products/metal-bond" },
         ]}
       />
+      <section className="section pt-0">
+        <div className="container">
+          <p className="prose" style={{ maxWidth: 860 }}>
+            Across all three, the specification and the QC pass are ours. That is the part a tool maker
+            is actually buying.
+          </p>
+        </div>
+      </section>
 
       <FeaturesListParallax
         chapterIndex="03"
@@ -77,6 +86,8 @@ export default function AboutPage() {
           { title: "Full traceability", desc: "Documented from raw material through QC to delivery." },
           { title: "ISO 9001 certified", desc: "Covering production, QC, and the full supply chain." },
         ]}
+              ctaLabel="See how our QC works"
+        ctaHref="/quality"
       />
 
       {/* WHO WE SERVE — real buyer types and regions, no unverified figures */}
@@ -90,8 +101,8 @@ export default function AboutPage() {
           <p className="prose" style={{ maxWidth: 860 }}>
             Our customers include diamond and CBN grinding and dressing tool makers, dental bur and rotary
             instrument producers, ultra-precision tool makers for optics and watch components, and
-            flexible-abrasive manufacturers for glass and stone. We supply them across Europe, the Middle East,
-            and Asia, with the material behind dental, optics and precision, automotive and aerospace, tool and
+            flexible-abrasive manufacturers for glass and stone. We supply them across Europe, Asia, the Americas,
+            and the Middle East, with the material behind dental, optics and precision, automotive and aerospace, tool and
             die, stone and glass, and electronics applications.
           </p>
           <Link href="/contact" className="btn btn__primary mt-20">

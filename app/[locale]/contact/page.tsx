@@ -8,7 +8,7 @@ import { products } from "@/lib/products";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: { absolute: "Contact EID | Request a Quote or Sample | EID Ltd" },
+  title: { absolute: "Contact EID | Request a Quote or Sample" },
   description:
     "Contact EID for industrial diamond and CBN quotes, samples, and technical specs. London manufacturer, real technical replies within one business day.",
 };
@@ -34,8 +34,13 @@ export default function ContactPage() {
               <div className="heading heading-3 mb-40">
                 <h2 className="heading__title">A qualified quote in three steps.</h2>
                 <p className="heading__desc">
-                  No account, no minimum enquiry. Tell us what you need and a
-                  technical specialist takes it from there.
+                  Request a quote or technical support. A specialist will reply within one business day.
+                </p>
+                <p className="heading__desc">
+                  The more you can tell us upfront, product, grade, size, and quantity, the faster we can
+                  provide a useful answer instead of coming back with basic questions. Not sure of the exact
+                  grade? Give us the material you are working and the finish you need, and we will specify
+                  it for you.
                 </p>
                 <p className="heading__desc">
                   Prefer to talk first? Email{" "}

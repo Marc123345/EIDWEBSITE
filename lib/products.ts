@@ -11,12 +11,21 @@ export type ProductSection = {
   id: string; // anchor, e.g. "grit" -> /products/natural-grit-powder#grit
   label: string; // short label for the on-page jump nav
   title: string; // H2
+  /**
+   * Paragraphs. Inline links use [label](href) — the deck places specific
+   * in-prose links (PCBN <-> PCD, the single-crystal guide, the on-page jump
+   * anchors) that carry internal-link equity between the merged pages, so they
+   * have to survive as real links rather than flatten to plain text.
+   */
   intro: string[];
   callouts?: Callout[];
   applicationsTitle?: string;
   applications?: string[];
+  applicationsNote?: string; // the deck's closing line after the bullet list
   specsTitle?: string;
   specs?: Spec[];
+  specsNote?: string; // e.g. "Need a size or grade not listed? Ask our technical team."
+  enquiryCta?: { label: string; href: string }; // e.g. "Enquire about rotary diamonds"
   datasheet?: string; // download label
 };
 
@@ -33,6 +42,8 @@ export type Product = {
   intro: string[]; // hero/intro paragraphs
   sections: ProductSection[]; // one or more; single-section products render flat
   quality?: string; // custom QC paragraph
+  qualityCta?: string; // deck's "See how our (mesh and micron) QC works" label
+  overviewDesc?: string; // longer blurb for the /products overview list
   cta: string;
   crossLinks?: CrossGroup[]; // anchor-bearing product/related links from the copy deck
   crossApplications: string[]; // application hub slugs (names resolve per locale)
@@ -75,10 +86,12 @@ export const products: Product[] = [
     cardDesc:
       "Natural mesh, micron powder, and rotary diamonds, crushed, sorted, and graded in-house for grinding, lapping, dressing, and drilling.",
     menuNote: "grit (mesh), micron powder, rotary diamonds",
+    overviewDesc:
+      "Crushed and graded in-house. Graded mesh grit for grinding, sawing, and dressing; fine micron powder for lapping and polishing; natural rotary diamonds for drilling and truing.",
     intro: [
       "Crushed, graded, and tested in our own factory.",
       "EID manufactures natural diamond grit and fine micron powder in-house. By controlling the entire crushing, shaping, and grading process, we hold a tight, repeatable size distribution on every order.",
-      "This is the one page in the range that carries the fully in-house claim without qualification. EID makes this material from raw, start to finish. Standard grades ship from stock, and custom sizes are made to order. Jump to the grit specs or the micron powder specs below, or tell us the tool and the material and we will specify the grade.",
+      "This is the one page in the range that carries the fully in-house claim without qualification. EID makes this material from raw, start to finish. Standard grades ship from stock, and custom sizes are made to order. Jump to the [grit specs](#grit) or the [micron powder specs](#micron), or tell us the tool and the material and we will specify the grade.",
     ],
     sections: [
       {
@@ -94,8 +107,9 @@ export const products: Product[] = [
           "Saw blades and wire saws for stone and concrete.",
           "Dressing tools for truing grinding wheels.",
           "Lapping and rough-polishing of hard, brittle materials.",
-          "For hardened or ferrous steels, use CBN instead.",
         ],
+        applicationsNote:
+          "Note: for hardened or ferrous steels, use [CBN](/products/cbn) instead.",
         specsTitle: "Grit specifications",
         specs: [
           { label: "Mesh size range", value: "[confirm with Uri: FEPA and US mesh range, coarse to fine]" },
@@ -104,6 +118,8 @@ export const products: Product[] = [
           { label: "Friability / strength", value: "[confirm grade descriptors]" },
           { label: "Typical grades", value: "[confirm EID grade naming, if branded]" },
         ],
+        specsNote:
+          "Need a size or grade not listed? [Ask our technical team](/contact) and we will confirm availability and lead time.",
         datasheet: "Natural Grit datasheet",
       },
       {
@@ -113,6 +129,7 @@ export const products: Product[] = [
         intro: [
           "We supply selected natural rotary diamonds for dressing and truing. Provide your wheel and operation details, and we will match the appropriate stone.",
         ],
+        enquiryCta: { label: "Enquire about rotary diamonds", href: "/contact" },
       },
       {
         id: "micron",
@@ -138,11 +155,13 @@ export const products: Product[] = [
           { label: "Formats", value: "Dry powder, water or oil suspension, paste" },
           { label: "Packaging", value: "Syringes, jars, bottles, or custom [confirm]" },
         ],
+        specsNote: "Need a size or format not listed? [Ask our technical team](/contact).",
         datasheet: "Micron Powder datasheet",
       },
     ],
     quality:
       "Every production run is tested in our QC laboratory for mesh sizing, shape, strength, and micron particle size distribution. The ISO 9001 certified system ensures full traceability and includes a certificate of analysis for every lot. QC proves the consistency our grading builds.",
+    qualityCta: "See how our mesh and micron QC works",
     cta: "Request a Quote or Sample",
     crossLinks: [
       {
@@ -163,11 +182,12 @@ export const products: Product[] = [
       "grinding-cutting-sawing-drilling",
       "polishing-lapping",
       "semiconductor-electronics",
+      "dental",
     ],
     guides: [
-      "Diamond grit and micron size chart (mesh to micron)",
-      "How diamond size distribution affects tool performance",
-      "Diamond vs CBN: which superabrasive for your application",
+      "Diamond grit and micron size chart",
+      "How size distribution affects tool performance",
+      "Diamond vs CBN",
     ],
   },
 
@@ -177,13 +197,15 @@ export const products: Product[] = [
     name: "Metal Bond Diamond",
     family: "Metal Bond Diamond",
     h1: "Metal Bond Diamond Powder",
-    metaTitle: "Metal Bond Diamond Powder | Saw & Wheel Grades | EID",
+    metaTitle: "Metal Bond Diamond Powder | Saw & Wheel Grades, Mesh & Micron",
     metaDesc:
       "Metal bond synthetic diamond in saw and wheel grades, coated and QC-upgraded for sintered tools. Mesh and micron, finished to your spec.",
     eyebrow: "Products · Group 2",
     cardDesc:
       "Saw and wheel grades for sintered, brazed, and electroplated tools, with in-house coating options.",
     menuNote: "mesh, micron, coated",
+    overviewDesc:
+      "Mesh and micron grades for diamond saws, grinding wheels, and sintered, brazed, and electroplated tools, with in-house coating options.",
     intro: [
       "Metal bond diamond powder, QC-upgraded for industrial consistency.",
       "Essential for high-pressure tools like saw segments and drill bits, EID's metal bond range is re-processed and QC-upgraded in-house. That gives tool makers production-ready consistency instead of a grade they have to re-qualify every order.",
@@ -198,10 +220,10 @@ export const products: Product[] = [
         ],
         applicationsTitle: "Where metal bond diamond is used",
         applications: [
-          "Stone and concrete: saw blades, wire saw beads, and grinding cups.",
-          "Construction and mining: core drill bits and segments.",
-          "Precision manufacturing: electroplated and sintered tools for glass and ceramics.",
-          "Dental: sintered burs and rotary instruments.",
+          "Stone & Concrete — Saw blades, wire saw beads, and grinding cups.",
+          "Construction & Mining — Core drill bits and segments.",
+          "Precision Manufacturing — Electroplated and sintered tools for glass and ceramics.",
+          "Dental — Sintered burs and rotary instruments.",
         ],
         specsTitle: "Specifications",
         specs: [
@@ -224,12 +246,13 @@ export const products: Product[] = [
         title: "Coated metal bond diamond.",
         intro: [
           "In-house coating provides a metallurgical bond between the diamond and the metal matrix, preventing premature pull-out under load. By sourcing grit and coating from EID, you manage one relationship and receive a finished, production-ready abrasive.",
-          "Tell us your bond and we will recommend the coating and weight.",
+          "Tell us your bond and we will recommend the coating and weight. [Ask our technical team](/contact).",
         ],
       },
     ],
     quality:
       "ISO 9001 certified and fully traceable. We hold batch-to-batch consistency in crystal strength and coating weight, so your sintering results stay repeatable across every production run.",
+    qualityCta: "See how our QC works",
     cta: "Request a Quote or Sample",
     crossLinks: [
       {
@@ -240,8 +263,8 @@ export const products: Product[] = [
         ],
       },
     ],
-    crossApplications: ["dental", "grinding-cutting-sawing-drilling"],
-    guides: ["Metal bond, resin bond, and vitrified: choosing a diamond bond system"],
+    crossApplications: ["dental", "grinding-cutting-sawing-drilling", "automotive-aerospace"],
+    guides: ["Metal bond vs resin bond vs vitrified"],
   },
 
   /* ============================ 3 · RESIN BOND ============================= */
@@ -257,6 +280,8 @@ export const products: Product[] = [
     cardDesc:
       "Friable, multi-crystalline grades for fine grinding and polishing, with in-house coating options.",
     menuNote: "mesh, micron, coated",
+    overviewDesc:
+      "Friable, multi-crystalline grades in mesh and micron for fine grinding and polishing, coatings available.",
     intro: [
       "Resin bond diamond powder: friable grades for precision finishing.",
       "Resin bond diamond is engineered for controlled friability, exposing fresh cutting edges for superior fine grinding.",
@@ -278,6 +303,8 @@ export const products: Product[] = [
           "Flexible abrasive products such as sheets, belts, and pads for glass and stone.",
           "Lapping and honing of technical ceramics and other hard, brittle materials.",
         ],
+        applicationsNote:
+          "Wherever the last few microns and the surface finish are the point, this is the bond family that gets there.",
         specsTitle: "Specifications",
         specs: [
           { label: "Forms", value: "Mesh and micron" },
@@ -298,13 +325,14 @@ export const products: Product[] = [
         label: "Coated",
         title: "Coated resin bond diamond.",
         intro: [
-          "In a resin system, the coating does two jobs. It improves how the resin grips the diamond, so the crystal holds until it has done its work, and on metallic coatings it helps carry heat away from the cutting zone, which protects both the bond and the workpiece finish. Copper is a common choice for resin bonds for its thermal behaviour; nickel is used where retention is the priority.",
-          "EID applies these coatings in-house, so a single order covers the grit and the coating. Tell us the resin system and we will recommend the coating.",
+          "In a resin system, the coating does two jobs. It improves how the resin grips the diamond, so the crystal holds until it has done its work, and on metallic coatings it helps carry heat away from the cutting zone, which protects both the bond and the workpiece finish. Copper coating is a common choice for resin bonds for its thermal behaviour; nickel is used where retention is the priority.",
+          "EID applies these coatings in-house, so a single order covers the grit and the coating. Tell us the resin system and we will recommend the coating. [Ask our technical team](/contact).",
         ],
       },
     ],
     quality:
       "The quality system is ISO 9001 certified, with a certificate of analysis per lot on request. For fine grinding and polishing, a grade that breaks down the same way every order is what keeps your finish predictable, and that consistency is what our QC confirms.",
+    qualityCta: "See how our QC works",
     cta: "Request a Quote or Sample",
     crossLinks: [
       {
@@ -315,8 +343,12 @@ export const products: Product[] = [
         ],
       },
     ],
-    crossApplications: ["semiconductor-electronics", "polishing-lapping"],
-    guides: ["Metal bond, resin bond, and vitrified: choosing a diamond bond system"],
+    crossApplications: [
+      "semiconductor-electronics",
+      "polishing-lapping",
+      "grinding-cutting-sawing-drilling",
+    ],
+    guides: ["Metal bond vs resin bond vs vitrified"],
   },
 
   /* ================================ 4 · CBN =============================== */
@@ -332,9 +364,11 @@ export const products: Product[] = [
     cardDesc:
       "The superabrasive for hardened and ferrous steels, plus PCBN for finished cutting forms.",
     menuNote: "mesh & micron, coated CBN, PCBN",
+    overviewDesc:
+      "CBN powder in mesh and micron for hardened and ferrous steels, coated options, plus PCBN discs and blanks for hard-turning inserts.",
     intro: [
       "CBN: the superabrasive for hardened and ferrous metals.",
-      "Cubic boron nitride is vital for grinding ferrous steels where diamond degrades. EID supplies graded, QC-tested CBN in mesh and micron sizes, monocrystalline and microcrystalline, coated or uncoated, plus PCBN discs and blanks for hard-turning inserts.",
+      "Cubic boron nitride is vital for grinding ferrous steels where diamond degrades. EID supplies CBN in mesh and micron grades, monocrystalline and microcrystalline, coated or uncoated, each batch graded and quality-controlled to your specification through our facility, plus [PCBN discs and blanks](#pcbn) for hard-turning inserts.",
       "With CBN and PCBN alongside the full diamond range, one supplier covers both the non-ferrous and the ferrous side of your production.",
     ],
     sections: [
@@ -344,7 +378,7 @@ export const products: Product[] = [
         title: "CBN or diamond?",
         intro: [
           "Use diamond for non-ferrous materials like stone, glass, and carbide. Use CBN for ferrous materials like hardened steel and superalloys.",
-          "Diamond is harder, but it reacts with iron at grinding temperatures. For gears, bearings, and crankshafts, CBN is the practical choice. For the full comparison with application charts, see the Diamond vs CBN guide.",
+          "Diamond is harder, but it reacts with iron at grinding temperatures. For gears, bearings, and crankshafts, CBN is the practical choice. For the full comparison with application charts, see the guide: [Diamond vs CBN](/resources).",
         ],
         applicationsTitle: "Where CBN is used",
         applications: [
@@ -354,6 +388,8 @@ export const products: Product[] = [
           "Tool-and-die grinding of hardened tool steels and HSS.",
           "Honing of cylinder and precision bores.",
         ],
+        applicationsNote:
+          "High-volume ferrous grinding where the wheel has to hold form across long production runs.",
         specsTitle: "CBN powder specifications",
         specs: [
           { label: "Forms", value: "Mesh and micron" },
@@ -372,7 +408,7 @@ export const products: Product[] = [
         title: "Coated CBN.",
         intro: [
           "Coating CBN before it goes into a bonded wheel improves how the matrix holds it, so the crystal stays anchored through the grind instead of releasing early. Nickel improves retention in metal and resin systems; titanium suits vitrified bonds, where it helps the chemical bond between the CBN and the glass matrix.",
-          "EID applies these coatings in-house, so the grit and the coating come from one order. Tell us the bond system and we will recommend the coating.",
+          "EID applies these coatings in-house, so the grit and the coating come from one order. Tell us the bond system and we will recommend the coating. [Ask our technical team](/contact).",
         ],
       },
       {
@@ -382,16 +418,18 @@ export const products: Product[] = [
         intro: [
           "PCBN discs and blanks are sintered composites used for hard-turning inserts. They offer significantly greater hot hardness than carbide. EID provides PCBN in various diameters and grain sizes, so one relationship covers the full diamond and CBN range.",
           "Where CBN powder goes into a grinding wheel, PCBN goes into a cutting edge.",
-          "PCBN is for machining ferrous materials that are too hard for carbide and too valuable to grind slowly: hardened steel above roughly 45 HRC, cast iron, powder-metallurgy parts, and superalloys. It lets a shop hard-turn a finished part on a lathe instead of grinding it, which often removes a whole process step. PCBN is the ferrous counterpart to PCD, which does the same job for non-ferrous materials like aluminium and composites.",
+          "PCBN is for machining ferrous materials that are too hard for carbide and too valuable to grind slowly: hardened steel above roughly 45 HRC, cast iron, powder-metallurgy parts, and superalloys. It lets a shop hard-turn a finished part on a lathe instead of grinding it, which often removes a whole process step. PCBN is the ferrous counterpart to [PCD](/products/polycrystalline-diamond#pcd-blanks), which does the same job for non-ferrous materials like aluminium and composites.",
           "CBN content and grain size set the trade-off between wear resistance and toughness, so the grade follows the operation: high-CBN grades for interrupted cuts and roughing, lower-CBN grades for continuous finishing.",
         ],
-        applicationsTitle: "Where PCBN fits",
+        applicationsTitle: "Where PCBN is used",
         applications: [
           "Hard-turning and finish-machining inserts for hardened powertrain components.",
           "Finish machining of hardened gears and bearings.",
           "High-speed machining of cast iron brake rotors and cylinder liners.",
           "Turning of case-hardened and through-hardened steel parts.",
         ],
+        applicationsNote:
+          "Automotive and aerospace production is the core, wherever a hardened ferrous part needs a defined finish at production speed.",
         specsTitle: "PCBN specifications",
         specs: [
           { label: "Form", value: "Discs and blanks" },
@@ -407,6 +445,7 @@ export const products: Product[] = [
     ],
     quality:
       "The quality system is ISO 9001 certified, with a certificate of analysis per lot on request. In high-volume ferrous grinding, a CBN lot that matches the last one keeps the grinding line from needing a re-set. For an insert maker, a PCBN substrate and grade that match the last order keep insert performance repeatable.",
+    qualityCta: "See how our QC works",
     cta: "Request a Quote or Sample",
     crossLinks: [
       {
@@ -428,7 +467,7 @@ export const products: Product[] = [
       "tool-and-die",
       "grinding-cutting-sawing-drilling",
     ],
-    guides: ["Diamond vs CBN: which superabrasive for your application"],
+    guides: ["Diamond vs CBN"],
   },
 
   /* ========================= 5 · SINGLE CRYSTAL =========================== */
@@ -444,10 +483,12 @@ export const products: Product[] = [
     cardDesc:
       "CVD single crystal and MCD materials, made to spec for precision tooling, thermal, optical, and advanced applications.",
     menuNote: "CVD single crystal, MCD",
+    overviewDesc:
+      "White CVD single crystal grown to your orientation, and HPHT MCD for single-point and precision tooling.",
     intro: [
       "Single crystal diamond, CVD and MCD, for single-point precision tooling.",
       "EID provides two paths to precision: white CVD single crystal grown to your orientation, and HPHT MCD for reproducible edge geometry. Both are mechanical-grade crystals, inspected in-house, for the most demanding single-point tooling.",
-      "Jump to CVD single crystal or MCD below, or tell us the tool and the tolerance and we will specify the crystal.",
+      "Jump to [CVD single crystal](#cvd) or [MCD](#mcd), or tell us the tool and the tolerance and we will specify the crystal.",
     ],
     sections: [
       {
@@ -467,6 +508,8 @@ export const products: Product[] = [
           "Luxury watch component machining.",
           "Wire-drawing dies for fine wire.",
         ],
+        applicationsNote:
+          "Applications where the surface finish and the edge geometry are the specification, not a by-product.",
         specsTitle: "CVD single crystal specifications",
         specs: [
           { label: "Type", value: "CVD single crystal, white, mechanical grade" },
@@ -479,6 +522,7 @@ export const products: Product[] = [
           { label: "Clarity", value: "Optical-grade, low dislocation density [confirm descriptors]" },
           { label: "Lead time", value: "Made to order [confirm typical lead time]" },
         ],
+        specsNote: "Grown to your specification.",
         datasheet: "CVD Single Crystal datasheet",
       },
       {
@@ -488,7 +532,7 @@ export const products: Product[] = [
         intro: [
           "MCD is an HPHT-grown crystal with predictable edge geometry. It is the reproducible alternative to natural stone, giving the same edge performance tool after tool.",
           "EID supplies MCD in a range of sizes, shapes, and orientations for turning, dressing, wire drawing, and scribing. Standard grades and made-to-spec crystals are both available.",
-          "MCD, CVD single crystal, and natural diamond all give you a single crystal, and each suits a different job. MCD (HPHT) offers reproducible edge geometry at a lower cost than CVD, which makes it the workhorse for single-point turning and dressing where you need consistency across many tools. CVD single crystal is grown to a specified orientation for the most demanding optical and precision work. Natural stone still has a place in specific dressing applications.",
+          "MCD, CVD single crystal, and natural diamond all give you a single crystal, and each suits a different job. MCD (HPHT) offers reproducible edge geometry at a lower cost than CVD, which makes it the workhorse for single-point turning and dressing where you need consistency across many tools. [CVD single crystal](#cvd) is grown to a specified orientation for the most demanding optical and precision work. Natural stone still has a place in specific dressing applications. If you are choosing between them, the guide walks through each: [CVD, HPHT (MCD), and natural diamond compared](/resources).",
         ],
         applicationsTitle: "Where MCD is used",
         applications: [
@@ -498,6 +542,7 @@ export const products: Product[] = [
           "Scribing and cutting of semiconductor wafers and glass.",
           "Precision engraving tools.",
         ],
+        applicationsNote: "Work where a defined, repeatable edge is the requirement.",
         specsTitle: "MCD specifications",
         specs: [
           { label: "Type", value: "HPHT monocrystalline diamond" },
@@ -512,6 +557,7 @@ export const products: Product[] = [
     ],
     quality:
       "Every CVD crystal is inspected for clarity, orientation accuracy, and dislocation density, and every MCD grade is checked against its specification for shape, size, and orientation, before anything ships. ISO 9001 certified, with documentation available per order. The reason to choose grown or HPHT single crystal over natural stone is reproducibility, so consistency is exactly what our QC verifies.",
+    qualityCta: "See how our QC works",
     cta: "Request a Custom Quote",
     crossLinks: [
       {
@@ -525,7 +571,7 @@ export const products: Product[] = [
         ],
       },
     ],
-    crossApplications: ["tool-and-die", "semiconductor-electronics", "polishing-lapping"],
+    crossApplications: ["tool-and-die", "semiconductor-electronics"],
     guides: ["CVD, HPHT (MCD), and natural diamond compared"],
   },
 
@@ -542,6 +588,8 @@ export const products: Product[] = [
     cardDesc:
       "PCD blanks for cutting inserts and CVD dressing logs for truing wheels.",
     menuNote: "CVD polycrystalline (dressers), PCD blanks",
+    overviewDesc:
+      "CVD polycrystalline logs for dressing and truing, and PCD discs and blanks for cutting tools.",
     intro: [
       "Polycrystalline diamond, for cutting inserts and for wheel dressing.",
       "EID offers a complete polycrystalline diamond range. PCD discs and blanks provide wear-resistant cutting edges for non-ferrous materials, and CVD polycrystalline logs deliver isotropic hardness for consistent wheel dressing.",
@@ -553,10 +601,10 @@ export const products: Product[] = [
         title: "PCD discs and blanks for cutting-tool inserts.",
         intro: [
           "PCD consists of diamond grains sintered onto a carbide substrate. It is far more wear-resistant than carbide for machining non-ferrous and abrasive materials. EID supplies PCD in various grades, where grain size determines the balance between wear resistance and surface finish.",
-          "Where diamond powder goes into a tool as an abrasive, PCD goes in as a cutting edge. It is the non-ferrous counterpart to PCBN, which does the same job on hardened ferrous parts.",
+          "Where diamond powder goes into a tool as an abrasive, PCD goes in as a cutting edge. It is the non-ferrous counterpart to [PCBN](/products/cbn#pcbn), which does the same job on hardened ferrous parts.",
           "PCD machines materials that wear carbide out fast but are not ferrous: aluminium and aluminium alloys, copper and brass, carbon and glass-fibre composites, wood-based panels, and abrasive plastics. It holds a sharp edge far longer than carbide in these materials, which is what makes it economic for high-volume runs despite the higher tool cost.",
           "Grain size sets the trade-off. Coarser grains resist wear and suit abrasive, interrupted work; finer grains take a keener edge and give a better finish. The grade follows the material and the finish you need, which is the first thing to specify.",
-          "Do not use PCD on ferrous materials; diamond reacts with iron at cutting temperature. For hardened steel and cast iron, PCBN is the right blank.",
+          "Do not use PCD on ferrous materials; diamond reacts with iron at cutting temperature. For hardened steel and cast iron, [PCBN](/products/cbn#pcbn) is the right blank.",
         ],
         applicationsTitle: "Where PCD is used",
         applications: [
@@ -565,6 +613,8 @@ export const products: Product[] = [
           "High-volume machining of composites for aerospace and wind energy.",
           "Cutting-tool inserts for wood-based panel and abrasive-plastic production.",
         ],
+        applicationsNote:
+          "Non-ferrous, high-volume work where edge life per insert drives the cost per part.",
         specsTitle: "PCD specifications",
         specs: [
           { label: "Form", value: "Discs and blanks" },
@@ -592,6 +642,8 @@ export const products: Product[] = [
           "Stationary and traverse dressing in CNC grinding centres.",
           "A higher-consistency alternative to natural diamond dressing tools.",
         ],
+        applicationsNote:
+          "Wherever a wheel has to be trued repeatably and the dressing tool itself has to hold up.",
         specsTitle: "CVD polycrystalline specifications",
         specs: [
           { label: "Type", value: "CVD polycrystalline, black" },
@@ -605,6 +657,7 @@ export const products: Product[] = [
     ],
     quality:
       "Every PCD grade is checked against its specification for grain size, substrate, and dimensional tolerance, and every CVD log is inspected for dimensions and structure, before shipping. ISO 9001 certified, with documentation available per order. For an insert maker, a blank that matches the last order keeps insert performance repeatable; for a dressing operation, a log that matches the last one keeps the wheel profile true.",
+    qualityCta: "See how our QC works",
     cta: "Request a Quote",
     crossLinks: [
       {
@@ -640,6 +693,8 @@ export const products: Product[] = [
       "Rough and shaped natural diamond tool stones for single-point dressing and set tools. Selected in-house for crystal quality and orientation.",
     eyebrow: "Products · Group 7",
     cardDesc: "Rough and shaped natural diamond for single-point dressing and set tools.",
+    overviewDesc:
+      "Rough and shaped natural diamond for single-point dressing and set tools.",
     intro: [
       "Natural diamond tool stones, hand-selected for precision.",
       "EID provides hand-selected natural tool stones, inspected in-house for orientation and crystal quality. Our selection ensures stones are free from inclusions, which protects tool life and finish.",
@@ -651,7 +706,7 @@ export const products: Product[] = [
         label: "Natural Tool Stones",
         title: "Natural stone or a synthetic?",
         intro: [
-          "Natural stones offer unique toughness, but variability is inherent. For high-volume reproducibility, MCD or CVD polycrystalline logs provide defect-controlled alternatives. We supply all three, so the recommendation follows your operation rather than what we happen to stock.",
+          "Natural stones offer unique toughness, but variability is inherent. For high-volume reproducibility, [MCD](/products/single-crystal#mcd) or [CVD polycrystalline logs](/products/polycrystalline-diamond#dressing-logs) provide defect-controlled alternatives. We supply all three to match your specific operation.",
         ],
         applicationsTitle: "Where natural tool stones are used",
         applications: [
@@ -659,6 +714,8 @@ export const products: Product[] = [
           "Turning and profiling of non-ferrous and non-metallic materials.",
           "Specialty tooling where natural diamond's edge retention and thermal conductivity are the reason to choose it over a synthetic.",
         ],
+        applicationsNote:
+          "Natural stone still holds its place in dressing operations that suit its toughness.",
         specsTitle: "Specifications",
         specs: [
           { label: "Carat sizes", value: "[confirm with Uri]" },
@@ -666,11 +723,12 @@ export const products: Product[] = [
           { label: "Quality grades", value: "[confirm EID grading / selection criteria]" },
           { label: "Setting", value: "Supplied loose for setting, or shaped to spec" },
         ],
-        datasheet: "Natural Diamond Tool Stones datasheet",
+        enquiryCta: { label: "Enquire about tool stones", href: "/contact" },
       },
     ],
     quality:
       "Because each stone is individual, selection is the quality step: every stone is inspected for crystal quality, orientation, and inclusions before it is matched to your application. ISO 9001 certified. Where you need documented consistency across a batch, we will tell you honestly whether natural stone or a synthetic alternative is the better fit.",
+    qualityCta: "See how our QC works",
     cta: "Request a Quote",
     crossLinks: [
       {
@@ -706,6 +764,8 @@ export const products: Product[] = [
     eyebrow: "Products · Group 8",
     cardDesc:
       "Engineered polycrystalline powders for precision polishing, lapping, and advanced material finishing.",
+    overviewDesc:
+      "Polycrystalline diamond powder for precision polishing, lapping, and advanced surface finishing.",
     intro: [
       "Polycrystalline diamond powder: for uniform, sub-nanometer finishes.",
       "Polycrystalline diamond powder has rounded particles that micro-fracture to expose fresh edges rather than scratching. That mechanism makes it the choice for the finest, most uniform sub-nanometer finishes on optics and advanced materials.",
@@ -718,7 +778,7 @@ export const products: Product[] = [
         title: "Why the polycrystalline particle polishes finer.",
         intro: [
           "Monocrystalline particles have sharp corners that can scratch surfaces. Detonation-synthesis polycrystalline particles are rounded and micro-fracture to expose fresh cutting points.",
-          "That gradual breakdown produces lower, more uniform surface roughness, which is what nanometer-scale Ra specifications require.",
+          "This gradual breakdown produces lower, more uniform surface roughness, which is essential for nanometer-scale Ra specifications.",
         ],
         applicationsTitle: "Where polycrystalline micron powder is used",
         applications: [
@@ -728,6 +788,7 @@ export const products: Product[] = [
           "Polishing of ceramic and sapphire substrates.",
           "Fine lapping of carbide and hardened-steel precision parts.",
         ],
+        applicationsNote: "The last step, where surface quality is the deliverable.",
         specsTitle: "Specifications",
         specs: [
           { label: "Size range", value: "[confirm with Uri: typical 0.1–60 µm]" },
@@ -741,6 +802,7 @@ export const products: Product[] = [
     ],
     quality:
       "Particle size distribution is measured on every batch, with controlled D50 and span, because in final polishing a single oversized particle can scratch the workpiece and cost the whole part. ISO 9001 certified, with a certificate of analysis per lot on request. Consistency at the top of the distribution is what protects the surface, and that is what our micron QC verifies.",
+    qualityCta: "See how our micron QC works",
     cta: "Request a Quote or Sample",
     crossLinks: [
       {
@@ -754,7 +816,7 @@ export const products: Product[] = [
       },
     ],
     crossApplications: ["polishing-lapping", "semiconductor-electronics"],
-    guides: ["How diamond size distribution affects tool performance"],
+    guides: ["How size distribution affects tool performance"],
   },
 ];
 

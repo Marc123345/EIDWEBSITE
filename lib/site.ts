@@ -66,6 +66,9 @@ export const primaryNav = [
   { label: "Quality", href: "/quality" },
   { label: "Resources", href: "/resources", menu: "resources" as const },
   { label: "About", href: "/about" },
+  // The conversion endpoint. Rendered as a visually distinct button at the far
+  // right, never as just another link.
+  { label: "Contact", href: "/contact", cta: true as const },
 ];
 
 // Footer = the complete index. A mega-menu cannot expose every page and section
@@ -109,4 +112,13 @@ export const footerColumns = [
       { label: "Contact", href: "/contact" },
     ],
   },
+];
+
+// Legal links live in the footer bottom bar per the architecture doc §10.
+// Terms and Privacy need real content from Uri before launch; until then they
+// are not linked to placeholder pages that would rank or mislead.
+export const legalLinks = [
+  { label: "Sitemap", href: "/sitemap.xml", ready: true },
+  { label: "Terms", href: "/terms", ready: false },
+  { label: "Privacy", href: "/privacy", ready: false },
 ];

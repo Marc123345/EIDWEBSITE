@@ -3,21 +3,25 @@ import { BannerCTA } from "@/app/_components/sections";
 import { Chapter } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
 import Icon from "@/app/_components/Icon";
+import { Link } from "@/i18n/navigation";
 
 export const metadata: Metadata = {
-  title: { absolute: "Diamond & CBN Safety Data Sheets (MSDS) | EID Ltd" },
+  title: { absolute: "Diamond & CBN Safety Data Sheets (MSDS) | EID" },
   description:
     "Download safety data sheets for EID's industrial diamond and CBN products. Handling, storage, disposal, and regulatory information. Free, no login.",
 };
 
-const msds = [
-  "Natural Diamond (Grit & Micron)",
-  "Synthetic Diamond (Metal Bond & Resin Bond)",
-  "CBN (Cubic Boron Nitride)",
-  "CVD Diamond (Single Crystal & Polycrystalline)",
-  "MCD (Monocrystalline Diamond)",
-  "PCD / PCBN",
-  "Coated Diamond & CBN Products",
+// Grouped by material family, not by the eight-page catalogue: safety documents
+// genuinely group by material, and coated abrasives carry different handling
+// information even though coatings are no longer a standalone product line.
+const msds: [string, string][] = [
+  ["Natural Diamond (Grit & Powder)", "Handling and safety for natural diamond abrasive products."],
+  ["Synthetic Diamond (Metal Bond & Resin Bond)", "For synthetic bonded diamond powders."],
+  ["CBN (Cubic Boron Nitride)", "For CBN mesh and micron products."],
+  ["CVD Diamond (Single Crystal & Polycrystalline)", "For CVD single crystal and polycrystalline products."],
+  ["MCD (Monocrystalline Diamond)", "For HPHT monocrystalline products."],
+  ["PCD / PCBN", "For polycrystalline diamond and CBN discs and blanks."],
+  ["Coated Diamond & CBN Products", "Handling and safety for coated (nickel, copper, titanium) abrasives."],
 ];
 
 export default function MsdsPage() {
@@ -44,7 +48,8 @@ export default function MsdsPage() {
             <h2 className="heading__title">Safety data for all EID products.</h2>
             <p className="prose mt-20">
               Handling, storage, disposal, and regulatory information. No form, no login. If you need a document
-              that is not listed, or a specific regional format, ask us and we will send it.
+              that is not listed, or a specific regional format, <Link href="/contact">ask us</Link> and we
+              will send it.
             </p>
             <p className="note-mono mt-20">
               Documents must be current, accurate, and correctly labelled before publishing. The EU uses SDS under
@@ -53,11 +58,14 @@ export default function MsdsPage() {
             </p>
           </div>
           <div style={{ display: "grid", gap: 14 }}>
-            {msds.map((name) => (
+            {msds.map(([name, desc]) => (
               <div key={name} className="tech-card dl-row">
                 <div className="dl-meta">
                   <Icon name="shield" />
-                  <h3 style={{ fontSize: 16 }}>{name}</h3>
+                  <div>
+                    <h3 style={{ fontSize: 16, margin: 0 }}>{name}</h3>
+                    <p style={{ fontSize: 14, margin: "4px 0 0", color: "var(--eid-muted)" }}>{desc}</p>
+                  </div>
                 </div>
                 <span className="btn btn__secondary"><Icon name="download" /> PDF</span>
               </div>

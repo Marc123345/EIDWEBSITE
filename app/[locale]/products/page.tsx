@@ -6,6 +6,7 @@ import { CrystalHeroPage } from "@/app/_components/stone";
 import Icon, { IconName } from "@/app/_components/Icon";
 import { getProducts } from "@/lib/i18n-content";
 import { localeAlternates } from "@/lib/hreflang";
+import { site } from "@/lib/site";
 import type { Locale } from "@/i18n/routing";
 
 export async function generateMetadata({
@@ -15,7 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: { absolute: "Industrial Diamond & CBN Products | Full Range | EID Ltd" },
+    title: { absolute: "Industrial Diamond & CBN Products | Full Range | EID" },
     description:
       "Browse EID's full range of industrial diamond and CBN: natural grit and powder, metal and resin bond, CBN and PCBN, CVD, MCD, PCD, and polishing powder.",
     alternates: localeAlternates(locale, "/products"),
@@ -47,7 +48,9 @@ export default async function ProductsOverview({
   const familyCards = products.map((p) => ({
     icon: familyIcon[p.family] || "diamond",
     title: p.name,
-    desc: p.cardDesc,
+    // The deck gives the overview page its own, longer blurb per product,
+    // distinct from the shorter card used on the home page.
+    desc: p.overviewDesc ?? p.cardDesc,
     href: `/products/${p.slug}`,
   }));
 
@@ -67,7 +70,7 @@ export default async function ProductsOverview({
       <ServicesLayout3
         subtitle="The full range · one source"
         title="The complete diamond and CBN range, from one manufacturer."
-        desc="EID manufactures and supplies a complete range of industrial superabrasives. From in-house processed grit and powder to custom-grown CVD single crystal, every product is quality-controlled to our specifications, giving tool makers a consistent, single-source quality standard across the entire range. Browse the eight product families below. Mesh, micron, coatings, grades, and sizing are configured within each family to match your application."
+        desc="EID manufactures and supplies a complete range of industrial superabrasives. From in-house processed grit and powder to custom-grown CVD single crystal, every product is quality-controlled to our strict specifications, providing tool makers with a consistent, single-source quality standard across the entire range. Browse the eight product families below. Mesh, micron, coatings, grades, and sizing are configured within each family to match your application."
         ctaHref="/contact"
         ctaLabel="Request a Quote"
         items={familyCards}
@@ -93,7 +96,7 @@ export default async function ProductsOverview({
                   <Icon name={familyIcon[p.family] || "diamond"} style={{ color: "var(--eid-blue)" }} />
                   <h3 style={{ margin: 0 }}>{p.name}</h3>
                 </div>
-                <p>{p.cardDesc}</p>
+                <p>{p.overviewDesc ?? p.cardDesc}</p>
                 {p.sections.length > 1 && (
                   <p className="note-mono" style={{ marginTop: 10 }}>
                     Contains: {p.sections.map((sec) => sec.label).join(" · ")}
@@ -142,6 +145,14 @@ export default async function ProductsOverview({
         ctaLabel="Request a Quote or Sample"
         ctaHref="/contact"
       />
+      <section className="section pt-0 pb-90">
+        <div className="container text-center">
+          <p className="prose" style={{ margin: 0 }}>
+            Email <a href={`mailto:${site.email}`}>{site.email}</a> · Call{" "}
+            <a href={site.phoneHref}>{site.phone}</a>
+          </p>
+        </div>
+      </section>
     </>
   );
 }

@@ -10,6 +10,7 @@ import { FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
 import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
 import { ProductVisual, SectionVisual } from "@/app/_components/product-visuals";
+import { RichText, RichParagraphs } from "@/app/_components/RichText";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -60,6 +61,7 @@ export default async function ProductPage({
     .filter(Boolean)
     .map((ca) => ({ label: ca!.name, href: `/applications/${ca!.slug}` }));
   const guideLinks = (p.guides ?? []).map((g) => ({ label: g, href: "/resources" }));
+  const hasDatasheet = p.sections.some((s) => s.datasheet);
 
   return (
     <>
@@ -93,7 +95,9 @@ export default async function ProductPage({
             <div className="col-sm-12 col-md-12 col-lg-4">
               <div className="about__text mt-30 prose">
                 {bodyParas.map((para, i) => (
-                  <p key={i}>{para}</p>
+                  <p key={i}>
+                    <RichText>{para}</RichText>
+                  </p>
                 ))}
                 <Link href="/contact" className="btn btn__primary mt-20">
                   {p.cta} <i className="fa fa-long-arrow-right" />
@@ -153,6 +157,8 @@ export default async function ProductPage({
       <FeaturesListParallax
         chapterIndex={chapterIndex("Quality Control")}
         chapterLabel="Quality Control"
+        ctaLabel={p.qualityCta}
+        ctaHref={p.qualityCta ? "/quality" : undefined}
         subtitle="Proven on every lot"
         title="Tested in our own laboratory."
         desc={
@@ -198,7 +204,11 @@ export default async function ProductPage({
             title: "Quality & resources",
             links: [
               { label: "Quality, QC & ISO 9001", href: "/quality" },
-              { label: "Datasheets", href: "/resources/datasheets" },
+              // Tool Stones is deliberately enquiry-led: the deck specifies no
+              // datasheet for it, so we do not offer a download that has no file.
+              ...(hasDatasheet
+                ? [{ label: "Datasheets", href: "/resources/datasheets" }]
+                : []),
               ...guideLinks,
             ],
           },
@@ -236,11 +246,12 @@ function ProductSectionBlock({
                 {showHeading && <span className="heading__subtitle">{section.label}</span>}
                 <h2 className="heading__title">{section.title}</h2>
               </div>
-              <div className="prose">
-                {section.intro.map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
+              <RichParagraphs className="prose" paragraphs={section.intro} />
+              {section.enquiryCta && (
+                <Link href={section.enquiryCta.href} className="btn btn__secondary btn__link mt-20">
+                  <span>{section.enquiryCta.label}</span> <i className="fa fa-long-arrow-right" />
+                </Link>
+              )}
               {section.callouts?.map((c) => (
                 <div key={c.title} className="tech-card mt-30">
                   <div className="tech-card__meta">{c.title}</div>
@@ -274,6 +285,11 @@ function ProductSectionBlock({
                       <li key={i}>{a}</li>
                     ))}
                   </ul>
+                  {section.applicationsNote && (
+                    <p className="prose mt-20">
+                      <RichText>{section.applicationsNote}</RichText>
+                    </p>
+                  )}
                 </div>
               ) : null}
 
@@ -300,6 +316,11 @@ function ProductSectionBlock({
                       ))}
                     </tbody>
                   </table>
+                  {section.specsNote && (
+                    <p className="prose mt-20">
+                      <RichText>{section.specsNote}</RichText>
+                    </p>
+                  )}
                   {section.datasheet && (
                     <Link href="/resources/datasheets" className="btn btn__secondary btn__link mt-20">
                       <i className="fa fa-download" /> <span>Download the {section.datasheet} (PDF)</span>

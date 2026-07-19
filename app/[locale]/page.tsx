@@ -15,6 +15,7 @@ import {
 } from "@/app/_components/award";
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
+import { site } from "@/lib/site";
 import { CrystalHero } from "@/app/_components/stone";
 import type { IconName } from "@/app/_components/Icon";
 import { getProducts, getApplications } from "@/lib/i18n-content";
@@ -32,10 +33,9 @@ export async function generateMetadata({
 
 const heroSlides = [
   {
-    eyebrow: "Industrial Diamond & CBN · Manufacturer and Supplier · London, UK",
-    title:
-      "The full industrial diamond and CBN range, manufactured, processed, and graded in-house to EID standards.",
-    desc: "EID manufactures industrial diamond and CBN for tool makers worldwide. Every grade is processed and tested in our own laboratory to ensure batch-to-batch consistency. Get your superabrasives from one accountable manufacturer.",
+    eyebrow: "Industrial Diamond & CBN · Manufacturer and Supplier",
+    title: "The full industrial diamond and CBN range, made and graded in-house.",
+    desc: "Manufactured, processed, and graded in-house to EID standards. EID manufactures industrial diamond and CBN for tool makers worldwide. Every grade is processed and tested in our own laboratory to ensure batch-to-batch consistency. Get your superabrasives from one accountable manufacturer.",
   },
   {
     eyebrow: "We control production, not just supply",
@@ -419,6 +419,14 @@ export default async function Home({
         ctaLabel="Request a Quote"
         ctaHref="/contact"
       />
+      <section className="section pt-0 pb-90">
+        <div className="container text-center">
+          <p className="prose" style={{ margin: 0 }}>
+            Email <a href={`mailto:${site.email}`}>{site.email}</a> · Call{" "}
+            <a href={site.phoneHref}>{site.phone}</a>
+          </p>
+        </div>
+      </section>
     </>
   );
 }

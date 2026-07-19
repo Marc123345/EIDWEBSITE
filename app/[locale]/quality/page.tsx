@@ -11,9 +11,9 @@ import { Link } from "@/i18n/navigation";
 import type { IconName } from "@/app/_components/Icon";
 
 export const metadata: Metadata = {
-  title: { absolute: "Quality Control & ISO 9001 | Industrial Diamond QC | EID Ltd" },
+  title: { absolute: "Quality Control & ISO 9001 | Industrial Diamond QC | EID" },
   description:
-    "EID's in-house QC laboratory tests every batch of diamond and CBN for size distribution, crystal strength, morphology, and coating integrity. ISO 9001 certified.",
+    "EID's in-house QC laboratory tests every batch of diamond and CBN for size distribution, crystal strength, morphology, and coating. ISO 9001 certified.",
 };
 
 const tests: { icon: IconName; title: string; desc: string; href: string }[] = [
@@ -101,14 +101,16 @@ export default function QualityPage() {
               </p>
             </div>
             <div className="tech-card">
-              <div className="tech-card__meta">ISO 9001 certified</div>
-              <h3>A documented, audited, repeatable process.</h3>
+              <div className="tech-card__meta">Detail</div>
+              <h3>Grading and testing differ by form.</h3>
               <p style={{ fontSize: 16 }}>
-                Our quality management system is ISO 9001 certified, covering the full process from incoming raw
-                material inspection through manufacturing, testing, packaging, and delivery. That is what stands
-                behind every certificate of analysis we issue.
+                Mesh QC covers how we grade and verify grit sizing and crystal shape. Micron QC covers
+                particle-size-distribution measurement and the D-value control that fine polishing depends on.
               </p>
-              <p className="note-mono mt-20">Certificate number and validity date to be confirmed with Uri; display the scanned certificate here.</p>
+              <p className="note-mono mt-20">
+                The copy deck links these to dedicated /mesh-qc and /micron-qc pages, which the Phase 2
+                page inventory does not include. Confirm with Uri whether to build them.
+              </p>
             </div>
           </div>
         </div>
@@ -208,6 +210,9 @@ export default function QualityPage() {
                 </ul>
                 <Link href="/resources/datasheets" className="btn btn__secondary btn__link mt-20">
                   <span>All datasheets</span> <i className="fa fa-long-arrow-right" />
+                </Link>
+                <Link href="/resources/msds" className="btn btn__secondary btn__link mt-10">
+                  <span>Safety data sheets</span> <i className="fa fa-long-arrow-right" />
                 </Link>
               </div>
             </div>

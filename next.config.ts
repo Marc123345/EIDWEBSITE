@@ -16,6 +16,9 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
  */
 const redirects = [
   /* --- Live-site slugs (pre-rebuild) --- */
+  // "industrial diamonds for sale" is one of only two pages ranking today, so it
+  // gets a clean one-to-one 301 to the overview that now owns that intent.
+  { source: "/industrial-diamonds-for-sale", destination: "/products", permanent: true },
   { source: "/ebn", destination: "/products/cbn", permanent: true },
   { source: "/ebn-mesh", destination: "/products/cbn", permanent: true },
   { source: "/toolstones", destination: "/products/tool-stones", permanent: true },
@@ -36,6 +39,15 @@ const redirects = [
     destination: "/applications/semiconductor-electronics",
     permanent: true,
   },
+  { source: "/industries/tool-and-die", destination: "/applications/tool-and-die", permanent: true },
+  {
+    source: "/industries/grinding-cutting-sawing-drilling",
+    destination: "/applications/grinding-cutting-sawing-drilling",
+    permanent: true,
+  },
+  { source: "/industries/polishing-lapping", destination: "/applications/polishing-lapping", permanent: true },
+  // Backstop only: every known old industry slug has an explicit one-to-one rule
+  // above, so this catches nothing that was ever published.
   { source: "/industries/:slug*", destination: "/applications", permanent: true },
 
   /* --- Twelve product pages folded into eight (Phase 2) --- */

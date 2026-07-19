@@ -1,7 +1,7 @@
 import { getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { site } from "@/lib/site";
-import { footerColumns } from "@/lib/site";
+import { footerColumns, legalLinks } from "@/lib/site";
 import { getProducts, getApplications, t } from "@/lib/i18n-content";
 import type { Locale } from "@/i18n/routing";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -102,9 +102,17 @@ export default async function Footer() {
                     <li>
                       <span>© 2026 EID Ltd · Industrial Diamond &amp; CBN Manufacturer · London, UK</span>
                     </li>
-                    <li><Link href="/contact">Terms</Link></li>
-                    <li><Link href="/contact">Privacy</Link></li>
-                    <li><Link href="/products">Sitemap</Link></li>
+                    {legalLinks.map((l) =>
+                      l.ready ? (
+                        <li key={l.href}>
+                          <a href={l.href}>{l.label}</a>
+                        </li>
+                      ) : (
+                        <li key={l.href}>
+                          <span title="Awaiting content from EID before launch">{l.label}</span>
+                        </li>
+                      ),
+                    )}
                   </ul>
                 </nav>
               </div>

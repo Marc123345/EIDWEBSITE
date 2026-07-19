@@ -149,6 +149,8 @@ export default async function ApplicationPage({
         subtitle="The EID advantage"
         title={app.why.title}
         desc={app.why.body}
+        ctaLabel={app.whyCta}
+        ctaHref={app.whyCta ? "/quality" : undefined}
         features={[
           { title: "Batch-to-batch consistency", desc: "Re-order and get the same material, tested on every production run." },
           { title: "Full range, one supplier", desc: "Everything this application needs from a single relationship and standard." },
@@ -163,7 +165,7 @@ export default async function ApplicationPage({
       <BannerCTA
         subtitle="Tell us your application"
         title={`${app.cta}.`}
-        desc="Request a quote, order a sample, or ask a technical question. A real person replies within one business day."
+        desc={app.ctaDesc}
         ctaLabel="Request a Quote"
         ctaHref="/contact"
       />

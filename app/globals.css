@@ -2598,3 +2598,34 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
   .faq-item { grid-template-columns: 1fr; gap: 4px; }
   .faq-item__num { padding-top: 0; }
 }
+
+/* Contact as the conversion endpoint: a button at the far right of the nav bar,
+   never styled as just another link. The nav ul must span the row for the auto
+   margin to push the button right. */
+@media (min-width: 992px) {
+  .navbar__bottom .navbar-nav { width: 100%; }
+}
+.nav__item--cta { margin-left: auto; display: flex; align-items: center; }
+.navbar__bottom .nav__item--cta .nav__cta {
+  padding: 9px 20px;
+  font-size: 12.5px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  background-color: #fff;
+  color: var(--eid-blue);
+  border: none;
+  border-radius: 2px;
+}
+.navbar__bottom .nav__item--cta .nav__cta:hover,
+.navbar__bottom .nav__item--cta .nav__cta:focus-visible {
+  background-color: var(--eid-blue-deep);
+  color: #fff;
+}
+.navbar__bottom .nav__item--cta .nav__cta .fa { margin-left: 7px; }
+
+/* Below lg the desktop topbar is hidden, so Contact and WhatsApp get compact
+   always-visible affordances in the brand bar. */
+.header__compact { display: flex; align-items: center; gap: 10px; margin-left: auto; margin-right: 12px; }
+.header__whatsapp--sm { width: 36px; height: 36px; font-size: 17px; margin-left: 0; }
+.header__compact-cta { padding: 9px 16px; font-size: 12.5px; }
+@media (max-width: 400px) { .header__compact-cta { display: none; } }
