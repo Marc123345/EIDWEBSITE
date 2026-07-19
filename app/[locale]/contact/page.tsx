@@ -25,44 +25,6 @@ export default function ContactPage() {
         secondaryCta={{ label: "View Products", href: "/products" }}
       />
 
-      {/* RFQ PROCESS lead-in */}
-      <section className="pt-90 pb-40">
-        <div className="container">
-          <ChapterMarker index="01" label="Request a Quote" />
-          <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-5">
-              <div className="heading heading-3 mb-40">
-                <h2 className="heading__title">A qualified quote in three steps.</h2>
-                <p className="heading__desc">
-                  Request a quote or technical support. A specialist will reply within one business day.
-                </p>
-                <p className="heading__desc">
-                  The more you can tell us upfront, product, grade, size, and quantity, the faster we can
-                  provide a useful answer instead of coming back with basic questions. Not sure of the exact
-                  grade? Give us the material you are working and the finish you need, and we will specify
-                  it for you.
-                </p>
-                <p className="heading__desc">
-                  Prefer to talk first? Email{" "}
-                  <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}
-                  <a href={site.phoneHref}>{site.phone}</a>. You can also reach us on{" "}
-                  <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>,
-                  shared across the sales team so replies are not blocked on one person.
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-12 col-md-12 col-lg-7">
-              <ProcessSteps
-                steps={[
-                  { title: "Tell us the spec", desc: "Product, grade, size, quantity, and destination country. Not sure of the exact grade? Give us the material you are working and the finish you need, and we will specify it for you." },
-                  { title: "We qualify & quote", desc: "A technical specialist reviews your enquiry and replies within one business day with a real answer, not a request for more info." },
-                  { title: "Sample & supply", desc: "Order a sample to validate, then scheduled or stock supply to your lead time." },
-                ]}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
       <RequestQuotePanel
         panelTitle="Tell us the grade you need."
         panelDesc="Pick the closest product. Not sure? Choose 'Help me specify' and describe your application. The dropdown pre-qualifies your enquiry so it arrives ready to action, and a real person replies within one business day."

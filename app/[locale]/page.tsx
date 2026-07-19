@@ -303,47 +303,7 @@ export default async function Home({
         ]}
       />
 
-      {/* CAPABILITIES — bento montage */}
-      <BentoGallery
-        chapterIndex="05"
-        chapterLabel="Capabilities"
-        subtitle="Inside the operation"
-        title="Manufacturing, growth partnership, and QC."
-        items={[
-          { label: "FACTORY FLOOR — London", caption: "In-house manufacturing", wide: true },
-          { label: "QC LABORATORY", caption: "Every batch tested", href: "/quality" },
-          { label: "CVD CRYSTAL GROWTH", caption: "Grown to your spec", href: "/products/single-crystal#cvd" },
-          { label: "DIAMOND GRIT & POWDER", caption: "Natural grit & micron", href: "/products/natural-grit-powder#grit" },
-          { label: "CBN SUPERABRASIVE", caption: "For hardened steels", href: "/products/cbn" },
-        ]}
-      />
-
-      {/* REQUEST QUOTE — numbered process lead-in + form panel */}
-      <section className="pt-110 pb-40">
-        <div className="container">
-          <ChapterMarker index="06" label="Request a Quote" />
-          <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-5">
-              <div className="heading heading-3 mb-40">
-                <h2 className="heading__title">A qualified quote in three steps.</h2>
-                <p className="heading__desc">
-                  No account, no minimum enquiry. Tell us what you need and a
-                  technical specialist takes it from there.
-                </p>
-              </div>
-            </div>
-            <div className="col-sm-12 col-md-12 col-lg-7">
-              <ProcessSteps
-                steps={[
-                  { title: "Tell us the spec", desc: "Product, grade, size, quantity, and destination country, as much or as little as you have." },
-                  { title: "We qualify & quote", desc: "A technical specialist reviews your enquiry and replies within one business day, not with a request for more info." },
-                  { title: "Sample & supply", desc: "Order a sample to validate, then scheduled or stock supply to your lead time." },
-                ]}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* REQUEST QUOTE — the deck's conversion block is the form itself */}
       <RequestQuotePanel
         panelTitle="Tell us the grade you need. A real person replies within one business day."
         panelDesc="Request a quote, order a sample, or ask a technical question. One form, routed to someone who works with the material."
