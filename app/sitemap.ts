@@ -30,10 +30,12 @@ const paths: Record<string, Meta> = {
     applications.map((a) => [`/applications/${a.slug}`, { priority: 0.8, changeFrequency: "monthly" } as Meta]),
   ),
   "/quality": { priority: 0.7, changeFrequency: "monthly" },
+  "/mesh-qc": { priority: 0.5, changeFrequency: "monthly" },
+  "/micron-qc": { priority: 0.5, changeFrequency: "monthly" },
   "/resources": { priority: 0.6, changeFrequency: "monthly" },
   "/resources/datasheets": { priority: 0.6, changeFrequency: "monthly" },
   "/resources/msds": { priority: 0.6, changeFrequency: "monthly" },
-  "/blog": { priority: 0.4, changeFrequency: "monthly" },
+  "/resources/blog": { priority: 0.5, changeFrequency: "weekly" },
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {

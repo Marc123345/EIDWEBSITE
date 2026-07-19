@@ -595,6 +595,38 @@ body .about__text p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px 36px;
 }
+/* Phase 2 mega-menu: the eight product pages exposed directly as a 2-2-2-2
+   grid, four columns of two. No group headings and no nested fly-outs, because
+   there is nothing below a page: the mesh/micron splits, coatings, PCBN, and
+   PCD blanks are sections inside their parent, shown here only as a note. */
+.eid-mega__grid--2222 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px 28px;
+}
+.eid-mega__grid--2222 .eid-mega__col ul { gap: 16px; }
+.eid-mega__grid--2222 .eid-mega__col ul a { padding: 2px 0; }
+.eid-mega__name {
+  display: block;
+  font-family: "Rubik", sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--eid-ink);
+}
+.eid-mega__col ul a:hover .eid-mega__name { color: var(--eid-blue); }
+.eid-mega__note {
+  display: block;
+  margin-top: 3px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--eid-muted);
+}
+/* Narrow screens: the same eight pages stack vertically as a single scroll,
+   which is the pattern reviewed against the competitor overlays. */
+@media (max-width: 991px) {
+  .eid-mega__grid--2222 { grid-template-columns: 1fr; gap: 14px; }
+}
+
 .eid-mega__col h6 {
   font-family: "Rubik", sans-serif;
   font-size: 11px;
@@ -2218,141 +2250,6 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
 }
 
 /* =========================================================================
-   PATTERN LIBRARY — styles for app/_components/patterns.tsx (/styleguide)
-   ========================================================================= */
-.p-intro { max-width: 720px; margin-bottom: 44px; }
-.p-intro--center { margin-inline: auto; text-align: center; }
-.p-intro__title { font-family: "Rubik", sans-serif; font-weight: 700; font-size: clamp(26px, 3vw, 38px); line-height: 1.18; letter-spacing: -0.01em; color: var(--eid-ink); margin-bottom: 12px; text-wrap: balance; }
-.p-intro__desc { font-size: 16.5px; line-height: 1.75; color: var(--eid-muted); }
-
-.p-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border: 1px solid var(--eid-line); border-radius: 2px; overflow: hidden; }
-.p-stats__tile { display: grid; gap: 4px; padding: 26px 26px 22px; background: #fff; border-right: 1px solid var(--eid-line); }
-.p-stats__tile:last-child { border-right: 0; }
-.p-stats__value { font-family: "Rubik", sans-serif; font-weight: 700; font-size: 30px; color: var(--eid-ink); font-variant-numeric: tabular-nums; }
-.p-stats__label { font-family: "Rubik", sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--eid-blue); }
-.p-stats__note { font-size: 13px; color: var(--eid-muted); }
-@media (max-width: 767px) { .p-stats__tile { border-right: 0; border-bottom: 1px solid var(--eid-line); } .p-stats__tile:last-child { border-bottom: 0; } }
-
-.p-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
-.p-features__tile { background: #fff; border: 1px solid var(--eid-line); border-radius: 2px; padding: 26px; transition: transform 0.28s cubic-bezier(.2,.7,.3,1), border-color 0.28s cubic-bezier(.2,.7,.3,1), box-shadow 0.28s cubic-bezier(.2,.7,.3,1); }
-.p-features__tile--link { display: block; }
-.p-features__tile--link:hover { transform: translateY(-4px); border-color: var(--eid-blue); box-shadow: 0 14px 34px rgba(11, 14, 20, 0.10); }
-.p-features__icon { width: 48px; height: 48px; display: inline-grid; place-items: center; background: #dbe1ff; color: var(--eid-blue-deep); border-radius: 2px; font-size: 19px; margin-bottom: 14px; }
-.p-features__title { font-family: "Rubik", sans-serif; font-weight: 600; font-size: 17.5px; color: var(--eid-ink); margin-bottom: 7px; }
-.p-features__desc { font-size: 14.5px; line-height: 1.65; color: var(--eid-muted); margin: 0; }
-
-.p-spec { display: flex; flex-direction: column; }
-.p-spec__title { font-family: "Rubik", sans-serif; font-weight: 600; font-size: 19px; color: var(--eid-ink); margin-bottom: 8px; }
-.p-spec__desc { font-size: 14.5px; line-height: 1.65; color: var(--eid-muted); margin-bottom: 16px; }
-.p-spec__chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
-.p-spec__cta { margin-top: auto; font-family: "Rubik", sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--eid-blue-deep); }
-.p-spec__cta .fa { margin-left: 6px; transition: transform 0.18s ease; }
-.p-spec__cta:hover .fa { transform: translateX(3px); }
-
-.p-compare__caption { caption-side: top; text-align: left; font-family: "Rubik", sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--eid-muted); padding-bottom: 10px; }
-
-.p-sheet { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid var(--eid-line); border-left: 3px solid var(--eid-blue); border-radius: 2px; padding: 16px 18px; transition: transform 0.24s cubic-bezier(.2,.7,.3,1), box-shadow 0.24s cubic-bezier(.2,.7,.3,1); }
-.p-sheet:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(11, 14, 20, 0.09); }
-.p-sheet__icon { width: 42px; height: 42px; flex-shrink: 0; display: grid; place-items: center; background: var(--eid-surface-container); color: var(--eid-blue-deep); border-radius: 2px; font-size: 17px; }
-.p-sheet__body { display: grid; gap: 2px; min-width: 0; }
-.p-sheet__kind { font-family: "Rubik", sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--eid-muted); }
-.p-sheet__title { font-family: "Rubik", sans-serif; font-weight: 600; font-size: 15px; color: var(--eid-ink); }
-.p-sheet__dl { margin-left: auto; color: var(--eid-blue); font-size: 16px; }
-
-.p-faq { border: 1px solid var(--eid-line); border-radius: 2px; background: #fff; }
-.p-faq__item { border-bottom: 1px solid var(--eid-line); }
-.p-faq__item:last-child { border-bottom: 0; }
-.p-faq__item.is-open { background: var(--eid-surface); }
-.p-faq__q { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; text-align: left; background: none; border: 0; cursor: pointer; padding: 19px 22px; font-family: "Rubik", sans-serif; font-weight: 600; font-size: 16px; color: var(--eid-ink); }
-.p-faq__q .fa { color: var(--eid-blue); }
-.p-faq__a-wrap { overflow: hidden; }
-.p-faq__a { padding: 0 22px 20px; font-size: 15px; line-height: 1.7; color: var(--eid-muted); margin: 0; max-width: 68ch; }
-
-.p-timeline { display: grid; gap: 0; }
-.p-timeline__item { display: grid; grid-template-columns: 92px 1fr; gap: 22px; padding-block: 20px; border-bottom: 1px solid var(--eid-line); }
-.p-timeline__item:last-child { border-bottom: 0; }
-.p-timeline__marker { font-family: "Rubik", sans-serif; font-weight: 700; font-size: 15px; color: var(--eid-blue-deep); font-variant-numeric: tabular-nums; padding-top: 2px; }
-.p-timeline__title { font-family: "Rubik", sans-serif; font-weight: 600; font-size: 17px; color: var(--eid-ink); margin-bottom: 5px; }
-.p-timeline__desc { font-size: 14.5px; line-height: 1.65; color: var(--eid-muted); margin: 0; max-width: 62ch; }
-
-.p-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 26px; }
-.p-steps__step { position: relative; background: #fff; border: 1px solid var(--eid-line); border-top: 3px solid var(--eid-blue); border-radius: 2px; padding: 24px; }
-.p-steps__num { font-family: "Rubik", sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; color: var(--eid-blue-deep); }
-.p-steps__title { font-family: "Rubik", sans-serif; font-weight: 600; font-size: 16.5px; color: var(--eid-ink); margin: 9px 0 6px; }
-.p-steps__desc { font-size: 14px; line-height: 1.6; color: var(--eid-muted); margin: 0; }
-.p-steps__arrow { position: absolute; top: 50%; right: -20px; transform: translateY(-50%); color: var(--eid-line-2); font-size: 17px; }
-@media (max-width: 767px) { .p-steps__arrow { display: none; } }
-
-.p-certs { display: flex; flex-wrap: wrap; gap: 12px 30px; align-items: center; padding: 20px 26px; background: var(--eid-surface-container); border-block: 1px solid var(--eid-line); }
-.p-certs__item { display: inline-flex; align-items: center; gap: 9px; font-family: "Rubik", sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--eid-muted); }
-.p-certs__item .fa { color: var(--eid-blue); font-size: 15px; }
-
-.p-quote { position: relative; margin: 0; padding: 34px 34px 30px 42px; background: #fff; border: 1px solid var(--eid-line); border-left: 3px solid var(--eid-blue); border-radius: 2px; }
-.p-quote__mark { position: absolute; top: 14px; left: 15px; font-family: "Rubik", sans-serif; font-weight: 700; font-size: 42px; line-height: 1; color: #dbe1ff; }
-.p-quote__text { font-size: clamp(17px, 1.9vw, 21px); font-weight: 500; line-height: 1.55; color: var(--eid-ink); margin: 0 0 16px; border: 0; padding: 0; }
-.p-quote__by { display: grid; gap: 2px; }
-.p-quote__name { font-family: "Rubik", sans-serif; font-weight: 600; font-size: 14px; color: var(--eid-ink); }
-.p-quote__role { font-family: "Rubik", sans-serif; font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--eid-muted); }
-
-.p-note { display: flex; gap: 15px; padding: 18px 20px; border: 1px solid var(--eid-line); border-radius: 2px; background: var(--eid-surface); }
-.p-note--caution { background: #fffaf0; border-color: #f0dcb8; }
-.p-note__icon { color: var(--eid-blue); font-size: 17px; padding-top: 1px; }
-.p-note--caution .p-note__icon { color: #b07a1a; }
-.p-note__title { font-family: "Rubik", sans-serif; font-weight: 600; font-size: 14.5px; color: var(--eid-ink); margin-bottom: 4px; }
-.p-note__body { font-size: 14px; line-height: 1.65; color: var(--eid-muted); }
-
-.p-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.p-tags__label { font-family: "Rubik", sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--eid-muted); margin-right: 4px; }
-
-.p-contact { position: relative; background: radial-gradient(700px 300px at 22% 50%, rgba(44, 60, 108, 0.30), transparent 65%), var(--eid-midnight); overflow: hidden; }
-.p-contact__grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
-.p-contact__inner { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 22px; padding-block: 30px; }
-.p-contact__list { display: flex; flex-wrap: wrap; gap: 14px 36px; list-style: none; margin: 0; padding: 0; }
-.p-contact__list li { display: inline-flex; align-items: center; gap: 10px; font-family: "Rubik", sans-serif; font-size: 14px; font-weight: 500; color: #cfd9ef; }
-.p-contact__list .fa { color: #b3c5ff; }
-.p-contact__list a { color: #cfd9ef; }
-.p-contact__list a:hover { color: #fff; }
-
-.p-caps { margin: 0; border: 1px solid var(--eid-line); border-radius: 2px; background: #fff; }
-.p-caps__row { display: grid; grid-template-columns: minmax(160px, 34%) 1fr; border-bottom: 1px solid var(--eid-line); }
-.p-caps__row:last-child { border-bottom: 0; }
-.p-caps__row:nth-child(even) { background: var(--eid-surface-low); }
-.p-caps__label { font-family: "Rubik", sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--eid-muted); padding: 14px 18px; margin: 0; }
-.p-caps__value { font-size: 14.5px; color: var(--eid-ink); padding: 14px 18px; margin: 0; }
-
-.p-midnight { position: relative; background: radial-gradient(620px 320px at 70% 30%, rgba(44, 60, 108, 0.28), transparent 65%), var(--eid-midnight); border-radius: 2px; overflow: hidden; color: #eef1f7; }
-.p-midnight__grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
-.p-midnight__inner { position: relative; }
-.p-midnight--padded .p-midnight__inner { padding: 38px; }
-.p-midnight .p-intro__title { color: #f4f6fb; }
-.p-midnight .p-intro__desc { color: #aab3c5; }
-@media (max-width: 575px) { .p-midnight--padded .p-midnight__inner { padding: 24px; } }
-
-/* ---------- Product hero visuals (SVG in the stone viewport) ---------- */
-.product-visual { position: relative; width: 100%; height: 100%; min-height: inherit; display: grid; place-items: center; padding: 10px; }
-.product-visual svg { width: 100%; height: auto; max-height: 100%; filter: drop-shadow(0 0 30px rgba(44, 60, 108, 0.30)); }
-
-/* Product visual inside the compact page-hero band.
-   Size by HEIGHT (not width) so the 4:3 diagram keeps a footprint consistent
-   with the crystal on other pages and doesn't blow the band out taller. */
-.page-hero__stone--visual {
-  margin-block: -18px;
-  width: auto;
-  display: grid;
-  place-items: center;
-}
-.page-hero__stone--visual .product-visual { padding: 0; }
-.page-hero__stone--visual .product-visual svg {
-  width: auto;
-  height: clamp(168px, 20vw, 212px);
-  max-height: none;
-  max-width: 42vw;
-}
-@media (max-width: 767px) {
-  .page-hero__stone--visual { display: none; }
-}
-
-/* =========================================================================
    BRAND LOGO (real EID logo asset) — navy mask in the light header, white
    PNG in the dark footer.
    ========================================================================= */
@@ -2423,3 +2320,177 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
   position: relative;
   top: -1px;
 }
+
+/* =========================================================================
+   PHASE 2 — anchored product sections, on-page jump nav, WhatsApp channel
+   ========================================================================= */
+
+/* Folded-in sections are reached by anchor from the mega-menu notes, the
+   footer index, the hubs, and the 301s from their old URLs. The sticky navbar
+   would otherwise cover the heading on arrival. */
+.section-anchor { scroll-margin-top: 110px; }
+
+.section-jumpnav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 0;
+  border-top: 1px solid var(--eid-line);
+  border-bottom: 1px solid var(--eid-line);
+}
+.section-jumpnav__label {
+  font-family: "Rubik", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--eid-muted);
+  margin-right: 4px;
+}
+.section-jumpnav .chip {
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.section-jumpnav .chip:hover {
+  background: var(--eid-blue);
+  border-color: var(--eid-blue);
+  color: #fff;
+}
+
+/* WhatsApp Business: a second channel alongside the quote form. The form
+   captures the qualified, spec-heavy enquiry; WhatsApp captures the fast
+   question and the follow-up. Both feed the same sales inbox. */
+.header__whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  font-size: 19px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.header__whatsapp:hover { background: #1da851; color: #fff; transform: translateY(-1px); }
+
+.wa-float {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 52px;
+  padding: 0 15px;
+  border-radius: 26px;
+  background: #25d366;
+  color: #fff;
+  font-family: "Rubik", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+  transition: gap 0.2s ease, padding 0.2s ease, background-color 0.15s ease;
+}
+.wa-float .fa { font-size: 25px; }
+.wa-float__label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 0.25s ease, opacity 0.2s ease;
+}
+.wa-float:hover,
+.wa-float:focus-visible {
+  color: #fff;
+  background: #1da851;
+  gap: 10px;
+  padding-right: 22px;
+}
+.wa-float:hover .wa-float__label,
+.wa-float:focus-visible .wa-float__label { max-width: 160px; opacity: 1; }
+
+@media (max-width: 767px) {
+  .wa-float { left: 16px; bottom: 16px; height: 48px; padding: 0 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-float, .wa-float__label, .header__whatsapp { transition: none; }
+}
+
+/* FAQ — plain visible Q&A. Deliberately not an accordion: the answers are the
+   thing AI answer engines and crawlers need to read, and hiding them behind a
+   click buys nothing here. */
+.faq-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--eid-line);
+}
+.faq-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 12px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--eid-line);
+}
+.faq-item__num {
+  font-family: "Rubik", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--eid-blue);
+  padding-top: 4px;
+}
+.faq-item__q {
+  /* The template capitalizes every heading word. A question reads as a question
+     in sentence case, and it matches how buyers actually type the query. */
+  text-transform: none;
+  font-size: 19px;
+  line-height: 1.35;
+  margin: 0 0 8px;
+  color: var(--eid-ink);
+}
+.faq-item__a {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--eid-muted);
+  margin: 0;
+  max-width: 78ch;
+}
+@media (max-width: 575px) {
+  .faq-item { grid-template-columns: 1fr; gap: 4px; }
+  .faq-item__num { padding-top: 0; }
+}
+
+/* Contact as the conversion endpoint: a button at the far right of the nav bar,
+   never styled as just another link. The nav ul must span the row for the auto
+   margin to push the button right. */
+@media (min-width: 992px) {
+  .navbar__bottom .navbar-nav { width: 100%; }
+}
+.nav__item--cta { margin-left: auto; display: flex; align-items: center; }
+.navbar__bottom .nav__item--cta .nav__cta {
+  padding: 9px 20px;
+  font-size: 12.5px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  background-color: #fff;
+  color: var(--eid-blue);
+  border: none;
+  border-radius: 2px;
+}
+.navbar__bottom .nav__item--cta .nav__cta:hover,
+.navbar__bottom .nav__item--cta .nav__cta:focus-visible {
+  background-color: var(--eid-blue-deep);
+  color: #fff;
+}
+.navbar__bottom .nav__item--cta .nav__cta .fa { margin-left: 7px; }
+
+/* Below lg the desktop topbar is hidden, so Contact and WhatsApp get compact
+   always-visible affordances in the brand bar. */
+.header__compact { display: flex; align-items: center; gap: 10px; margin-left: auto; margin-right: 12px; }
+.header__whatsapp--sm { width: 36px; height: 36px; font-size: 17px; margin-left: 0; }
+.header__compact-cta { padding: 9px 16px; font-size: 12.5px; }
+@media (max-width: 400px) { .header__compact-cta { display: none; } }

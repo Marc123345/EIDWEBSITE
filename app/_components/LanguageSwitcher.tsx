@@ -8,8 +8,11 @@ const LABELS: Record<string, string> = {
   en: "EN",
   de: "DE",
   es: "ES",
-  ja: "JA",
   it: "IT",
+  ja: "JA",
+  fr: "FR",
+  ko: "KO",
+  zh: "ZH",
 };
 
 // Switches locale while preserving the current path (next-intl's usePathname

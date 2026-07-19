@@ -1,6 +1,7 @@
 import { getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { site } from "@/lib/site";
+import { footerColumns, legalLinks } from "@/lib/site";
 import { getProducts, getApplications, t } from "@/lib/i18n-content";
 import type { Locale } from "@/i18n/routing";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -17,15 +18,22 @@ export default async function Footer() {
       title: t(locale, "Applications"),
       links: getApplications(locale).map((a) => ({ label: a.name, href: `/applications/${a.slug}` })),
     },
+    // Section anchors: the mega-menu cannot expose these without clutter, so the
+    // footer carries them. Power users get a fast index; crawlers get a complete
+    // internal-link map from every page.
+    {
+      title: t(locale, "Sections"),
+      links: footerColumns.find((c) => c.title === "Sections")!.links,
+    },
     {
       title: t(locale, "Company & Resources"),
       links: [
         { label: t(locale, "Products Overview"), href: "/products" },
         { label: t(locale, "Quality, QC & ISO 9001"), href: "/quality" },
         { label: t(locale, "Resources & Guides"), href: "/resources" },
+        { label: t(locale, "Blog"), href: "/resources/blog" },
         { label: t(locale, "Datasheets"), href: "/resources/datasheets" },
         { label: t(locale, "MSDS"), href: "/resources/msds" },
-        { label: t(locale, "Blog"), href: "/blog" },
         { label: t(locale, "About"), href: "/about" },
         { label: t(locale, "Contact"), href: "/contact" },
       ],
@@ -52,6 +60,11 @@ export default async function Footer() {
                 </p>
                 <p>
                   <a href={site.phoneHref} className="font-weight-bold">{site.phone}</a>
+                </p>
+                <p>
+                  <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer">
+                    <i className="fa fa-whatsapp" aria-hidden="true" /> WhatsApp {site.whatsapp}
+                  </a>
                 </p>
               </div>
             </div>
@@ -89,9 +102,17 @@ export default async function Footer() {
                     <li>
                       <span>© 2026 EID Ltd · Industrial Diamond &amp; CBN Manufacturer · London, UK</span>
                     </li>
-                    <li><Link href="/contact">Terms</Link></li>
-                    <li><Link href="/contact">Privacy</Link></li>
-                    <li><Link href="/products">Sitemap</Link></li>
+                    {legalLinks.map((l) =>
+                      l.ready ? (
+                        <li key={l.href}>
+                          <a href={l.href}>{l.label}</a>
+                        </li>
+                      ) : (
+                        <li key={l.href}>
+                          <span title="Awaiting content from EID before launch">{l.label}</span>
+                        </li>
+                      ),
+                    )}
                   </ul>
                 </nav>
               </div>

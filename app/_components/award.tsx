@@ -32,15 +32,19 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 /* Typographic trust strip — real trade descriptors until real logos exist.
    Never ship "CLIENT LOGO" boxes to a procurement buyer. */
+// Buyer types only. The copy deck names the kinds of tool maker EID supplies
+// ("dental burs, optics, watch components, and abrasives for glass and stone")
+// and the regions ("Europe, Asia, the Americas, and the Middle East"), but never
+// pairs a customer type with a country. Do not reintroduce named geographies.
 export const TRADE_STRIP = [
-  "Diamond tool makers · Germany",
-  "Dental instruments · Israel",
-  "Saw blade producers · Italy",
-  "Grinding wheel makers · Japan",
-  "Wire die producers · USA",
-  "Precision optics · Switzerland",
-  "Stone & construction · India",
-  "PCD tooling · United Kingdom",
+  "Diamond tool makers",
+  "Dental instrument producers",
+  "Saw blade producers",
+  "Grinding wheel makers",
+  "Wire die producers",
+  "Precision optics tooling",
+  "Stone & construction tooling",
+  "PCD tooling",
 ];
 
 /* Shared keyword set for the marquee ticker across pages. */
@@ -289,7 +293,7 @@ export function HeroMasthead({
    ------------------------------------------------------------------------- */
 const DEFAULT_HERO_META = [
   { value: "50+", label: "Years' experience" },
-  { value: "12", label: "Product lines" },
+  { value: "8", label: "Product groups" },
   { value: "ISO 9001", label: "Certified" },
 ];
 

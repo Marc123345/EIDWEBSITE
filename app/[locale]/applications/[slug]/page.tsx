@@ -52,20 +52,26 @@ export default async function ApplicationPage({
 
   const [headline, ...bodyParas] = app.intro;
 
-  const serviceItems = app.products
-    .map((ap) => {
-      const prod = getProduct(locale, ap.product);
-      if (!prod) return null;
-      return {
-        icon: familyIcon[prod.family] || "diamond",
-        title: prod.name,
-        desc: ap.note,
-        href: `/products/${prod.slug}`,
-      };
-    })
-    .filter(Boolean) as { icon: IconName; title: string; desc: string; href: string }[];
+  // A hub routes to the exact product page, and often to the exact section
+  // anchor within it, so the label and href come from the hub rather than from
+  // the product record. The icon still keys off the parent product's family.
+  const serviceItems = app.products.map((ap) => {
+    const parentSlug = ap.href.replace("/products/", "").split("#")[0];
+    const prod = getProduct(locale, parentSlug);
+    return {
+      icon: (prod ? familyIcon[prod.family] : undefined) || "diamond",
+      title: ap.label,
+      desc: ap.note,
+      href: ap.href,
+    };
+  }) as { icon: IconName; title: string; desc: string; href: string }[];
 
   const productLinks = serviceItems.map((s) => ({ label: s.title, href: s.href }));
+  const guideLinks = (app.guides ?? []).map((g) => ({ label: g, href: "/resources" }));
+  const relatedHubLinks = (app.relatedHubs ?? [])
+    .map((h) => getApplication(locale, h))
+    .filter(Boolean)
+    .map((h) => ({ label: h!.name, href: `/applications/${h!.slug}` }));
 
   return (
     <>
@@ -128,7 +134,7 @@ export default async function ApplicationPage({
       {/* PRODUCTS USED — services layout 3 */}
       <Chapter index="02" label="Products Used" />
       <ServicesLayout3
-        subtitle={`The grades ${app.name.toLowerCase()} makers use`}
+        subtitle={app.productsTitle}
         title="The material behind your tools."
         desc="Every grade quality-controlled through our own laboratory to the same standard, every time. Tell us your application and we will recommend the right product."
         ctaHref="/contact"
@@ -143,6 +149,8 @@ export default async function ApplicationPage({
         subtitle="The EID advantage"
         title={app.why.title}
         desc={app.why.body}
+        ctaLabel={app.whyCta}
+        ctaHref={app.whyCta ? "/quality" : undefined}
         features={[
           { title: "Batch-to-batch consistency", desc: "Re-order and get the same material, tested on every production run." },
           { title: "Full range, one supplier", desc: "Everything this application needs from a single relationship and standard." },
@@ -157,7 +165,7 @@ export default async function ApplicationPage({
       <BannerCTA
         subtitle="Tell us your application"
         title={`${app.cta}.`}
-        desc="Request a quote, order a sample, or ask a technical question. A real person replies within one business day."
+        desc={app.ctaDesc}
         ctaLabel="Request a Quote"
         ctaHref="/contact"
       />
@@ -170,10 +178,11 @@ export default async function ApplicationPage({
             title: "Quality & resources",
             links: [
               { label: "Quality, QC & ISO 9001", href: "/quality" },
-              { label: "Resources & Guides", href: "/resources" },
               { label: "Datasheets", href: "/resources/datasheets" },
+              ...guideLinks,
             ],
           },
+          ...(relatedHubLinks.length ? [{ title: "Related hub", links: relatedHubLinks }] : []),
           {
             title: "Other applications",
             links: getApplications(locale)

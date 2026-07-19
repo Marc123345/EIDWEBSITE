@@ -27,7 +27,7 @@ export default function BlogPage() {
         eyebrow="News, application notes & technical insight"
         title="The EID Blog"
         desc="News, application notes, and technical insight on industrial diamond and CBN from EID Ltd, London-based superabrasive manufacturer."
-        crumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
+        crumbs={[{ label: "Home", href: "/" }, { label: "Resources", href: "/resources" }, { label: "Blog" }]}
         imgLabel="TECHNICAL INSIGHT — Diamond & CBN"
         secondaryCta={{ label: "Resources & Guides", href: "/resources" }}
       />

@@ -227,6 +227,8 @@ export function FeaturesListParallax({
   features,
   chapterIndex,
   chapterLabel,
+  ctaLabel,
+  ctaHref,
 }: {
   subtitle: string;
   title: string;
@@ -234,6 +236,8 @@ export function FeaturesListParallax({
   features: { title: string; desc: string }[];
   chapterIndex?: string;
   chapterLabel?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 }) {
   const mid = Math.ceil(features.length / 2);
   const cols = [features.slice(0, mid), features.slice(mid)];
@@ -272,6 +276,15 @@ export function FeaturesListParallax({
             </div>
           ))}
         </div>
+        {ctaLabel && ctaHref && (
+          <div className="row">
+            <div className="col-sm-12">
+              <Link href={ctaHref} className="btn btn__white btn__hover2 mt-30">
+                {ctaLabel} <i className="fa fa-long-arrow-right" />
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
