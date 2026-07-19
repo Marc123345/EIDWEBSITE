@@ -111,9 +111,9 @@ export default function ContactPage() {
       <FeaturesRow
         items={[
           { title: "ISO 9001 Certified", desc: "Quality management certified across production and supply chain.", href: "/quality" },
-          { title: "In-House QC Lab", desc: "Every batch tested before it ships, no surprises.", href: "/quality" },
+          { title: "In-House QC Laboratory", desc: "Every batch tested before it ships, no surprises.", href: "/quality" },
           { title: "50+ Years' Experience", desc: "Serving tool makers across Europe, the Middle East, and Asia.", href: "/about" },
-          { title: "Full Diamond & CBN Range", desc: "One supplier, one standard, one delivery to manage.", href: "/products" },
+          { title: "Complete Superabrasive Range", desc: "One supplier, one standard, one delivery to manage.", href: "/products" },
         ]}
       />
     </>

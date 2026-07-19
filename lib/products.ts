@@ -73,7 +73,7 @@ export const products: Product[] = [
       "Natural diamond grit in graded mesh sizes and micron powder for grinding, sawing, dressing, lapping, and polishing. Crushed and graded in-house, ISO 9001.",
     eyebrow: "Products · Group 1",
     cardDesc:
-      "Natural mesh grit, micron powder, and rotary diamonds. Crushed, sorted, and graded in-house for grinding, lapping, dressing, and drilling.",
+      "Natural mesh, micron powder, and rotary diamonds, crushed, sorted, and graded in-house for grinding, lapping, dressing, and drilling.",
     menuNote: "grit (mesh), micron powder, rotary diamonds",
     intro: [
       "Crushed, graded, and tested in our own factory.",
@@ -442,7 +442,7 @@ export const products: Product[] = [
       "White CVD single crystal grown to your orientation, and HPHT MCD monocrystalline diamond, for single-point and precision tooling. Made to spec, QC-tested.",
     eyebrow: "Products · Group 5",
     cardDesc:
-      "CVD single crystal and MCD, made to spec for precision tooling, thermal, optical, and advanced applications.",
+      "CVD single crystal and MCD materials, made to spec for precision tooling, thermal, optical, and advanced applications.",
     menuNote: "CVD single crystal, MCD",
     intro: [
       "Single crystal diamond, CVD and MCD, for single-point precision tooling.",

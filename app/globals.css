@@ -2554,3 +2554,47 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
 @media (prefers-reduced-motion: reduce) {
   .wa-float, .wa-float__label, .header__whatsapp { transition: none; }
 }
+
+/* FAQ — plain visible Q&A. Deliberately not an accordion: the answers are the
+   thing AI answer engines and crawlers need to read, and hiding them behind a
+   click buys nothing here. */
+.faq-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--eid-line);
+}
+.faq-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 12px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--eid-line);
+}
+.faq-item__num {
+  font-family: "Rubik", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--eid-blue);
+  padding-top: 4px;
+}
+.faq-item__q {
+  /* The template capitalizes every heading word. A question reads as a question
+     in sentence case, and it matches how buyers actually type the query. */
+  text-transform: none;
+  font-size: 19px;
+  line-height: 1.35;
+  margin: 0 0 8px;
+  color: var(--eid-ink);
+}
+.faq-item__a {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--eid-muted);
+  margin: 0;
+  max-width: 78ch;
+}
+@media (max-width: 575px) {
+  .faq-item { grid-template-columns: 1fr; gap: 4px; }
+  .faq-item__num { padding-top: 0; }
+}
