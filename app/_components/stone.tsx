@@ -16,7 +16,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 const DEFAULT_META = [
   { value: "50+", label: "Years' experience" },
-  { value: "12", label: "Product lines" },
+  { value: "8", label: "Product groups" },
   { value: "ISO 9001", label: "Certified" },
 ];
 

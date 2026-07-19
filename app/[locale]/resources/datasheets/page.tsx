@@ -42,7 +42,7 @@ const groups: { group: string; sheets: [string, string][] }[] = [
     ],
   },
   {
-    group: "Polycrystalline Diamond (PCD & CVD)",
+    group: "Polycrystalline Diamond (CVD & PCD)",
     sheets: [
       ["PCD Discs & Blanks", "Grain sizes and dimensions."],
       ["CVD Polycrystalline Dressing Logs", "Log sizes and shapes."],

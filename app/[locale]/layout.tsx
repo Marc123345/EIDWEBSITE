@@ -83,6 +83,19 @@ export default async function LocaleLayout({
             {children}
             <Footer />
           </div>
+          {/* Persistent WhatsApp Business channel. One tap opens a chat to the
+              London landline, shared across the sales team, for the buyer who
+              wants a fast answer rather than a form. */}
+          <a
+            href={site.whatsappHref}
+            className="wa-float"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with EID on WhatsApp"
+          >
+            <i className="fa fa-whatsapp" aria-hidden="true" />
+            <span className="wa-float__label">WhatsApp us</span>
+          </a>
           <a href="#" id="scrollTopBtn" aria-label="Scroll to top">
             <i className="fa fa-angle-up" />
           </a>

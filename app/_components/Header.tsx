@@ -4,8 +4,8 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import { useState } from "react";
 import { primaryNav, resourceMenu as resourceMenuBase, site } from "@/lib/site";
-import { PRODUCT_FAMILIES } from "@/lib/products";
-import { getProducts, getApplications, getFamilyLabel, t } from "@/lib/i18n-content";
+import { MEGA_MENU_COLUMNS } from "@/lib/products";
+import { getProducts, getApplications, t } from "@/lib/i18n-content";
 import type { Locale } from "@/i18n/routing";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -19,12 +19,19 @@ export default function Header() {
 
   const products = getProducts(locale);
   const nav = primaryNav.map((i) => ({ ...i, label: t(locale, i.label) }));
-  const productMenu = PRODUCT_FAMILIES.map((family) => ({
-    family: getFamilyLabel(locale, family),
-    items: products
-      .filter((p) => p.family === family)
-      .map((p) => ({ label: p.name, href: `/products/${p.slug}` })),
-  }));
+  // The mega-menu exposes the eight product pages directly, laid out 2-2-2-2.
+  // Nothing sits below them: the mesh/micron splits, coatings, PCBN, and PCD
+  // blanks are sections inside their parent page, shown here only as a note.
+  const productColumns = MEGA_MENU_COLUMNS.map((column) =>
+    column
+      .map((slug) => products.find((p) => p.slug === slug))
+      .filter((p): p is NonNullable<typeof p> => Boolean(p))
+      .map((p) => ({
+        label: p.name,
+        href: `/products/${p.slug}`,
+        note: p.menuNote,
+      })),
+  );
   const applicationMenu = getApplications(locale).map((a) => ({
     label: a.name,
     href: `/applications/${a.slug}`,
@@ -71,6 +78,16 @@ export default function Header() {
                 <span>{t(locale, "Request A Quote")}</span>
                 <i className="fa fa-long-arrow-right" />
               </Link>
+              <a
+                href={site.whatsappHref}
+                className="header__whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`WhatsApp EID on ${site.whatsapp}`}
+                title="Chat with us on WhatsApp"
+              >
+                <i className="fa fa-whatsapp" aria-hidden="true" />
+              </a>
               <LanguageSwitcher />
             </div>
           </div>
@@ -118,15 +135,15 @@ export default function Header() {
 
                       {item.menu === "products" && (
                         <div className="dropdown-menu eid-mega">
-                          <div className="eid-mega__grid">
-                            {productMenu.map((group) => (
-                              <div key={group.family} className="eid-mega__col">
-                                <h6>{group.family}</h6>
+                          <div className="eid-mega__grid eid-mega__grid--2222">
+                            {productColumns.map((column, ci) => (
+                              <div key={ci} className="eid-mega__col">
                                 <ul>
-                                  {group.items.map((l) => (
+                                  {column.map((l) => (
                                     <li key={l.href}>
                                       <Link href={l.href} onClick={close}>
-                                        {l.label}
+                                        <span className="eid-mega__name">{l.label}</span>
+                                        {l.note && <span className="eid-mega__note">{l.note}</span>}
                                       </Link>
                                     </li>
                                   ))}
@@ -172,6 +189,14 @@ export default function Header() {
                   <Link href="/contact" className="btn btn__primary btn-block" onClick={close}>
                     {t(locale, "Contact")}
                   </Link>
+                  <a
+                    href={site.whatsappHref}
+                    className="btn btn__secondary btn-block mt-10"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fa fa-whatsapp" aria-hidden="true" /> <span>WhatsApp</span>
+                  </a>
                 </li>
               </ul>
             </div>

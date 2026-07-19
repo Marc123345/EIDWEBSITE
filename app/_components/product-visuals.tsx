@@ -358,22 +358,45 @@ export function SurfaceEnhancementsVisual() {
 }
 
 /* ------------------------------ Dispatcher ------------------------------ */
+// Keyed by the eight page slugs.
 const VISUALS: Record<string, () => ReactNode> = {
-  "natural-grit": GritMeshVisual,
-  "natural-micron": NaturalMicronVisual,
-  "tool-stones": ToolStonesVisual,
+  "natural-grit-powder": GritMeshVisual,
   "metal-bond": MetalBondVisual,
   "resin-bond": ResinBondVisual,
   "cbn": CbnVisual,
-  "cvd-single-crystal": CvdSingleVisual,
-  "cvd-polycrystalline": CvdPolyVisual,
-  "mcd": McdVisual,
-  "pcd-blanks": PcdPcbnVisual,
-  "pcbn": PcdPcbnVisual,
-  "polycrystalline-micron": PolyMicronVisual,
+  "single-crystal": CvdSingleVisual,
+  "polycrystalline-diamond": PcdPcbnVisual,
+  "tool-stones": ToolStonesVisual,
+  "polycrystalline-powder": PolyMicronVisual,
+};
+
+// Keyed by "slug#anchor", so a folded-in section keeps the visual it had when it
+// was its own page.
+const SECTION_VISUALS: Record<string, () => ReactNode> = {
+  "natural-grit-powder#grit": GritMeshVisual,
+  "natural-grit-powder#micron": NaturalMicronVisual,
+  "natural-grit-powder#rotary": ToolStonesVisual,
+  "metal-bond#metal-bond": MetalBondVisual,
+  "metal-bond#coated": SurfaceEnhancementsVisual,
+  "resin-bond#resin-bond": ResinBondVisual,
+  "resin-bond#coated": SurfaceEnhancementsVisual,
+  "cbn#cbn": CbnVisual,
+  "cbn#coated": SurfaceEnhancementsVisual,
+  "cbn#pcbn": PcdPcbnVisual,
+  "single-crystal#cvd": CvdSingleVisual,
+  "single-crystal#mcd": McdVisual,
+  "polycrystalline-diamond#pcd-blanks": PcdPcbnVisual,
+  "polycrystalline-diamond#dressing-logs": CvdPolyVisual,
+  "tool-stones#tool-stones": ToolStonesVisual,
+  "polycrystalline-powder#polycrystalline-powder": PolyMicronVisual,
 };
 
 export function ProductVisual({ slug }: { slug: string }) {
   const V = VISUALS[slug];
+  return V ? <div className="product-visual">{V()}</div> : null;
+}
+
+export function SectionVisual({ slug, id }: { slug: string; id: string }) {
+  const V = SECTION_VISUALS[`${slug}#${id}`];
   return V ? <div className="product-visual">{V()}</div> : null;
 }

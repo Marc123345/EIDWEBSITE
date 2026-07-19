@@ -37,6 +37,13 @@ export default function ContactPage() {
                   No account, no minimum enquiry. Tell us what you need and a
                   technical specialist takes it from there.
                 </p>
+                <p className="heading__desc">
+                  Prefer to talk first? Email{" "}
+                  <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}
+                  <a href={site.phoneHref}>{site.phone}</a>. You can also reach us on{" "}
+                  <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>,
+                  shared across the sales team so replies are not blocked on one person.
+                </p>
               </div>
             </div>
             <div className="col-sm-12 col-md-12 col-lg-7">
@@ -77,6 +84,15 @@ export default function ContactPage() {
                 <li style={{ display: "flex", gap: 12 }}>
                   <Icon name="phone" style={{ color: "var(--eid-blue)" }} />
                   <span style={{ color: "var(--eid-muted)" }}>Tel: {site.phone} · Fax: {site.fax}</span>
+                </li>
+                <li style={{ display: "flex", gap: 12 }}>
+                  <Icon name="phone" style={{ color: "#25d366" }} />
+                  <span style={{ color: "var(--eid-muted)" }}>
+                    WhatsApp:{" "}
+                    <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer">
+                      {site.whatsapp}
+                    </a>
+                  </span>
                 </li>
                 <li style={{ display: "flex", gap: 12 }}>
                   <Icon name="mail" style={{ color: "var(--eid-blue)" }} />

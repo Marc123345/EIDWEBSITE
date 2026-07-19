@@ -88,7 +88,7 @@ export default function Styleguide() {
             title="Natural Diamond Grit"
             desc="Saw and drilling grades manufactured in-house for stone, glass, and construction tools."
             chips={["Saw grade", "Blocky", "Coated available"]}
-            href="/products/natural-grit"
+            href="/products/natural-grit-powder#grit"
           />
           <SpecCard
             meta="Superabrasive · Mesh & Micron"
@@ -102,7 +102,7 @@ export default function Styleguide() {
             title="CVD Single Crystal"
             desc="Precision-grown crystal for dressers, wire dies, and single-point tools."
             chips={["Orientation-cut", "Laser-cut", "Polished"]}
-            href="/products/cvd-single-crystal"
+            href="/products/single-crystal#cvd"
           />
         </div>
       </Block>

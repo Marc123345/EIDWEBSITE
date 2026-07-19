@@ -289,7 +289,7 @@ export function HeroMasthead({
    ------------------------------------------------------------------------- */
 const DEFAULT_HERO_META = [
   { value: "50+", label: "Years' experience" },
-  { value: "12", label: "Product lines" },
+  { value: "8", label: "Product groups" },
   { value: "ISO 9001", label: "Certified" },
 ];
 

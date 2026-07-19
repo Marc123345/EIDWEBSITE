@@ -25,8 +25,8 @@ const guides: { title: string; desc: string; links: { label: string; href: strin
     title: "Diamond grit & micron size chart (mesh-to-micron)",
     desc: "A reference chart mapping FEPA, US mesh, and micron sizes, so you can convert between the sizing systems your specs and your suppliers use.",
     links: [
-      { label: "Natural Grit", href: "/products/natural-grit" },
-      { label: "Natural Micron", href: "/products/natural-micron" },
+      { label: "Natural Grit", href: "/products/natural-grit-powder#grit" },
+      { label: "Natural Micron", href: "/products/natural-grit-powder#micron" },
     ],
   },
   {
@@ -42,15 +42,15 @@ const guides: { title: string; desc: string; links: { label: string; href: strin
     desc: "What D50, D10, D90, and span actually mean, and why a tight distribution changes the way your tool cuts and finishes.",
     links: [
       { label: "Quality & QC", href: "/quality" },
-      { label: "Natural Micron", href: "/products/natural-micron" },
+      { label: "Natural Micron", href: "/products/natural-grit-powder#micron" },
     ],
   },
   {
     title: "CVD, HPHT (MCD), and natural diamond compared",
     desc: "Three ways to get a single crystal, and when each is the right choice for single-point and precision tooling.",
     links: [
-      { label: "CVD Single Crystal", href: "/products/cvd-single-crystal" },
-      { label: "MCD", href: "/products/mcd" },
+      { label: "CVD Single Crystal", href: "/products/single-crystal#cvd" },
+      { label: "MCD", href: "/products/single-crystal#mcd" },
       { label: "Natural Tool Stones", href: "/products/tool-stones" },
     ],
   },
@@ -70,8 +70,28 @@ export default function ResourcesPage() {
         desc="Technical guides, application notes, and industry knowledge from EID on diamond vs CBN, grit size charts, bond comparison, and more."
         crumbs={[{ label: "Home", href: "/" }, { label: "Resources" }]}
         imgLabel="TECHNICAL LIBRARY — Guides & Charts"
-        secondaryCta={{ label: "Datasheets", href: "/resources/datasheets" }}
+        secondaryCta={{ label: "Read the blog", href: "/resources/blog" }}
       />
+
+      {/* INTRO — the research-stage entry point that feeds the product pages */}
+      <section className="section pb-0">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-12 col-lg-9">
+              <div className="heading">
+                <span className="heading__subtitle">Where to start</span>
+                <h2 className="heading__title">Technical guides for choosing the right superabrasive.</h2>
+              </div>
+              <p className="prose mt-20">
+                Reference charts, comparisons, and application notes to help you match the diamond or CBN
+                grade to your process, written by the people who grade and test the material. If you are still
+                deciding between options, start here. If you already know the grade, the{" "}
+                <Link href="/products">product pages</Link> carry the specs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* GUIDES — blog-grid style cards */}
       <Chapter index="01" label="Guides" />
@@ -118,21 +138,28 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* DATASHEETS / MSDS */}
-      <Chapter index="02" label="Downloads" gray />
+      {/* THE REST OF RESOURCES — Phase 2 consolidates guides, the blog, the
+          datasheets, and the SDS library under this one section. */}
+      <Chapter index="02" label="Downloads & Blog" gray />
       <section className="section bg-gray">
         <div className="container">
-          <div className="grid-2">
+          <div className="grid-3">
+            <Link href="/resources/blog" className="tech-card" style={{ display: "block" }}>
+              <div className="tech-card__meta">Blog</div>
+              <h3>Technical comparisons & notes</h3>
+              <p>The comparison content that earns search traffic: application notes, materials explainers, and news from the laboratory.</p>
+              <span className="btn btn__secondary btn__link mt-20"><span>Read the blog</span> <i className="fa fa-long-arrow-right" /></span>
+            </Link>
             <Link href="/resources/datasheets" className="tech-card" style={{ display: "block" }}>
               <div className="tech-card__meta">Reference</div>
               <h3>Datasheets</h3>
-              <p>Technical specification downloads for every product: grades, sizes, crystal types, coatings.</p>
+              <p>Technical specifications as page content with a downloadable PDF each: grades, sizes, crystal types, coatings. Ungated, no form.</p>
               <span className="btn btn__secondary btn__link mt-20"><span>Browse datasheets</span> <i className="fa fa-long-arrow-right" /></span>
             </Link>
             <Link href="/resources/msds" className="tech-card" style={{ display: "block" }}>
               <div className="tech-card__meta">Safety</div>
               <h3>MSDS</h3>
-              <p>Material safety data sheets covering handling, storage, disposal, and regulatory information.</p>
+              <p>Safety data sheets covering handling, storage, disposal, and regulatory information. Ungated, no login.</p>
               <span className="btn btn__secondary btn__link mt-20"><span>Browse MSDS</span> <i className="fa fa-long-arrow-right" /></span>
             </Link>
           </div>
@@ -143,8 +170,8 @@ export default function ResourcesPage() {
 
       <BannerCTA
         subtitle="Can't find what you need?"
-        title="Ask our technical team."
-        desc="We're happy to advise on grade selection, bond systems, and specification for your application."
+        title="Have a technical question the guides don't answer?"
+        desc="Tell us the material, the process, and the finish you need, and someone who works with the material will help you specify. Replies within one business day."
         ctaLabel="Contact Us"
         ctaHref="/contact"
       />

@@ -4,8 +4,7 @@ import { ServicesLayout3, BannerCTA } from "@/app/_components/sections";
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
 import Icon, { IconName } from "@/app/_components/Icon";
-import { PRODUCT_FAMILIES } from "@/lib/products";
-import { getProducts, getFamilyLabel } from "@/lib/i18n-content";
+import { getProducts } from "@/lib/i18n-content";
 import { localeAlternates } from "@/lib/hreflang";
 import type { Locale } from "@/i18n/routing";
 
@@ -29,7 +28,7 @@ const familyIcon: Record<string, IconName> = {
   "Resin Bond Diamond": "layers",
   CBN: "gauge",
   "Single Crystal Diamond (CVD & MCD)": "cube",
-  "Polycrystalline Diamond (PCD & CVD)": "grid",
+  "Polycrystalline Diamond (CVD & PCD)": "grid",
   "Natural Tool Stones": "flask",
   "Polycrystalline Diamond Powder": "bolt",
 };
@@ -41,17 +40,16 @@ export default async function ProductsOverview({
 }) {
   const { locale } = await params;
   const products = getProducts(locale);
-  const byFamily = (family: string) => products.filter((p) => p.family === family);
 
-  const familyCards = PRODUCT_FAMILIES.map((family) => {
-    const items = byFamily(family);
-    return {
-      icon: familyIcon[family] || "diamond",
-      title: getFamilyLabel(locale, family),
-      desc: items.map((p) => p.name).join(" · "),
-      href: `/products/${items[0].slug}`,
-    };
-  });
+  // Eight groups, eight pages. The card blurb is the page's own card copy, not a
+  // list of children, because there are no children: the mesh and micron splits,
+  // coatings, PCBN, and PCD blanks are sections inside each page.
+  const familyCards = products.map((p) => ({
+    icon: familyIcon[p.family] || "diamond",
+    title: p.name,
+    desc: p.cardDesc,
+    href: `/products/${p.slug}`,
+  }));
 
   return (
     <>
@@ -68,8 +66,8 @@ export default async function ProductsOverview({
       <Chapter index="01" label="The Range" />
       <ServicesLayout3
         subtitle="The full range · one source"
-        title="Eight groups. Twelve product lines."
-        desc="Natural grit and powder are produced and graded in our own factory. Bonded and CBN grades are made to order, then re-processed and QC-tested through our facility to your spec. CVD single crystal is grown to your orientation through a dedicated growth partner. One supplier covers the range, and one QC standard covers the range."
+        title="The complete diamond and CBN range, from one manufacturer."
+        desc="EID manufactures and supplies a complete range of industrial superabrasives. From in-house processed grit and powder to custom-grown CVD single crystal, every product is quality-controlled to our specifications, giving tool makers a consistent, single-source quality standard across the entire range. Browse the eight product families below. Mesh, micron, coatings, grades, and sizing are configured within each family to match your application."
         ctaHref="/contact"
         ctaLabel="Request a Quote"
         items={familyCards}
@@ -77,36 +75,36 @@ export default async function ProductsOverview({
 
       <StatsBar
         items={[
-          { value: 8, label: "Product groups" },
-          { value: 12, label: "Product lines" },
+          { value: 8, label: "Product pages" },
           { value: 6, label: "Application hubs" },
+          { value: 50, suffix: "+", label: "Years' experience" },
           { value: 100, suffix: "%", label: "Batches QC-tested" },
         ]}
       />
 
-      {/* FULL GRID grouped by the eight locked groups */}
+      {/* THE EIGHT PAGES — each card names the sections it contains */}
       <Chapter index="02" label="All Products" />
       <section className="section">
-        <div className="container" style={{ display: "grid", gap: 48 }}>
-          {PRODUCT_FAMILIES.map((family) => (
-            <div key={family}>
-              <div className="heading mb-30" style={{ display: "flex", alignItems: "center", gap: 14, borderBottom: "1px solid var(--eid-line)", paddingBottom: 12 }}>
-                <Icon name={familyIcon[family] || "diamond"} style={{ color: "var(--eid-blue)" }} />
-                <span className="heading__subtitle" style={{ margin: 0 }}>{getFamilyLabel(locale, family)}</span>
-              </div>
-              <div className="grid-3">
-                {byFamily(family).map((p) => (
-                  <Link key={p.slug} href={`/products/${p.slug}`} className="tech-card" style={{ display: "block" }}>
-                    <h3>{p.name}</h3>
-                    <p>{p.cardDesc}</p>
-                    <span className="btn btn__secondary btn__link mt-20">
-                      <span>View product</span> <i className="fa fa-long-arrow-right" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div className="container">
+          <div className="grid-3">
+            {products.map((p) => (
+              <Link key={p.slug} href={`/products/${p.slug}`} className="tech-card" style={{ display: "block" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                  <Icon name={familyIcon[p.family] || "diamond"} style={{ color: "var(--eid-blue)" }} />
+                  <h3 style={{ margin: 0 }}>{p.name}</h3>
+                </div>
+                <p>{p.cardDesc}</p>
+                {p.sections.length > 1 && (
+                  <p className="note-mono" style={{ marginTop: 10 }}>
+                    Contains: {p.sections.map((sec) => sec.label).join(" · ")}
+                  </p>
+                )}
+                <span className="btn btn__secondary btn__link mt-20">
+                  <span>View product</span> <i className="fa fa-long-arrow-right" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -120,8 +118,8 @@ export default async function ProductsOverview({
                 <h2 className="heading__title">Not sure which grade fits your process?</h2>
               </div>
               <p className="prose">
-                Tell us the material you are working, the bond system, and the finish you need, and we will
-                point you to the right product and grade. This is what our technical team does before every quote.
+                Share the material you are processing, your specific application, and the desired finish, and our
+                technical team will direct you to the ideal product and grade. This is what we do before every quote.
                 You can also start from your <Link href="/applications">application</Link> or read the{" "}
                 <Link href="/resources">technical guides</Link> if you are still comparing options.
               </p>
@@ -140,7 +138,7 @@ export default async function ProductsOverview({
       <BannerCTA
         subtitle="Whatever your application"
         title="Request a quote for any product."
-        desc={`One form covers all ${products.length} product lines. Give us the grade, size, and quantity, and a real person replies within one business day.`}
+        desc={`One form covers all ${products.length} product families. Give us the grade, size, and quantity, and a real person replies within one business day.`}
         ctaLabel="Request a Quote or Sample"
         ctaHref="/contact"
       />

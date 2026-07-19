@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
-import { products } from "@/lib/products";
+import { products, type ProductSection } from "@/lib/products";
 import { getProduct, getApplication } from "@/lib/i18n-content";
 import { localeAlternates } from "@/lib/hreflang";
 import type { Locale } from "@/i18n/routing";
@@ -9,8 +9,7 @@ import { CrossLinks, ImagePlaceholder } from "@/app/_components/ui";
 import { FeaturesListParallax, BannerCTA } from "@/app/_components/sections";
 import { Chapter, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
-import { ProductVisual } from "@/app/_components/product-visuals";
-import Icon from "@/app/_components/Icon";
+import { ProductVisual, SectionVisual } from "@/app/_components/product-visuals";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -41,17 +40,21 @@ export default async function ProductPage({
   if (!p) notFound();
 
   const [headline, ...bodyParas] = p.intro;
+  // A single-section product renders flat: no jump nav, no repeated section
+  // heading chrome, because there is nothing to jump between.
+  const isSplit = p.sections.length > 1;
+  const leadSpecs = p.sections.find((s) => s.specs?.length)?.specs ?? [];
 
-  // Contiguous chapter numbering even when optional sections are absent.
-  let step = 0;
+  // Chapter numbers are assigned up front rather than incremented during render.
+  // A counter mutated inside the parent's JSX runs before the child components
+  // render, which would number the QC band ahead of the sections above it.
+  const chapterOrder = ["Overview", ...p.sections.map((s) => s.label), "Quality Control"];
+  const chapterIndex = (label: string) =>
+    String(chapterOrder.indexOf(label) + 1).padStart(2, "0");
   const chapter = (label: string, gray = false) => (
-    <Chapter index={String(++step).padStart(2, "0")} label={label} gray={gray} />
+    <Chapter index={chapterIndex(label)} label={label} gray={gray} />
   );
 
-  const crossProductLinks = p.crossProducts
-    .map((s) => getProduct(locale, s))
-    .filter(Boolean)
-    .map((cp) => ({ label: cp!.name, href: `/products/${cp!.slug}` }));
   const crossApplicationLinks = p.crossApplications
     .map((s) => getApplication(locale, s))
     .filter(Boolean)
@@ -104,7 +107,7 @@ export default async function ProductPage({
             </div>
             <div className="col-sm-12 col-md-12 col-lg-3">
               <div className="features-list features-list-layout1 mt-30">
-                {p.specs.slice(0, 3).map((s) => (
+                {leadSpecs.slice(0, 3).map((s) => (
                   <div key={s.label} className="feature-item feature-list-item">
                     <div className="feature__content">
                       <h4 className="feature__title">{s.label}</h4>
@@ -118,79 +121,37 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* CALLOUTS — centered tech-card highlights (never sparse) */}
-      {p.callouts && p.callouts.length > 0 && (
-        <>
-          {chapter("Highlights")}
-          <section className="section">
+      {/* ON-PAGE JUMP NAV — the sections that used to be their own pages */}
+      {isSplit && (
+        <section className="section pt-0 pb-40">
           <div className="container">
-            <div className="callout-grid">
-              {p.callouts.map((c) => (
-                <div key={c.title} className="tech-card">
-                  <div className="tech-card__meta">{c.title}</div>
-                  {Array.isArray(c.body) ? (
-                    <ul className="check-list" style={{ marginTop: 6 }}>
-                      {c.body.map((b, i) => (
-                        <li key={i}>{b}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p style={{ fontSize: 16 }}>{c.body}</p>
-                  )}
-                </div>
+            <div className="section-jumpnav">
+              <span className="section-jumpnav__label">On this page</span>
+              {p.sections.map((s) => (
+                <a key={s.id} href={`#${s.id}`} className="chip">
+                  {s.label}
+                </a>
               ))}
             </div>
           </div>
-          </section>
-        </>
+        </section>
       )}
 
-      {/* APPLICATIONS + SPECIFICATIONS */}
-      {chapter("Applications & Specs", true)}
-      <section className="section bg-gray">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12 col-md-12 col-lg-6">
-              <div className="heading mb-30">
-                <span className="heading__subtitle">Applications</span>
-                <h2 className="heading__title">Where it&apos;s used.</h2>
-              </div>
-              <ul className="check-list">
-                {p.applications.map((a, i) => (
-                  <li key={i}>{a}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="col-sm-12 col-md-12 col-lg-6">
-              <div className="heading mb-30">
-                <span className="heading__subtitle">Specifications</span>
-                <h2 className="heading__title">Spec matrix.</h2>
-              </div>
-              <p className="note-mono mb-20">Confirm exact values with Uri.</p>
-              <table className="spec-table">
-                <thead>
-                  <tr>
-                    <th>Parameter</th>
-                    <th>Detail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {p.specs.map((s) => (
-                    <tr key={s.label}>
-                      <td className="spec-label">{s.label}</td>
-                      <td className="spec-value">{s.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* SECTIONS — each keeps its H2, anchor, applications, and spec table */}
+      {p.sections.map((s, i) => (
+        <ProductSectionBlock
+          key={s.id}
+          slug={p.slug}
+          section={s}
+          gray={i % 2 === 1}
+          showHeading={isSplit}
+          chapter={chapter}
+        />
+      ))}
 
       {/* QC — dark parallax features list; chapter marker sits inside the dark band */}
       <FeaturesListParallax
-        chapterIndex={String(++step).padStart(2, "0")}
+        chapterIndex={chapterIndex("Quality Control")}
         chapterLabel="Quality Control"
         subtitle="Proven on every lot"
         title="Tested in our own laboratory."
@@ -211,16 +172,27 @@ export default async function ProductPage({
       {/* CTA */}
       <BannerCTA
         subtitle="Made to your specification"
-        title={`Need ${p.name.toLowerCase()} to spec?`}
-        desc="Request a quote, order a sample, or send us your drawing. A real person responds within 24 hours."
+        title="Request a quote or a sample."
+        desc="Give us the grade, size, format, and application, and a real person replies within one business day."
         ctaLabel={p.cta}
         ctaHref="/contact"
       />
 
-      {/* CROSS-LINKS */}
+      {/* CROSS-LINKS — the cross-axis matrix, rendered */}
       <CrossLinks
         groups={[
-          { title: "Related products", links: crossProductLinks },
+          ...(isSplit
+            ? [
+                {
+                  title: "On this page",
+                  links: p.sections.map((s) => ({
+                    label: s.label,
+                    href: `/products/${p.slug}#${s.id}`,
+                  })),
+                },
+              ]
+            : []),
+          ...(p.crossLinks ?? []),
           { title: "Applications", links: crossApplicationLinks },
           {
             title: "Quality & resources",
@@ -232,6 +204,113 @@ export default async function ProductPage({
           },
         ]}
       />
+    </>
+  );
+}
+
+/* ------------------------------------------------------------------------- */
+
+function ProductSectionBlock({
+  slug,
+  section,
+  gray,
+  showHeading,
+  chapter,
+}: {
+  slug: string;
+  section: ProductSection;
+  gray: boolean;
+  showHeading: boolean;
+  chapter: (label: string, gray?: boolean) => React.ReactNode;
+}) {
+  const hasDetail = Boolean(section.applications?.length || section.specs?.length);
+
+  return (
+    <>
+      {chapter(section.label, gray)}
+      <section id={section.id} className={`section section-anchor${gray ? " bg-gray" : ""}`}>
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-12 col-lg-7">
+              <div className="heading mb-30">
+                {showHeading && <span className="heading__subtitle">{section.label}</span>}
+                <h2 className="heading__title">{section.title}</h2>
+              </div>
+              <div className="prose">
+                {section.intro.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+              {section.callouts?.map((c) => (
+                <div key={c.title} className="tech-card mt-30">
+                  <div className="tech-card__meta">{c.title}</div>
+                  {Array.isArray(c.body) ? (
+                    <ul className="check-list" style={{ marginTop: 6 }}>
+                      {c.body.map((b, i) => (
+                        <li key={i}>{b}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p style={{ fontSize: 16 }}>{c.body}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="col-sm-12 col-md-12 col-lg-5">
+              <SectionVisual slug={slug} id={section.id} />
+            </div>
+          </div>
+
+          {hasDetail && (
+            <div className="row mt-50">
+              {section.applications?.length ? (
+                <div className="col-sm-12 col-md-12 col-lg-6">
+                  <div className="heading mb-30">
+                    <span className="heading__subtitle">Applications</span>
+                    <h3 className="heading__title">{section.applicationsTitle ?? "Where it's used."}</h3>
+                  </div>
+                  <ul className="check-list">
+                    {section.applications.map((a, i) => (
+                      <li key={i}>{a}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {section.specs?.length ? (
+                <div className="col-sm-12 col-md-12 col-lg-6">
+                  <div className="heading mb-30">
+                    <span className="heading__subtitle">Specifications</span>
+                    <h3 className="heading__title">{section.specsTitle ?? "Specifications"}</h3>
+                  </div>
+                  <p className="note-mono mb-20">Confirm exact values with Uri before launch.</p>
+                  <table className="spec-table">
+                    <thead>
+                      <tr>
+                        <th>Attribute</th>
+                        <th>Detail</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {section.specs.map((s) => (
+                        <tr key={s.label}>
+                          <td className="spec-label">{s.label}</td>
+                          <td className="spec-value">{s.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  {section.datasheet && (
+                    <Link href="/resources/datasheets" className="btn btn__secondary btn__link mt-20">
+                      <i className="fa fa-download" /> <span>Download the {section.datasheet} (PDF)</span>
+                    </Link>
+                  )}
+                </div>
+              ) : null}
+            </div>
+          )}
+        </div>
+      </section>
     </>
   );
 }

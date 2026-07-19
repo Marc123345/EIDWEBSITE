@@ -33,7 +33,7 @@ const paths: Record<string, Meta> = {
   "/resources": { priority: 0.6, changeFrequency: "monthly" },
   "/resources/datasheets": { priority: 0.6, changeFrequency: "monthly" },
   "/resources/msds": { priority: 0.6, changeFrequency: "monthly" },
-  "/blog": { priority: 0.4, changeFrequency: "monthly" },
+  "/resources/blog": { priority: 0.5, changeFrequency: "weekly" },
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {

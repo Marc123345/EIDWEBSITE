@@ -16,8 +16,7 @@ import {
 import type { Metadata } from "next";
 import { CrystalHero } from "@/app/_components/stone";
 import type { IconName } from "@/app/_components/Icon";
-import { PRODUCT_FAMILIES } from "@/lib/products";
-import { getProducts, getApplications, getFamilyLabel } from "@/lib/i18n-content";
+import { getProducts, getApplications } from "@/lib/i18n-content";
 import { localeAlternates } from "@/lib/hreflang";
 import type { Locale } from "@/i18n/routing";
 
@@ -55,7 +54,7 @@ const familyIcon: Record<string, IconName> = {
   "Resin Bond Diamond": "layers",
   CBN: "gauge",
   "Single Crystal Diamond (CVD & MCD)": "cube",
-  "Polycrystalline Diamond (PCD & CVD)": "grid",
+  "Polycrystalline Diamond (CVD & PCD)": "grid",
   "Natural Tool Stones": "flask",
   "Polycrystalline Diamond Powder": "bolt",
 };
@@ -78,15 +77,13 @@ export default async function Home({
   const { locale } = await params;
   const products = getProducts(locale);
 
-  const groupCards = PRODUCT_FAMILIES.map((family) => {
-    const items = products.filter((p) => p.family === family);
-    return {
-      icon: familyIcon[family] || "diamond",
-      title: getFamilyLabel(locale, family),
-      desc: items.map((p) => p.name).join(" · "),
-      href: `/products/${items[0].slug}`,
-    };
-  });
+  // Eight locked groups, eight pages, linked straight from the home range block.
+  const groupCards = products.map((p) => ({
+    icon: familyIcon[p.family] || "diamond",
+    title: p.name,
+    desc: p.cardDesc,
+    href: `/products/${p.slug}`,
+  }));
 
   const hubCards = getApplications(locale).map((a) => ({
     icon: hubIcon[a.slug] || "diamond",
@@ -111,7 +108,7 @@ export default async function Home({
       <StatsBar
         items={[
           { value: 50, suffix: "+", label: "Years' experience" },
-          { value: 12, label: "Product lines" },
+          { value: 8, label: "Product groups" },
           { value: 100, suffix: "%", label: "Batches QC-tested" },
           { value: 1, suffix: " day", label: "Quote response" },
         ]}
@@ -122,7 +119,7 @@ export default async function Home({
         items={[
           { title: "We Manufacture", desc: "Natural grit and powder produced and graded in our own factory.", href: "/about" },
           { title: "In-House QC Lab", desc: "Every production run tested for size, strength, morphology, and coating.", href: "/quality" },
-          { title: "The Full Range", desc: "Diamond and CBN, grit to crystal, from one supplier and one standard.", href: "/products" },
+          { title: "Complete Range", desc: "Diamond and CBN, grit to crystal, from one supplier and one standard.", href: "/products" },
           { title: "ISO 9001 Certified", desc: "Full traceability from raw material to shipped lot.", href: "/quality" },
         ]}
       />
@@ -152,8 +149,8 @@ export default async function Home({
       </div>
       <ServicesLayout3
         subtitle="Every industrial diamond and CBN product, from one source"
-        title="Eight product groups. Twelve product lines."
-        desc="Natural grit and powder made in our own factory, bonded and CBN grades re-processed and QC-upgraded to your spec, and single crystal grown to your exact orientation."
+        title="Every industrial diamond and CBN product, from one source."
+        desc="We manufacture natural grit and powder in-house, QC-upgrade bonded and CBN grades to your spec, and offer single crystal grown to your orientation."
         ctaHref="/products"
         ctaLabel="Browse the Full Range"
         items={groupCards}
@@ -165,7 +162,7 @@ export default async function Home({
       </div>
       <ServicesLayout3
         subtitle="Diamond and CBN for the work your tools do"
-        title="Six application hubs, one material supplier."
+        title="Diamond and CBN for the work your tools do."
         desc="We supply the material. You build the tools that serve these applications. Start from your application to reach the exact grades that serve it."
         ctaHref="/applications"
         ctaLabel="View All Applications"
@@ -194,8 +191,8 @@ export default async function Home({
         items={[
           { label: "FACTORY FLOOR — London", caption: "In-house manufacturing", wide: true },
           { label: "QC LABORATORY", caption: "Every batch tested", href: "/quality" },
-          { label: "CVD CRYSTAL GROWTH", caption: "Grown to your spec", href: "/products/cvd-single-crystal" },
-          { label: "DIAMOND GRIT & POWDER", caption: "Natural grit & micron", href: "/products/natural-grit" },
+          { label: "CVD CRYSTAL GROWTH", caption: "Grown to your spec", href: "/products/single-crystal#cvd" },
+          { label: "DIAMOND GRIT & POWDER", caption: "Natural grit & micron", href: "/products/natural-grit-powder#grit" },
           { label: "CBN SUPERABRASIVE", caption: "For hardened steels", href: "/products/cbn" },
         ]}
       />

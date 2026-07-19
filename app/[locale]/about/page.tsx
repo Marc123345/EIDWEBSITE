@@ -58,8 +58,8 @@ export default function AboutPage() {
       <Chapter index="02" label="How We Make It" />
       <FeaturesRow
         items={[
-          { title: "Natural grit & powder", desc: "Manufactured entirely in-house, from raw material through crushing, grading, and final QC.", href: "/products/natural-grit" },
-          { title: "CVD single crystal", desc: "Grown to EID's exact specification and orientation through a dedicated growth partner, finished and inspected by us.", href: "/products/cvd-single-crystal" },
+          { title: "Natural grit & powder", desc: "Manufactured entirely in-house, from raw material through crushing, grading, and final QC.", href: "/products/natural-grit-powder#grit" },
+          { title: "CVD single crystal", desc: "Grown to EID's exact specification and orientation through a dedicated growth partner, finished and inspected by us.", href: "/products/single-crystal#cvd" },
           { title: "Bonded & CBN", desc: "Produced to order, then re-processed and QC-upgraded through our facility to your spec.", href: "/products/metal-bond" },
           { title: "Coating in-house", desc: "Nickel, copper, and titanium coatings applied in-house rather than sourced from a second vendor.", href: "/products/metal-bond" },
         ]}

@@ -7,6 +7,7 @@ import {
 } from "@/app/_components/sections";
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
+import { Link } from "@/i18n/navigation";
 import type { IconName } from "@/app/_components/Icon";
 
 export const metadata: Metadata = {
@@ -38,10 +39,10 @@ export default function QualityPage() {
       <Chapter index="01" label="QC Philosophy" />
       <AboutGeometric
         subtitle="Quality is the product"
-        title="We don't sample and hope. We test and confirm."
+        title="Quality control is what you are buying."
         text={[
-          "Quality control is built into every stage of production, from raw material selection through grading, coating, and final inspection. Our in-house QC laboratory is the backbone of everything we sell.",
-          "When a customer re-orders, they expect the same material. Our job is to make sure they get it.",
+          "EID does not check quality after the fact. It is built into every stage, from raw material selection through grading, coating, and final inspection, and the in-house QC laboratory is the backbone of everything we ship.",
+          "The reason matters more than the badge. When a tool maker re-orders a grade, they are trusting that this batch behaves like the last one, because their own production is tuned to it. Our job is to make that true every time, and to be able to prove it with data rather than a promise.",
         ]}
         imgLabel="QC LABORATORY — particle sizing & microscopy"
         features={[
@@ -55,7 +56,7 @@ export default function QualityPage() {
         items={[
           { value: 5, label: "QC process steps" },
           { value: 100, suffix: "%", label: "Batches tested" },
-          { value: 12, label: "Product lines" },
+          { value: 8, label: "Product groups" },
           { value: 50, suffix: "+", label: "Years' experience" },
         ]}
       />
@@ -113,12 +114,113 @@ export default function QualityPage() {
         </div>
       </section>
 
+      {/* QC MACHINERY — Phase 2 build-out. The equipment is shown as page
+          content because "we test everything" is a claim; naming the instrument
+          that produces the number is the proof. */}
+      <Chapter index="05" label="QC Machinery" />
+      <section className="section">
+        <div className="container">
+          <div className="heading mb-40">
+            <span className="heading__subtitle">The laboratory</span>
+            <h2 className="heading__title">The instruments behind the numbers.</h2>
+            <p className="prose mt-20">
+              Every figure on a certificate of analysis comes off a named instrument, calibrated and
+              logged. Photographs of the laboratory and the exact model designations are to be supplied
+              by Uri before launch.
+            </p>
+          </div>
+          <div className="grid-3">
+            {[
+              {
+                meta: "Particle sizing",
+                title: "Laser diffraction analyser",
+                desc: "Measures the full particle size distribution of micron powders, producing the D10, D50, D90, and span values recorded on the certificate of analysis.",
+              },
+              {
+                meta: "Particle counting",
+                title: "Coulter counter",
+                desc: "Independent electrical-sensing-zone count used to confirm distribution and catch outliers at the coarse tail, which is the failure mode in fine polishing.",
+              },
+              {
+                meta: "Sizing",
+                title: "Calibrated sieve stack & shaker",
+                desc: "Grades mesh grit to FEPA and US mesh, verified against calibrated reference sieves on a fixed re-certification interval.",
+              },
+              {
+                meta: "Morphology",
+                title: "Optical & stereo microscopy",
+                desc: "Confirms crystal shape (blocky, semi-blocky, irregular) against the grade specification and inspects coating coverage for uniformity.",
+              },
+              {
+                meta: "Strength",
+                title: "Friability / toughness test rig",
+                desc: "Measures how the crystal breaks down under load, which determines how the grade will behave in your bond system.",
+              },
+              {
+                meta: "Coating",
+                title: "Coating weight assay",
+                desc: "Confirms target weight percentage on every coated batch, because retention in a sintered matrix depends on it.",
+              },
+            ].map((m) => (
+              <div key={m.title} className="tech-card">
+                <div className="tech-card__meta">{m.meta}</div>
+                <h3>{m.title}</h3>
+                <p style={{ fontSize: 16 }}>{m.desc}</p>
+              </div>
+            ))}
+          </div>
+          <p className="note-mono mt-30">
+            Confirm exact instrument makes, models, and calibration intervals with Uri. Replace this
+            block with photographs of the actual QC laboratory before launch.
+          </p>
+        </div>
+      </section>
+
+      {/* CERTIFICATES — shown as content, offered as downloads. This replaces the
+          pattern of embedding one large PDF as the whole page. */}
+      <Chapter index="06" label="Certificates & Downloads" gray />
+      <section className="section bg-gray">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-12 col-lg-7">
+              <div className="heading mb-30">
+                <span className="heading__subtitle">ISO 9001 certified</span>
+                <h2 className="heading__title">A documented, audited, repeatable process.</h2>
+              </div>
+              <p className="prose">
+                EID&apos;s quality management system is ISO 9001 certified, covering the full process from
+                incoming raw material inspection through manufacturing, testing, packaging, and delivery.
+                Certification means the process is documented, audited, and repeatable, which is what stands
+                behind every certificate of analysis we issue.
+              </p>
+              <p className="note-mono mt-20">
+                Certificate number, issuing body, and validity dates to be confirmed with Uri. The scanned
+                certificate is displayed here as an image with the PDF offered alongside it.
+              </p>
+            </div>
+            <div className="col-sm-12 col-md-12 col-lg-5">
+              <div className="tech-card">
+                <div className="tech-card__meta">Downloads</div>
+                <ul className="check-list" style={{ marginTop: 10 }}>
+                  <li>ISO 9001 certificate (PDF) — [awaiting file from Uri]</li>
+                  <li>Sample certificate of analysis (PDF) — [awaiting file from Uri]</li>
+                  <li>QC methods & test parameters summary (PDF) — [awaiting file from Uri]</li>
+                </ul>
+                <Link href="/resources/datasheets" className="btn btn__secondary btn__link mt-20">
+                  <span>All datasheets</span> <i className="fa fa-long-arrow-right" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Marquee logos={8} keywords={PRODUCT_KEYWORDS} />
 
       <BannerCTA
         subtitle="Specify your tolerances"
         title="Request a quote with your QC specification."
-        desc="Send us your D50, span, friability, and coating requirements, and we'll match them and confirm on every lot."
+        desc="Send us your grade and the QC parameters you need documented, and a real person replies within one business day. A certificate of analysis is available with the shipment."
         ctaLabel="Request a Quote"
         ctaHref="/contact"
       />
