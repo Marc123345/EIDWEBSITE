@@ -596,35 +596,37 @@ body .about__text p {
   gap: 22px 36px;
 }
 /* Phase 2 mega-menu: the eight product pages exposed directly as a 2-2-2-2
-   grid, four columns of two. No group headings and no nested fly-outs, because
-   there is nothing below a page: the mesh/micron splits, coatings, PCBN, and
-   PCD blanks are sections inside their parent, shown here only as a note. */
+   grid, four columns of two. No group headings, no notes, no nested fly-outs.
+   Nothing sits below a page: the mesh/micron splits, coatings, PCBN, and PCD
+   blanks are sections inside their parent, reachable by anchor from the page
+   and from the footer index. */
 .eid-mega__grid--2222 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px 28px;
+  gap: 24px 32px;
 }
-.eid-mega__grid--2222 .eid-mega__col ul { gap: 16px; }
-.eid-mega__grid--2222 .eid-mega__col ul a { padding: 2px 0; }
+.eid-mega__grid--2222 .eid-mega__col ul { gap: 14px; }
+.eid-mega__grid--2222 .eid-mega__col ul a {
+  padding: 8px 10px;
+  margin: -8px -10px;
+  border-radius: 2px;
+}
+.eid-mega__grid--2222 .eid-mega__col ul a:hover {
+  padding-left: 10px;
+  background: var(--eid-surface-low);
+}
 .eid-mega__name {
   display: block;
   font-family: "Rubik", sans-serif;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.35;
   color: var(--eid-ink);
 }
 .eid-mega__col ul a:hover .eid-mega__name { color: var(--eid-blue); }
-.eid-mega__note {
-  display: block;
-  margin-top: 3px;
-  font-size: 11.5px;
-  line-height: 1.4;
-  color: var(--eid-muted);
-}
-/* Narrow screens: the same eight pages stack vertically as a single scroll,
-   which is the pattern reviewed against the competitor overlays. */
+
+/* Narrow screens: the same eight pages stack vertically as a single scroll. */
 @media (max-width: 991px) {
-  .eid-mega__grid--2222 { grid-template-columns: 1fr; gap: 14px; }
+  .eid-mega__grid--2222 { grid-template-columns: 1fr; gap: 4px; }
 }
 
 .eid-mega__col h6 {
@@ -1200,11 +1202,14 @@ a, .btn, .service-item, .tech-card, .post-item { transition-timing-function: cub
 .nav__item.with-dropdown > .eid-mega { z-index: 2100 !important; }
 @media (min-width: 992px) {
   .navbar-nav .nav__item .eid-mega {
-    width: min(860px, calc(100vw - 320px)) !important;
+    width: min(1040px, calc(100vw - 96px)) !important;
     min-width: 0 !important;
   }
-  .navbar-nav .nav__item .eid-mega .eid-mega__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* The 2-2-2-2 grid the architecture specifies. This selector has to carry the
+     same weight as the 3-column default above it, or the fourth column wraps
+     onto a second row. */
+  .navbar-nav .nav__item .eid-mega .eid-mega__grid--2222 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -2494,3 +2499,79 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
 .header__whatsapp--sm { width: 36px; height: 36px; font-size: 17px; margin-left: 0; }
 .header__compact-cta { padding: 9px 16px; font-size: 12.5px; }
 @media (max-width: 400px) { .header__compact-cta { display: none; } }
+
+/* =========================================================================
+   SINGLE HEADER BAR — logo, nav, and the conversion cluster on one row.
+   Replaces the two-row layout (brand + contact strip above the nav), which
+   duplicated the navigation and is not in the architecture's §3 header spec.
+   ========================================================================= */
+.navbar__bar {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  min-height: 74px;
+}
+.navbar__bar .navbar-brand {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* Bootstrap gives .navbar-collapse flex-basis:100%, which pushes the nav onto
+   its own line under the logo. On desktop it has to share the row. */
+@media (min-width: 992px) {
+  /* A template rule sets flex-wrap:wrap on the bar, and the collapse claims the
+     full row width, so the brand and the nav land on separate lines. Pin the
+     row and let the collapse shrink from zero instead. */
+  .navbar__bar { flex-wrap: nowrap !important; }
+  .navbar__bar .navbar-collapse {
+    flex: 1 1 0%;
+    min-width: 0;
+    display: flex !important;
+  }
+  .navbar__bar .navbar-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 4px;
+  }
+  .navbar__bar .navbar-toggler { display: none; }
+}
+
+/* The wordmark sits on the navy bar, so it uses the light treatment. */
+.navbar__bar .eid-wordmark--light .eid-wordmark__mark { color: #fff; }
+.navbar__bar .eid-wordmark--light .eid-wordmark__sub { color: rgba(255, 255, 255, 0.62); }
+.navbar__bar .navbar-brand:hover .eid-wordmark__sub { color: rgba(255, 255, 255, 0.85); }
+
+/* Conversion cluster pinned right: Contact button, WhatsApp, language.
+   Eight locale codes make this wide, so it is allowed to shrink and the nav
+   links give up their slack first. */
+.nav__item--cta {
+  margin-left: auto;
+  align-items: center;
+  gap: 12px;
+  padding-left: 16px;
+  flex: 0 0 auto;
+}
+.nav__item--cta .eid-lang { margin: 0; gap: 7px; font-size: 11px; }
+.navbar__bar .nav__item--cta .header__whatsapp { width: 36px; height: 36px; font-size: 17px; margin-left: 0; }
+.navbar__bar .navbar-nav > .nav__item:not(.nav__item--cta) { flex: 0 1 auto; min-width: 0; }
+.navbar__bar .navbar-nav > .nav__item:not(.nav__item--cta) > .nav__item-link { white-space: nowrap; }
+/* The switcher was styled for the old white topbar; on navy it needs the same
+   treatment it gets in the footer. */
+.navbar__bar .eid-lang a { color: rgba(255, 255, 255, 0.6); }
+.navbar__bar .eid-lang a:hover,
+.navbar__bar .eid-lang a.active { color: #fff; }
+
+@media (max-width: 991px) {
+  .navbar__bar {
+    flex-wrap: wrap;
+    gap: 0;
+    justify-content: space-between;
+    min-height: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .navbar__bar .navbar-toggler { order: 2; }
+  .navbar__bar .navbar-collapse { order: 3; flex-basis: 100%; }
+}

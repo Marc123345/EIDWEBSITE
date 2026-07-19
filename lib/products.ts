@@ -38,7 +38,6 @@ export type Product = {
   metaDesc: string;
   eyebrow: string;
   cardDesc: string; // one-liner for grids and the mega-menu
-  menuNote?: string; // "grit (mesh), micron powder, rotary diamonds" in the mega-menu
   intro: string[]; // hero/intro paragraphs
   sections: ProductSection[]; // one or more; single-section products render flat
   quality?: string; // custom QC paragraph
@@ -85,7 +84,6 @@ export const products: Product[] = [
     eyebrow: "Products · Group 1",
     cardDesc:
       "Natural mesh, micron powder, and rotary diamonds, crushed, sorted, and graded in-house for grinding, lapping, dressing, and drilling.",
-    menuNote: "grit (mesh), micron powder, rotary diamonds",
     overviewDesc:
       "Crushed and graded in-house. Graded mesh grit for grinding, sawing, and dressing; fine micron powder for lapping and polishing; natural rotary diamonds for drilling and truing.",
     intro: [
@@ -203,7 +201,6 @@ export const products: Product[] = [
     eyebrow: "Products · Group 2",
     cardDesc:
       "Saw and wheel grades for sintered, brazed, and electroplated tools, with in-house coating options.",
-    menuNote: "mesh, micron, coated",
     overviewDesc:
       "Mesh and micron grades for diamond saws, grinding wheels, and sintered, brazed, and electroplated tools, with in-house coating options.",
     intro: [
@@ -279,7 +276,6 @@ export const products: Product[] = [
     eyebrow: "Products · Group 3",
     cardDesc:
       "Friable, multi-crystalline grades for fine grinding and polishing, with in-house coating options.",
-    menuNote: "mesh, micron, coated",
     overviewDesc:
       "Friable, multi-crystalline grades in mesh and micron for fine grinding and polishing, coatings available.",
     intro: [
@@ -363,7 +359,6 @@ export const products: Product[] = [
     eyebrow: "Products · Group 4",
     cardDesc:
       "The superabrasive for hardened and ferrous steels, plus PCBN for finished cutting forms.",
-    menuNote: "mesh & micron, coated CBN, PCBN",
     overviewDesc:
       "CBN powder in mesh and micron for hardened and ferrous steels, coated options, plus PCBN discs and blanks for hard-turning inserts.",
     intro: [
@@ -482,7 +477,6 @@ export const products: Product[] = [
     eyebrow: "Products · Group 5",
     cardDesc:
       "CVD single crystal and MCD materials, made to spec for precision tooling, thermal, optical, and advanced applications.",
-    menuNote: "CVD single crystal, MCD",
     overviewDesc:
       "White CVD single crystal grown to your orientation, and HPHT MCD for single-point and precision tooling.",
     intro: [
@@ -587,7 +581,6 @@ export const products: Product[] = [
     eyebrow: "Products · Group 6",
     cardDesc:
       "PCD blanks for cutting inserts and CVD dressing logs for truing wheels.",
-    menuNote: "CVD polycrystalline (dressers), PCD blanks",
     overviewDesc:
       "CVD polycrystalline logs for dressing and truing, and PCD discs and blanks for cutting tools.",
     intro: [

@@ -28,20 +28,15 @@ export const trustPoints = [
 
 /**
  * Products mega-menu: the eight pages exposed directly, laid out as a 2-2-2-2
- * grid. Nothing sits below them — mesh and micron splits, rotary diamonds,
- * coatings, PCBN, and PCD blanks are sections inside their parent page, listed
- * here only as a note so a buyer can see what a page contains.
+ * grid. Nothing sits below them. Mesh and micron splits, rotary diamonds,
+ * coatings, PCBN, and PCD blanks are sections inside their parent page,
+ * reachable by anchor from the page and from the footer index, never from here.
  */
 export const productMenuColumns = MEGA_MENU_COLUMNS.map((column) =>
   column
     .map((slug) => getProduct(slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
-    .map((p) => ({
-      slug: p.slug,
-      label: p.name,
-      href: `/products/${p.slug}`,
-      note: p.menuNote,
-    })),
+    .map((p) => ({ slug: p.slug, label: p.name, href: `/products/${p.slug}` })),
 );
 
 export const applicationMenu = applications.map((a) => ({

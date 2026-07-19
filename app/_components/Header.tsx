@@ -19,23 +19,15 @@ export default function Header() {
 
   const products = getProducts(locale);
   const nav = primaryNav.map((i) => ({ ...i, label: t(locale, i.label) }));
-  // The mega-menu exposes the eight product pages directly, laid out 2-2-2-2.
-  // Nothing sits below them: the mesh/micron splits, coatings, PCBN, and PCD
-  // blanks are sections inside their parent page, shown here only as a note.
+  // The mega-menu exposes the eight product pages directly, laid out 2-2-2-2,
+  // and nothing sits below them. The mesh/micron splits, coatings, PCBN, and PCD
+  // blanks are sections inside their parent page, reachable by anchor from the
+  // page itself and from the footer index, never as menu entries.
   const productColumns = MEGA_MENU_COLUMNS.map((column) =>
     column
       .map((slug) => products.find((p) => p.slug === slug))
       .filter((p): p is NonNullable<typeof p> => Boolean(p))
-      .map((p) => ({
-        label: p.name,
-        href: `/products/${p.slug}`,
-        // The doc asks for the inside-sections to be jump links, not just a
-        // note, so a buyer can reach a folded-in section straight from the menu.
-        sections:
-          p.sections.length > 1
-            ? p.sections.map((s) => ({ label: s.label, href: `/products/${p.slug}#${s.id}` }))
-            : [],
-      })),
+      .map((p) => ({ label: p.name, href: `/products/${p.slug}` })),
   );
   const applicationMenu = getApplications(locale).map((a) => ({
     label: a.name,
@@ -46,98 +38,55 @@ export default function Header() {
   return (
     <header id="header" className="header header-white header-full header-full-layout2">
       <nav className="navbar navbar-expand-lg">
-        <div className="container">
-          <Link className="navbar-brand" href="/" onClick={close} aria-label="EID — Industrial Diamonds, home">
-            <span className="eid-wordmark">
-              <span className="eid-wordmark__mark">EID</span>
-              <span className="eid-wordmark__sub">Industrial Diamonds</span>
-            </span>
-          </Link>
-
-          <div className="header__topbar d-none d-lg-block">
-            <div className="d-flex flex-wrap">
-              <ul className="contact__list list-unstyled">
-                <li>
-                  <i className="fa fa-phone" />
-                  <div>
-                    <span>{t(locale, "Call Us:")}</span>
-                    <strong>{site.phone}</strong>
-                  </div>
-                </li>
-                <li>
-                  <i className="fa fa-envelope" />
-                  <div>
-                    <span>{t(locale, "Email Us:")}</span>
-                    <strong>{site.email}</strong>
-                  </div>
-                </li>
-                <li>
-                  <i className="fa fa-map-marker" />
-                  <div>
-                    <span>{t(locale, "Based In:")}</span>
-                    <strong>{site.location}</strong>
-                  </div>
-                </li>
-              </ul>
-              <Link href="/contact" className="btn btn__secondary module__btn-request" onClick={close}>
-                <span>{t(locale, "Request A Quote")}</span>
-                <i className="fa fa-long-arrow-right" />
-              </Link>
-              <a
-                href={site.whatsappHref}
-                className="header__whatsapp"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`WhatsApp EID on ${site.whatsapp}`}
-                title="Chat with us on WhatsApp"
-              >
-                <i className="fa fa-whatsapp" aria-hidden="true" />
-              </a>
-              <LanguageSwitcher />
-            </div>
-          </div>
-
-          {/* Below lg the topbar is hidden, so Contact and WhatsApp get compact
-              always-visible affordances here. The doc requires both to be
-              present on every page, not tucked inside the hamburger. */}
-          <div className="header__compact d-lg-none">
-            <a
-              href={site.whatsappHref}
-              className="header__whatsapp header__whatsapp--sm"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`WhatsApp EID on ${site.whatsapp}`}
-            >
-              <i className="fa fa-whatsapp" aria-hidden="true" />
-            </a>
-            <Link href="/contact" className="btn btn__primary header__compact-cta" onClick={close}>
-              Contact
-            </Link>
-          </div>
-
-          <button
-            className={`navbar-toggler${open ? " actived" : ""}`}
-            type="button"
-            aria-label="Toggle menu"
-            onClick={() => setOpen((o) => !o)}
-          >
-            <span className="menu-lines">
-              <span />
-            </span>
-          </button>
-        </div>
-
+        {/* One bar, not two. Architecture §3 specifies the header as
+            Home · Products · Applications · Quality · Resources · About ·
+            Contact · [WhatsApp] — the phone/email/location strip was extra
+            chrome, and those details live in the footer and on /contact. */}
         <div className="navbar__bottom sticky-navbar">
-          <div className="container">
+          <div className="container navbar__bar">
+            <Link
+              className="navbar-brand"
+              href="/"
+              onClick={close}
+              aria-label="EID — Industrial Diamonds, home"
+            >
+              <span className="eid-wordmark eid-wordmark--light">
+                <span className="eid-wordmark__mark">EID</span>
+                <span className="eid-wordmark__sub">Industrial Diamonds</span>
+              </span>
+            </Link>
+
+            <button
+              className={`navbar-toggler${open ? " actived" : ""}`}
+              type="button"
+              aria-label="Toggle menu"
+              onClick={() => setOpen((o) => !o)}
+            >
+              <span className="menu-lines">
+                <span />
+              </span>
+            </button>
+
             <div className={`collapse navbar-collapse${open ? " menu-opened" : ""}`} id="mainNavigation">
               <ul className="navbar-nav">
                 {nav.map((item) => {
                   if (item.cta) {
                     return (
-                      <li key={item.href} className="nav__item nav__item--cta d-none d-lg-block">
+                      <li key={item.href} className="nav__item nav__item--cta d-none d-lg-flex">
                         <Link href={item.href} className="btn btn__primary nav__cta" onClick={close}>
                           {item.label} <i className="fa fa-long-arrow-right" />
                         </Link>
+                        <a
+                          href={site.whatsappHref}
+                          className="header__whatsapp"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`WhatsApp EID on ${site.whatsapp}`}
+                          title="Chat with us on WhatsApp"
+                        >
+                          <i className="fa fa-whatsapp" aria-hidden="true" />
+                        </a>
+                        <LanguageSwitcher />
                       </li>
                     );
                   }
@@ -176,18 +125,6 @@ export default function Header() {
                                       <Link href={l.href} onClick={close}>
                                         <span className="eid-mega__name">{l.label}</span>
                                       </Link>
-                                      {l.sections.length > 0 && (
-                                        <span className="eid-mega__note">
-                                          {l.sections.map((sec, si) => (
-                                            <span key={sec.href}>
-                                              {si > 0 && " · "}
-                                              <Link href={sec.href} onClick={close}>
-                                                {sec.label}
-                                              </Link>
-                                            </span>
-                                          ))}
-                                        </span>
-                                      )}
                                     </li>
                                   ))}
                                 </ul>
