@@ -321,7 +321,9 @@ export const getApplication = (locale: Locale, slug: string): Application | unde
   getApplications(locale).find((a) => a.slug === slug);
 
 /* --------------------- PRODUCT GROUP (FAMILY) LABELS --------------------- */
-const familyLabels: Record<Locale, Record<string, string>> = {
+// Partial on purpose: a locale with no table falls back to the EN label, which
+// is what lets FR, KO and ZH render before their translation batch lands.
+const familyLabels: Partial<Record<Locale, Record<string, string>>> = {
   en: {},
   de: {
     "Natural Diamond Grit & Powder": "Naturdiamant-Körnung & -Pulver",
@@ -369,7 +371,9 @@ export const getFamilyLabel = (locale: Locale, family: string): string =>
 
 /* ------------------------------- UI CHROME ------------------------------- */
 type Dict = Record<string, string>;
-const ui: Record<Locale, Dict> = {
+// Partial on purpose, same reason as familyLabels: t() falls back to the key,
+// which is the English string.
+const ui: Partial<Record<Locale, Dict>> = {
   // EN is the source language, so keys pass through unchanged. The only entries
   // here are strings that have no sensible key-as-fallback.
   en: {

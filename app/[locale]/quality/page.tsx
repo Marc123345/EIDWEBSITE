@@ -7,6 +7,7 @@ import {
 } from "@/app/_components/sections";
 import { Chapter, StatsBar, Marquee, PRODUCT_KEYWORDS } from "@/app/_components/award";
 import { CrystalHeroPage } from "@/app/_components/stone";
+import { CrossLinks } from "@/app/_components/ui";
 import { Link } from "@/i18n/navigation";
 import type { IconName } from "@/app/_components/Icon";
 
@@ -87,29 +88,19 @@ export default function QualityPage() {
       />
 
       {/* MESH & MICRON QC + ISO 9001 */}
-      <Chapter index="04" label="Mesh, Micron & ISO 9001" gray />
+      <Chapter index="04" label="Mesh & Micron QC" gray />
       <section className="section bg-gray">
         <div className="container">
           <div className="grid-2">
             <div className="tech-card">
-              <div className="tech-card__meta">Mesh & micron QC</div>
-              <h3>Grading differs by form, so testing does too.</h3>
-              <p style={{ fontSize: 16 }}>
-                Mesh QC covers how we grade and verify grit sizing and crystal shape. Micron QC covers
-                particle-size-distribution measurement and the D-value control that fine polishing depends on.
-                Each product page states the checks that matter for that grade.
-              </p>
-            </div>
-            <div className="tech-card">
-              <div className="tech-card__meta">Detail</div>
+              <div className="tech-card__meta">Mesh &amp; micron QC in detail</div>
               <h3>Grading and testing differ by form.</h3>
               <p style={{ fontSize: 16 }}>
-                Mesh QC covers how we grade and verify grit sizing and crystal shape. Micron QC covers
-                particle-size-distribution measurement and the D-value control that fine polishing depends on.
-              </p>
-              <p className="note-mono mt-20">
-                The copy deck links these to dedicated /mesh-qc and /micron-qc pages, which the Phase 2
-                page inventory does not include. Confirm with Uri whether to build them.
+                Grading and testing differ between mesh grit and micron powder, so each has its own
+                detail. <Link href="/mesh-qc">Mesh QC</Link> covers how we grade and verify grit sizing
+                and crystal shape. <Link href="/micron-qc">Micron QC</Link> covers
+                particle-size-distribution measurement and the D-value control that fine polishing
+                depends on.
               </p>
             </div>
           </div>
@@ -228,6 +219,27 @@ export default function QualityPage() {
         desc="Send us your grade and the QC parameters you need documented, and a real person replies within one business day. A certificate of analysis is available with the shipment."
         ctaLabel="Request a Quote"
         ctaHref="/contact"
+      />
+
+      {/* CROSS-LINKS — the deck's Products / Detail / Support blocks */}
+      <CrossLinks
+        groups={[
+          { title: "Products", links: [{ label: "Products overview", href: "/products" }] },
+          {
+            title: "Detail",
+            links: [
+              { label: "Mesh QC", href: "/mesh-qc" },
+              { label: "Micron QC", href: "/micron-qc" },
+            ],
+          },
+          {
+            title: "Support",
+            links: [
+              { label: "Datasheets", href: "/resources/datasheets" },
+              { label: "MSDS", href: "/resources/msds" },
+            ],
+          },
+        ]}
       />
     </>
   );

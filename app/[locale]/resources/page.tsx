@@ -41,8 +41,8 @@ const guides: { title: string; desc: string; links: { label: string; href: strin
     title: "How diamond size distribution affects tool performance",
     desc: "What D50, D10, D90, and span actually mean, and why a tight distribution changes the way your tool cuts and finishes.",
     links: [
+      { label: "Micron QC", href: "/micron-qc" },
       { label: "Quality & QC", href: "/quality" },
-      { label: "Natural Micron", href: "/products/natural-grit-powder#micron" },
     ],
   },
   {
