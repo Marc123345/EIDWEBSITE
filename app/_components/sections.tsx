@@ -1,6 +1,8 @@
 import { Link } from "@/i18n/navigation";
 import Icon, { IconName } from "./Icon";
 import { ImagePlaceholder } from "./ui";
+import QuoteForm from "./QuoteForm";
+import { site } from "@/lib/site";
 
 /* =========================================================================
    Template-faithful section layouts (Industic), recolored blue, wireframe
@@ -242,7 +244,11 @@ export function FeaturesListParallax({
   const mid = Math.ceil(features.length / 2);
   const cols = [features.slice(0, mid), features.slice(mid)];
   return (
-    <section className="features-list features-list-layout2 bg-overlay bg-overlay-gradient bg-ph pt-110 pb-90">
+    <section
+      className={`features-list features-list-layout2 bg-overlay bg-overlay-gradient bg-ph pt-110 pb-90${
+        ctaLabel && ctaHref ? " features-list--has-cta" : ""
+      }`}
+    >
       <div className="container">
         {chapterLabel && (
           <div className="chapter-marker chapter-marker--on-dark parallax-chapter">
@@ -321,51 +327,11 @@ export function RequestQuotePanel({
                 </div>
               </div>
               <div className="request__form mb-0">
-                <div className="request__form-body">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-12 col-lg-12">
-                      <h4 className="request__form-title">{formTitle}</h4>
-                      <p className="request__form-desc">{formDesc}</p>
-                    </div>
-                    <div className="col-sm-6 col-md-6 col-lg-6">
-                      <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Name" />
-                      </div>
-                    </div>
-                    <div className="col-sm-6 col-md-6 col-lg-6">
-                      <div className="form-group">
-                        <input type="email" className="form-control" placeholder="Email" />
-                      </div>
-                    </div>
-                    <div className="col-sm-6 col-md-6 col-lg-6">
-                      <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Country" />
-                      </div>
-                    </div>
-                    <div className="col-sm-6 col-md-6 col-lg-6">
-                      <div className="form-group form-group-select">
-                        <select className="form-control" defaultValue="">
-                          <option value="" disabled>
-                            Product of interest
-                          </option>
-                          {productOptions.map((p) => (
-                            <option key={p}>{p}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-sm-12 col-md-12 col-lg-12">
-                      <div className="form-group">
-                        <textarea className="form-control" placeholder="Grade, size, quantity, application…" />
-                      </div>
-                    </div>
-                    <div className="col-sm-12 col-md-12 col-lg-12">
-                      <Link href="/contact" className="btn btn__primary">
-                        Submit Request <i className="fa fa-long-arrow-right" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                <QuoteForm
+                  formTitle={formTitle}
+                  formDesc={formDesc}
+                  productOptions={productOptions}
+                />
               </div>
             </div>
           </div>
@@ -373,8 +339,10 @@ export function RequestQuotePanel({
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12 text-center mt-40">
             <p className="text__link mb-0">
-              We&apos;ll get back to you within 24 hours, or email{" "}
-              <span className="font-bold color-theme">info@eid-ltd.com</span>
+              A real person replies within one business day, or email{" "}
+              <a className="font-bold color-theme" href={`mailto:${site.email}`}>
+                {site.email}
+              </a>
             </p>
           </div>
         </div>

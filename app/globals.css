@@ -2575,3 +2575,57 @@ a.bento__card:focus-visible .bento__caption { opacity: 1; transform: translateY(
   .navbar__bar .navbar-toggler { order: 2; }
   .navbar__bar .navbar-collapse { order: 3; flex-basis: 100%; }
 }
+
+/* The template deliberately pulls the quote panel 120px up into this dark band
+   (.features-list-layout2 + .request-quote-2 { margin-top: -120px }). A CTA at
+   the foot of the band lands inside that overlap and gets covered, so a band
+   carrying one needs clearance below it. */
+.features-list--has-cta { padding-bottom: 170px; }
+@media (max-width: 767px) {
+  .features-list--has-cta { padding-bottom: 150px; }
+}
+
+/* Visually-hidden labels. The template's form is placeholder-only, but a
+   placeholder disappears the moment someone types and is not an accessible
+   name, so every field carries a real label that only screen readers see. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Note under the submit button explaining what submitting actually does. */
+.form-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--eid-muted);
+}
+
+/* Required-field and validation affordances the template never styled. */
+.request__form-body .form-control:focus-visible {
+  outline: 2px solid var(--eid-blue);
+  outline-offset: 1px;
+}
+.request__form-body .form-control:user-invalid {
+  border-color: #c0392b;
+  background-color: #fdf3f2;
+}
+
+/* Mobile: the language switcher moves into the collapsed menu, since the
+   desktop conversion cluster that carries it is hidden below lg. */
+.nav__item--lang {
+  padding: 14px 0 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 8px;
+}
+.nav__item--lang .eid-lang { gap: 12px; font-size: 12px; }
+.nav__item--lang .eid-lang a { color: rgba(255, 255, 255, 0.6); }
+.nav__item--lang .eid-lang a:hover,
+.nav__item--lang .eid-lang a.active { color: #fff; }

@@ -56,10 +56,30 @@ export default function Header() {
               </span>
             </Link>
 
+            {/* Below lg the nav collapses, but §3 and §9 require Contact and
+                WhatsApp to stay visible on every page, so they sit in the bar
+                rather than inside the hamburger. */}
+            <div className="header__compact d-lg-none">
+              <a
+                href={site.whatsappHref}
+                className="header__whatsapp header__whatsapp--sm"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`WhatsApp EID on ${site.whatsapp}`}
+              >
+                <i className="fa fa-whatsapp" aria-hidden="true" />
+              </a>
+              <Link href="/contact" className="btn btn__primary header__compact-cta" onClick={close}>
+                {t(locale, "Contact")}
+              </Link>
+            </div>
+
             <button
               className={`navbar-toggler${open ? " actived" : ""}`}
               type="button"
               aria-label="Toggle menu"
+              aria-expanded={open}
+              aria-controls="mainNavigation"
               onClick={() => setOpen((o) => !o)}
             >
               <span className="menu-lines">
@@ -165,18 +185,10 @@ export default function Header() {
                 })}
 
                 {/* mobile-only CTA */}
-                <li className="nav__item d-lg-none">
-                  <Link href="/contact" className="btn btn__primary btn-block" onClick={close}>
-                    {t(locale, "Contact")}
-                  </Link>
-                  <a
-                    href={site.whatsappHref}
-                    className="btn btn__secondary btn-block mt-10"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fa fa-whatsapp" aria-hidden="true" /> <span>WhatsApp</span>
-                  </a>
+                {/* Mobile: the switcher lives here because the desktop cluster
+                    that normally carries it is hidden below lg. */}
+                <li className="nav__item nav__item--lang d-lg-none">
+                  <LanguageSwitcher />
                 </li>
               </ul>
             </div>
